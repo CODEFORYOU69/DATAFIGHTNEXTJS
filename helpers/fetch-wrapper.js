@@ -1,28 +1,28 @@
-import getConfig from 'next/config';
+import getConfig from "next/config";
 
-import { userService } from 'services';
+import { userService } from "services";
 
 const { publicRuntimeConfig } = getConfig();
 
 export const fetchWrapper = {
-    get: request('GET'),
-    post: request('POST'),
-    put: request('PUT'),
-    delete: request('DELETE')
+    get: request("GET"),
+    post: request("POST"),
+    put: request("PUT"),
+    delete: request("DELETE"),
 };
 
 function request(method) {
     return (url, body) => {
         const requestOptions = {
             method,
-            headers: authHeader(url)
+            headers: authHeader(url),
         };
         if (body) {
-            requestOptions.headers['Content-Type'] = 'application/json';
+            requestOptions.headers["Content-Type"] = "application/json";
             requestOptions.body = JSON.stringify(body);
         }
         return fetch(url, requestOptions).then(handleResponse);
-    }
+    };
 }
 
 // helper functions
@@ -40,7 +40,9 @@ function authHeader(url) {
 }
 
 async function handleResponse(response) {
-    const isJson = response.headers?.get('content-type')?.includes('application/json');
+    const isJson = response.headers
+        ?.get("content-type")
+        ?.includes("application/json");
     const data = isJson ? await response.json() : null;
 
     // check for error response
@@ -52,6 +54,7 @@ async function handleResponse(response) {
 
         // get error message from body or default to response status
         const error = (data && data.message) || response.statusText;
+        // eslint-disable-next-line no-undef
         return Promise.reject(error);
     }
 

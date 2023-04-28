@@ -15,11 +15,11 @@ export const usersRepo = {
     delete: _delete
 };
 
-async function authenticate({ username, password }) {
-    const user = await User.findOne({ username });
+async function authenticate({ email, password }) {
+    const user = await User.findOne({ email });
 
     if (!(user && bcrypt.compareSync(password, user.hash))) {
-        throw 'Username or password is incorrect';
+        throw 'email or password is incorrect';
     }
 
     // create a jwt token that is valid for 7 days
@@ -41,8 +41,8 @@ async function getById(id) {
 
 async function create(params) {
     // validate
-    if (await User.findOne({ username: params.username })) {
-        throw 'Username "' + params.username + '" is already taken';
+    if (await User.findOne({ email: params.email })) {
+        throw 'email "' + params.email + '" is already taken';
     }
 
     const user = new User(params);
@@ -54,6 +54,7 @@ async function create(params) {
 
     // save user
     await user.save();
+    
 }
 
 async function update(id, params) {
@@ -61,8 +62,8 @@ async function update(id, params) {
 
     // validate
     if (!user) throw 'User not found';
-    if (user.username !== params.username && await User.findOne({ username: params.username })) {
-        throw 'Username "' + params.username + '" is already taken';
+    if (user.email !== params.email && await User.findOne({ email: params.email })) {
+        throw 'email "' + params.email + '" is already taken';
     }
 
     // hash password if it was entered

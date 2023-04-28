@@ -17,11 +17,20 @@ function Nav() {
     if (!user) return null;
 
     return (
-        <nav className="navbar navbar-expand navbar-dark bg-dark px-3">
-            <div className="navbar-nav">
-                <NavLink href="/" exact className="nav-item nav-link">Home</NavLink>
-                <NavLink href="/users" className="nav-item nav-link">Users</NavLink>
-                <button onClick={userService.logout} className="btn btn-link nav-item nav-link">Logout</button>
+        <nav className="bg-blue-500 fixed w-full top-0 z-50">
+            <div className="flex items-center ml-12 justify-between">
+                <NavLink href="/" exact>Home</NavLink>
+                <NavLink href="/howtouse" exact>How to Use</NavLink>
+                <NavLink href="/users">Users</NavLink>
+                <NavLink href="/addfighter/addFighter">Fighters</NavLink>
+                <NavLink href="/AddFight">Add Fight</NavLink>
+                <NavLink href="/Stats">Stats</NavLink>
+                <button
+                    onClick={userService.logout}
+                    className="px-4 py-2 bg-red-600 hover:bg-red-500 text-white transition-colors duration-300 ease-in-out"
+                >
+                    Logout
+                </button>
             </div>
         </nav>
     );

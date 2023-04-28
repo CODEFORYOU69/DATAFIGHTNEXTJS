@@ -1,6 +1,9 @@
 import Head from 'next/head';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import 'styles/tailwind.css';
+
+
 
 import 'styles/globals.css';
 
@@ -51,11 +54,12 @@ function App({ Component, pageProps }) {
     return (
         <>
             <Head>
-                <title>Next.js 13 - User Registration and Login Example</title>
+                <title>DATAFIGHT</title>
             </Head>
 
             <div className={`app-container ${user ? 'bg-light' : ''}`}>
                 <Nav />
+                <div className="h-16"></div>
                 <Alert />
                 {authorized &&
                     <Component {...pageProps} />

@@ -18,8 +18,8 @@ function AddEdit(props) {
             .required('First Name is required'),
         lastName: Yup.string()
             .required('Last Name is required'),
-        username: Yup.string()
-            .required('Username is required'),
+        email: Yup.string()
+            .required('email is required'),
         password: Yup.string()
             .transform(x => x === '' ? undefined : x)
             // password optional in edit mode
@@ -75,8 +75,8 @@ function AddEdit(props) {
             </div>
             <div className="row">
                 <div className="mb-3 col">
-                    <label className="form-label">Username</label>
-                    <input name="username" type="text" {...register('username')} className={`form-control ${errors.username ? 'is-invalid' : ''}`} />
+                    <label className="form-label">email</label>
+                    <input name="email" type="text" {...register('email')} className={`form-control ${errors.email ? 'is-invalid' : ''}`} />
                     <div className="invalid-feedback">{errors.email?.message}</div>
                 </div>
                 <div className="mb-3 col">
@@ -88,6 +88,13 @@ function AddEdit(props) {
                     <div className="invalid-feedback">{errors.password?.message}</div>
                 </div>
             </div>
+            <div className="row">
+            <div className="mb-3 col">
+                    <label className="form-label">country</label>
+                    <input name="country" type="text" {...register('country')} className={`form-control ${errors.country ? 'is-invalid' : ''}`} />
+                    <div className="invalid-feedback">{errors.country?.message}</div>
+                </div>
+                </div>
             <div className="mb-3">
                 <button type="submit" disabled={formState.isSubmitting} className="btn btn-primary me-2">
                     {formState.isSubmitting && <span className="spinner-border spinner-border-sm me-1"></span>}

@@ -18,8 +18,10 @@ function Register() {
             .required('First Name is required'),
         lastName: Yup.string()
             .required('Last Name is required'),
-        username: Yup.string()
-            .required('Username is required'),
+        email: Yup.string()
+            .required('email is required'),
+        country: Yup.string()
+            .required('country is required'),
         password: Yup.string()
             .required('Password is required')
             .min(6, 'Password must be at least 6 characters')
@@ -56,9 +58,14 @@ function Register() {
                             <div className="invalid-feedback">{errors.lastName?.message}</div>
                         </div>
                         <div className="mb-3">
-                            <label className="form-label">Username</label>
-                            <input name="username" type="text" {...register('username')} className={`form-control ${errors.username ? 'is-invalid' : ''}`} />
-                            <div className="invalid-feedback">{errors.username?.message}</div>
+                            <label className="form-label">Email</label>
+                            <input name="email" type="text" {...register('email')} className={`form-control ${errors.email ? 'is-invalid' : ''}`} />
+                            <div className="invalid-feedback">{errors.email?.message}</div>
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Country</label>
+                            <input name="country" type="text" {...register('country')} className={`form-control ${errors.country ? 'is-invalid' : ''}`} />
+                            <div className="invalid-feedback">{errors.country?.message}</div>
                         </div>
                         <div className="mb-3">
                             <label className="form-label">Password</label>

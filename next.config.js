@@ -14,6 +14,7 @@ const nextConfig = {
   images: {
     domains: ['localhost'],
     path: '/',
+
   },
 };
 

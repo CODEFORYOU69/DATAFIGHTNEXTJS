@@ -86,7 +86,7 @@ function FightersList() {
                   <div className="flex flex-col gap-8">
                     <Image
                       alt="fighter"
-                      src={port + fighter.photo || '/uploads/defaultPhoto.jpg'}
+                      src={fighter.photo || '/uploads/defaultPhoto.jpg'}
                       width={300}
                       height={300}
                       className="w-[100%] rounded border-2 border-gray-300"

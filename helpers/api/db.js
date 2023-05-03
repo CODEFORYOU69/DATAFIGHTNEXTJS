@@ -5,14 +5,7 @@ const { serverRuntimeConfig } = getConfig();
 const Schema = mongoose.Schema;
 const MONGODB = process.env.MONGODB_URI || serverRuntimeConfig.connectionString;
 
-mongoose
-  .connect(MONGODB, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("Database connected"))
-  .catch((err) => console.error("Database connection error:", err));
-mongoose.Promise = global.Promise;
+
 
 export const db = {
   User: userModel(),
@@ -85,11 +78,7 @@ function fighterModel() {
 function roundModel() {
   const schema = new Schema(
     {
-      eventyear: { type: Number, required: true },
-      eventtype: { type: String, required: true },
-      eventname: { type: String, required: true },
-      category: { type: String, required: true },
-      weightcat: { type: Number, required: true },
+
       round: { type: Number, required: true },
       att_og_1_by_fighter1: Number,
       att_og_2_by_fighter1: Number,
@@ -251,6 +240,11 @@ function roundModel() {
 function fightModel() {
   const schema = new Schema(
     {
+      eventyear: { type: Number, required: true },
+      eventtype: { type: String, required: true },
+      eventname: { type: String, required: true },
+      category: { type: String, required: true },
+      weightcat: { type: Number, required: true },
       fighter1_id: {
         type: Schema.Types.ObjectId,
         ref: "Fighter",

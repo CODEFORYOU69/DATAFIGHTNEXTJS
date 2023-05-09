@@ -1,18 +1,16 @@
-import getConfig from "next/config";
-import * as mongoose from "mongoose";
+import getConfig from 'next/config'
+const mongoose = require('mongoose')
 
-const { serverRuntimeConfig } = getConfig();
-const Schema = mongoose.Schema;
-const MONGODB = process.env.MONGODB_URI || serverRuntimeConfig.connectionString;
-
-
+const { serverRuntimeConfig } = getConfig()
+const Schema = mongoose.Schema
+const MONGODB = process.env.MONGODB_URI || serverRuntimeConfig.connectionString
 
 export const db = {
   User: userModel(),
   Fighter: fighterModel(),
   Fight: fightModel(),
   Round: roundModel(),
-};
+}
 
 // mongoose models with schema definitions
 
@@ -28,18 +26,18 @@ function userModel() {
       // add createdAt and updatedAt timestamps
       timestamps: true,
     }
-  );
+  )
 
-  schema.set("toJSON", {
+  schema.set('toJSON', {
     virtuals: true,
     versionKey: false,
     transform: function (doc, ret) {
-      delete ret._id;
-      delete ret.hash;
+      delete ret._id
+      delete ret.hash
     },
-  });
+  })
 
-  return mongoose.models.User || mongoose.model("User", schema);
+  return mongoose.models.User || mongoose.model('User', schema)
 }
 
 function fighterModel() {
@@ -55,30 +53,29 @@ function fighterModel() {
       photo: { type: String, required: false },
 
       // store fight object ids in array
-      fights: [{ type: Schema.Types.ObjectId, ref: "Fight" }],
+      fights: [{ type: Schema.Types.ObjectId, ref: 'Fight' }],
     },
     {
       // add createdAt and updatedAt timestamps
       timestamps: true,
     }
-  );
+  )
 
-  schema.set("toJSON", {
+  schema.set('toJSON', {
     virtuals: true,
     versionKey: false,
     transform: function (doc, ret) {
-      delete ret._id;
-      delete ret.hash;
+      delete ret._id
+      delete ret.hash
     },
-  });
+  })
 
-  return mongoose.models.Fighter || mongoose.model("Fighter", schema);
+  return mongoose.models.Fighter || mongoose.model('Fighter', schema)
 }
 
 function roundModel() {
   const schema = new Schema(
     {
-
       round: { type: Number, required: true },
       att_og_1_by_fighter1: Number,
       att_og_2_by_fighter1: Number,
@@ -204,38 +201,31 @@ function roundModel() {
       gj_by_fighter2: Number,
       hits_by_fighter1: Number,
       hits_by_fighter2: Number,
-
-      fighter1_id: {
+      fight: {
         type: Schema.Types.ObjectId,
-        ref: "Fighter",
-      },
-      fighter2_id: {
-        type: Schema.Types.ObjectId,
-        ref: "Fighter",
+        ref: 'Fight',
       },
       round_winner_id: {
         type: Schema.Types.ObjectId,
-        ref: "Fighter",
+        ref: 'Fighter',
       },
-
     },
     {
       // add createdAt and updatedAt timestamps
       timestamps: true,
     }
-  );
+  )
 
-  schema.set("toJSON", {
+  schema.set('toJSON', {
     virtuals: true,
     versionKey: false,
     transform: function (doc, ret) {
-      delete ret._id;
+      delete ret._id
     },
-  });
+  })
 
-  return mongoose.models.Round || mongoose.model("Round", schema);
+  return mongoose.models.Round || mongoose.model('Round', schema)
 }
-
 
 function fightModel() {
   const schema = new Schema(
@@ -247,32 +237,33 @@ function fightModel() {
       weightcat: { type: Number, required: true },
       fighter1_id: {
         type: Schema.Types.ObjectId,
-        ref: "Fighter",
+        ref: 'Fighter',
       },
       fighter2_id: {
         type: Schema.Types.ObjectId,
-        ref: "Fighter",
+        ref: 'Fighter',
       },
-      winner_id: {
+      winner_id: [{
         type: Schema.Types.ObjectId,
-        ref: "Fighter",
-      },
+        ref: 'Fighter',
+
+      }],
       //round Ids for this fight
-      rounds: [{ type: Schema.Types.ObjectId, ref: "Round" }],
+      rounds: [{ type: Schema.Types.ObjectId, ref: 'Round' }],
     },
     {
       // add createdAt and updatedAt timestamps
       timestamps: true,
     }
-  );
+  )
 
-  schema.set("toJSON", {
+  schema.set('toJSON', {
     virtuals: true,
     versionKey: false,
     transform: function (doc, ret) {
-      delete ret._id;
+      delete ret._id
     },
-  });
+  })
 
-  return mongoose.models.Fight || mongoose.model("Fight", schema);
+  return mongoose.models.Fight || mongoose.model('Fight', schema)
 }

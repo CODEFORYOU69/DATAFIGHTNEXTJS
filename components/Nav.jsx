@@ -1,29 +1,33 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
 
-import { NavLink } from '.';
-import { userService } from 'services';
+import { NavLink } from '.'
+import { userService } from 'services'
 
-export { Nav };
+export { Nav }
 
 function Nav() {
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState(null)
 
     useEffect(() => {
-        const subscription = userService.user.subscribe(x => setUser(x));
-        return () => subscription.unsubscribe();
-    }, []);
+        const subscription = userService.user.subscribe((x) => setUser(x))
+        return () => subscription.unsubscribe()
+    }, [])
 
     // only show nav when logged in
-    if (!user) return null;
+    if (!user) return null
 
     return (
         <nav className="bg-blue-500 fixed w-full top-0 z-50">
             <div className="flex items-center ml-12 justify-between">
-                <NavLink href="/" exact>Home</NavLink>
-                <NavLink href="/howtouse" exact>How to Use</NavLink>
+                <NavLink href="/" exact>
+                    Home
+                </NavLink>
+                <NavLink href="/howtouse" exact>
+                    How to Use
+                </NavLink>
                 <NavLink href="/users">Users</NavLink>
-                <NavLink href="/addfighter/addFighter">Fighters</NavLink>
-                <NavLink href="/AddFight">Add Fight</NavLink>
+                <NavLink href="/fighters">Fighters</NavLink>
+                <NavLink href="/fights">Add Fight</NavLink>
                 <NavLink href="/Stats">Stats</NavLink>
                 <button
                     onClick={userService.logout}
@@ -33,5 +37,5 @@ function Nav() {
                 </button>
             </div>
         </nav>
-    );
+    )
 }

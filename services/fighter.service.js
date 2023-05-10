@@ -54,11 +54,11 @@ async function _delete(id) {
     await fetchWrapper.delete(`${baseUrl}/${id}`);
 }
 
-async function uploadPhoto(id, file) {
+async function uploadPhoto(fighterid, file) {
     const formData = new FormData();
     formData.append("photo", file);
 
-    await fetchWrapper.put(`${baseUrl}/uploadPhoto/${id}`, formData, {
+    await fetchWrapper.put(`${baseUrl}/uploadPhoto/${fighterid}`, formData, {
         headers: {
             // Remove the 'Content-Type' header to allow the browser to set it with the correct boundary
             "Content-Type": "",

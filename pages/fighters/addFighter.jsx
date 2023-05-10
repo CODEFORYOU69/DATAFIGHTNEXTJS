@@ -1,6 +1,6 @@
-import { Layout, AddEditFighter } from 'components/fighters';
+import { Layout, AddEditFighter } from 'components/fighters'
 
-export default Add;
+export default Add
 
 function Add() {
     return (
@@ -8,5 +8,5 @@ function Add() {
             <h1>Add Fighter</h1>
             <AddEditFighter />
         </Layout>
-    );
+    )
 }

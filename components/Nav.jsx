@@ -17,21 +17,44 @@ function Nav() {
     if (!user) return null
 
     return (
-        <nav className="bg-blue-500 fixed w-full top-0 z-50">
-            <div className="flex items-center ml-12 justify-between">
+        <nav
+            className="bg-black fixed w-full top-0 z-50 align-items-center"
+            style={{ height: '80px' }}
+        >
+            <div className="h-[100%] flex items-center  ml-12 justify-between">
                 <NavLink href="/" exact>
-                    Home
+                    <span className="text-white text-lg font-bold hover:text-gray-300 transition-colors duration-300 ease-in-out">
+                        Home
+                    </span>
                 </NavLink>
                 <NavLink href="/howtouse" exact>
-                    How to Use
+                    <span className="text-white text-lg font-bold hover:text-gray-300 transition-colors duration-300 ease-in-out">
+                        How to Use
+                    </span>
                 </NavLink>
-                <NavLink href="/users">Users</NavLink>
-                <NavLink href="/fighters">Fighters</NavLink>
-                <NavLink href="/fights">Add Fight</NavLink>
-                <NavLink href="/Stats">Stats</NavLink>
+                <NavLink href="/users">
+                    <span className="text-white text-lg font-bold hover:text-gray-300 transition-colors duration-300 ease-in-out">
+                        Users
+                    </span>
+                </NavLink>
+                <NavLink href="/fighters">
+                    <span className="text-white text-lg font-bold hover:text-gray-300 transition-colors duration-300 ease-in-out">
+                        Fighters
+                    </span>
+                </NavLink>
+                <NavLink href="/fights">
+                    <span className="text-white text-lg font-bold hover:text-gray-300 transition-colors duration-300 ease-in-out">
+                        Add Fight
+                    </span>
+                </NavLink>
+                <NavLink href="/stats">
+                    <span className="text-white text-lg font-bold hover:text-gray-300 transition-colors duration-300 ease-in-out">
+                        Stats
+                    </span>
+                </NavLink>
                 <button
                     onClick={userService.logout}
-                    className="px-4 py-2 bg-red-600 hover:bg-red-500 text-white transition-colors duration-300 ease-in-out"
+                    className="px-4 py-2 h-[100%] bg-red-600 hover:bg-red-500 text-white text-lg font-bold transition-colors duration-300 ease-in-out"
                 >
                     Logout
                 </button>

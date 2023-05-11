@@ -21,6 +21,7 @@ export const fightService = {
     getById,
     update,
     delete: _delete,
+    filterFights
 };
 
 async function createFight(data) {
@@ -55,3 +56,11 @@ async function _delete(id) {
     await fetchWrapper.delete(`${baseUrl}/${id}`);
 }
 
+async function filterFights(params) {
+    const queryString = Object.entries(params)
+        .filter(([_, value]) => value !== '') // Ignore les entrées vides
+        .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+        .join('&');
+    const url = `${baseUrl}/filterFights?${queryString}`;
+    return await fetchWrapper.get(url);
+}

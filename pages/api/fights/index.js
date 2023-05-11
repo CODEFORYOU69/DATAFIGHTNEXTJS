@@ -8,3 +8,6 @@ async function getAll(req, res) {
     const users = await fightRepo.getAll();
     return res.status(200).json(users);
 }
+
+
+

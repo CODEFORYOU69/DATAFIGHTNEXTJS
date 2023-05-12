@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import { fightService, fighterService } from 'services'
+import ChartsDash from 'components/charts/ChartsDash'
 
 const StatsPage = () => {
     const [fighters, setFighters] = useState([])
     const [fights, setFights] = useState([])
+    const [photoData, setPhotoData] = useState([])
 
     console.log('fighters', fighters)
 
@@ -50,6 +51,52 @@ const StatsPage = () => {
         // setData(response.data)
     }
 
+    // get the number of fight if fighter1 ||or fighter2|| or both are true
+    const numberOfFightFiltered = data && data.length
+
+    console.log('numberOfFightFiltered', numberOfFightFiltered)
+
+    const labels = ['Number of fight']
+    const dataset1 = [numberOfFightFiltered]
+    // search photo from fighter if filter.fighter1 === true and filter.fighter1 === data[0].fighter1._id get data[0].fighter1.photo else get data[0].fighter2.photo
+    const getPhoto = () => {
+        if (!data) {
+            return []
+        } else if (data.length > 1) {
+            if (filters.fighter1 === data[0].fighter1._id) {
+                return [
+                    data[0].fighter1.photo,
+                    data[0].fighter1.firstName,
+                    data[0].fighter1.lastName,
+                ]
+            } else {
+                return [
+                    data[0].fighter2.photo,
+                    data[0].fighter2.firstName,
+                    data[0].fighter2.lastName,
+                ]
+            }
+        } else {
+            if (filters.fighter1 === data[0].fighter1._id) {
+                return [
+                    data[0].fighter1.photo,
+                    data[0].fighter1.firstName,
+                    data[0].fighter1.lastName,
+                ]
+            } else {
+                return [
+                    data[0].fighter2.photo,
+                    data[0].fighter2.firstName,
+                    data[0].fighter2.lastName,
+                ]
+            }
+        }
+    }
+
+    useEffect(() => {
+        setPhotoData(getPhoto())
+    }, [data, filters])
+    console.log('photoData', photoData)
     return (
         <div className="pt-20">
             <h1 className="text-3xl text-center font-bold mb-8">Stats</h1>
@@ -282,8 +329,24 @@ const StatsPage = () => {
                     Filter
                 </button>
             </form>
-
-            {/* Affichez vos graphiques ici, en utilisant les données filtrées. Vous pouvez utiliser la bibliothèque de graphiques de votre choix. */}
+            <div className="flex  h-60 border border-r-red-600 gap-4">
+                <div className="flex flex-row ">
+                    <div className="flex flex-col">
+                        <h2 className="text-2xl font-bold">Fighter Selected</h2>
+                        <p className="text-xl font-bold">
+                            {photoData[1]} {photoData[2]}
+                        </p>
+                        <img
+                            className="w-40 h-40 rounded"
+                            src={photoData[0]}
+                            alt=""
+                        />
+                    </div>
+                </div>
+                <div className="flex  h-60 border border-r-red-600">
+                    <ChartsDash labels={labels} dataset1={dataset1} />
+                </div>
+            </div>
         </div>
     )
 }

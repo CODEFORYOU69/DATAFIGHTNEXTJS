@@ -39,6 +39,22 @@ const StatsPage = () => {
     }
 
     console.log('filters', filters)
+    const FilterTag = ({ filterName, onDelete }) => (
+        <div className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+            {filterName}
+            <button onClick={onDelete} className="ml-2 text-red-500">
+                ×
+            </button>
+        </div>
+    )
+
+    const removeFilter = (filterName) => {
+        setFilters((prevFilters) => {
+            const newFilters = { ...prevFilters }
+            delete newFilters[filterName]
+            return newFilters
+        })
+    }
 
     const handleSubmit = async (event) => {
         event.preventDefault()
@@ -321,6 +337,18 @@ const StatsPage = () => {
                         </select>
                     </label>
                 </div>
+                <div className="my-4">
+                    {Object.keys(filters).map(
+                        (filterName) =>
+                            filters[filterName] && (
+                                <FilterTag
+                                    key={filterName}
+                                    filterName={filterName}
+                                    onDelete={() => removeFilter(filterName)}
+                                />
+                            ),
+                    )}
+                </div>
                 {/* Continuez à ajouter les autres lignes ici, en utilisant le même format */}
                 <button
                     type="submit"
@@ -329,6 +357,7 @@ const StatsPage = () => {
                     Filter
                 </button>
             </form>
+
             <div className="flex  h-60 border border-r-red-600 gap-4">
                 <div className="flex flex-row ">
                     <div className="flex flex-col">

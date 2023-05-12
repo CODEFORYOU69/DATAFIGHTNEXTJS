@@ -38,17 +38,19 @@ async function getById(id) {
 }
 
 async function update(id, params) {
+    console.log('params', params)
+    console.log('id', id)
     await fetchWrapper.put(`${baseUrl}/${id}`, params);
 
     // update stored fight if the logged in fight updated their own record
-    if (id === fightSubject.value.id) {
-        // update local storage
-        const fight = { ...fightSubject.value, ...params };
-        localStorage.setItem('fight', JSON.stringify(fight));
+    // if (id === fightSubject.value.id) {
+    //     // update local storage
+    //     const fight = { ...fightSubject.value, ...params };
+    //     // localStorage.setItem('fight', JSON.stringify(fight));
 
-        // publish updated fight to subscribers
-        fightSubject.next(fight);
-    }
+    //     // publish updated fight to subscribers
+    //     fightSubject.next(fight);
+    // }
 }
 
 // prefixed with underscored because delete is a reserved word in javascript

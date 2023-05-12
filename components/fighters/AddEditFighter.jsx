@@ -1,16 +1,28 @@
+import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { useForm } from 'react-hook-form'
+import { useForm, Controller, Control } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
 
 import { fighterService, alertService } from 'services'
+// FighterForm.js
+import { AgeSelect } from './AgeSelect'
+import { SexSelect } from './SexSelect'
+import { WeightSelect } from './WeightSelect'
+import { getWeightCategories } from './utilities'
 
 export { AddEditFighter }
 
 function AddEditFighter(props) {
     const fighter = props?.fighter
     const router = useRouter()
+
+    const [selectedSex, setSelectedSex] = useState('')
+    const [selectedAge, setSelectedAge] = useState('')
+    const [selectedWeight, setSelectedWeight] = useState('')
+
+    const availableWeights = getWeightCategories(selectedSex, selectedAge)
 
     // form validation rules
 
@@ -32,7 +44,8 @@ function AddEditFighter(props) {
     }
 
     // get functions to build form with useForm() hook
-    const { register, handleSubmit, reset, formState } = useForm(formOptions)
+    const { register, handleSubmit, control, reset, formState } =
+        useForm(formOptions)
     const { errors } = formState
 
     async function onSubmit(data) {
@@ -55,6 +68,16 @@ function AddEditFighter(props) {
             alertService.error(error)
             console.error(error)
         }
+    }
+    const handleSexChange = (event) => {
+        setSelectedSex(event.target.value)
+    }
+    const handleCategoryChange = (event) => {
+        setSelectedAge(event.target.value)
+    }
+
+    const handleWeightChange = (event) => {
+        setSelectedWeight(event.target.value)
     }
 
     return (
@@ -91,20 +114,6 @@ function AddEditFighter(props) {
             </div>
             <div className="row">
                 <div className="mb-3 col">
-                    <label className="form-label">Sex</label>
-                    <input
-                        name="sex"
-                        type="text"
-                        {...register('sex')}
-                        className={`form-control ${
-                            errors.sex ? 'is-invalid' : ''
-                        }`}
-                    />
-                    <div className="invalid-feedback">
-                        {errors.sex?.message}
-                    </div>
-                </div>
-                <div className="mb-3 col">
                     <label className="form-label">Country</label>
                     <input
                         name="country"
@@ -133,31 +142,60 @@ function AddEditFighter(props) {
                     </div>
                 </div>
                 <div className="mb-3 col">
-                    <label className="form-label">Category</label>
-                    <input
+                    <label className="form-label">Age Category</label>
+                    <Controller
                         name="category"
-                        type="text"
-                        {...register('category')}
-                        className={`form-control ${
-                            errors.category ? 'is-invalid' : ''
-                        }`}
+                        control={control}
+                        defaultValue=""
+                        rules={{ required: 'Age Category is required' }}
+                        render={({ field }) => (
+                            <AgeSelect
+                                selectedAge={selectedAge}
+                                handleAgeChange={handleCategoryChange}
+                            />
+                        )}
                     />
                     <div className="invalid-feedback">
                         {errors.category?.message}
                     </div>
                 </div>
+
                 <div className="mb-3 col">
-                    <label className="form-label">Weight Category</label>
-                    <input
-                        name="weightcategory"
-                        type="text"
-                        {...register('weightcategory')}
-                        className={`form-control ${
-                            errors.weightcategory ? 'is-invalid' : ''
-                        }`}
+                    <label className="form-label">Sex</label>
+                    <Controller
+                        name="sex"
+                        control={control}
+                        defaultValue=""
+                        rules={{ required: 'Sex is required' }}
+                        render={({ field }) => (
+                            <SexSelect
+                                selectedSex={field.value}
+                                handleSexChange={field.onChange}
+                            />
+                        )}
                     />
                     <div className="invalid-feedback">
-                        {errors.weightcategory?.message}
+                        {errors.sex?.message}
+                    </div>
+                </div>
+
+                <div className="mb-3 col">
+                    <label className="form-label">Weight Category</label>
+                    <Controller
+                        name="weightCategory"
+                        control={control}
+                        defaultValue=""
+                        rules={{ required: 'Weight Category is required' }}
+                        render={({ field }) => (
+                            <WeightSelect
+                                selectedWeight={selectedWeight}
+                                handleWeightChange={handleWeightChange}
+                                availableWeights={availableWeights}
+                            />
+                        )}
+                    />
+                    <div className="invalid-feedback">
+                        {errors.weightCategory?.message}
                     </div>
                 </div>
             </div>

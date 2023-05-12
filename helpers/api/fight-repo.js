@@ -53,7 +53,7 @@ async function createFight(params) {
 
 
 async function update(id, params) {
-    const fight = Fight.findById(id)
+    const fight = await Fight.findById(id)
 
     if (!fight) throw 'Fight not found'
     // sinon update le fight
@@ -61,6 +61,7 @@ async function update(id, params) {
 
     await fight.save()
 }
+
 
 async function _delete(id) {
     await Fight.findByIdAndRemove(id)

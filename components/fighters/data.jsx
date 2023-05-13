@@ -11,6 +11,7 @@ export const sexes = ['male', 'female']
 
 export const weightCategories = {
     male: {
+        master: ['-54', '-58', '-63', '-68', '-74', '-80', '-87', '+87'],
         senior: ['-54', '-58', '-63', '-68', '-74', '-80', '-87', '+87'],
         junior: [
             '-45',
@@ -63,6 +64,7 @@ export const weightCategories = {
         // autres catégories d'age...
     },
     female: {
+        master: ['-46', '-49', '-53', '-57', '-62', '-67', '-73', '+73'],
         senior: ['-46', '-49', '-53', '-57', '-62', '-67', '-73', '+73'],
         junior: [
             '-42',

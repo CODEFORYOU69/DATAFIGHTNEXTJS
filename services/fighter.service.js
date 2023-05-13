@@ -36,17 +36,18 @@ async function getById(id) {
 }
 
 async function update(id, params) {
+    console.log("update", id, params);
     await fetchWrapper.put(`${baseUrl}/${id}`, params);
 
     // update stored fighter if the logged in fighter updated their own record
-    if (id === fighterSubject.value.id) {
-        // update local storage
-        const fighter = { ...fighterSubject.value, ...params };
-        localStorage.setItem("fighter", JSON.stringify(fighter));
+    // if (id === fighterSubject.value.id) {
+    //     // update local storage
+    //     const fighter = { ...fighterSubject.value, ...params };
+    //     localStorage.setItem("fighter", JSON.stringify(fighter));
 
-        // publish updated fighter to subscribers
-        fighterSubject.next(fighter);
-    }
+    //     // publish updated fighter to subscribers
+    //     fighterSubject.next(fighter);
+    // }
 }
 
 // prefixed with underscored because delete is a reserved word in javascript

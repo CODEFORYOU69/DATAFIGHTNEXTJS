@@ -89,7 +89,7 @@ function Index() {
                                     <td>{fight.eventtype}</td>
                                     <td>{fight.eventname}</td>
                                     <td>{fight.category}</td>
-                                    <td>{fight.weightCategory}</td>
+                                    <td>{fight.weightcat}</td>
                                     <td>
                                         {fight.fighter1_id.firstName}{' '}
                                         {fight.fighter1_id.lastName}

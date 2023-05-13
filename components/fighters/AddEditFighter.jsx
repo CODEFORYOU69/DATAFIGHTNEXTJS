@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { useForm, Controller, Control } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
 
@@ -18,11 +18,7 @@ function AddEditFighter(props) {
     const fighter = props?.fighter
     const router = useRouter()
 
-    const [selectedSex, setSelectedSex] = useState('')
-    const [selectedAge, setSelectedAge] = useState('')
-    const [selectedWeight, setSelectedWeight] = useState('')
-
-    const availableWeights = getWeightCategories(selectedSex, selectedAge)
+    console.log('fighterprops', fighter)
 
     // form validation rules
 
@@ -44,46 +40,52 @@ function AddEditFighter(props) {
     }
 
     // get functions to build form with useForm() hook
-    const { register, handleSubmit, control, reset, formState } =
+    const { register, handleSubmit, control, reset, formState, watch } =
         useForm(formOptions)
     const { errors } = formState
 
+    const selectedSex = watch('sex')
+    const selectedAge = watch('category')
+
+    const availableWeights = getWeightCategories(selectedSex, selectedAge)
+
     async function onSubmit(data) {
+        console.log('datasubmit', data)
         alertService.clear()
         try {
+            // Merge selected values with form data
+            const updatedData = {
+                ...data,
+                sex: selectedSex,
+                category: selectedAge,
+                weightCategory: selectedWeight,
+            }
+
+            console.log('updatedData', updatedData)
             // create or update user based on user prop
             let message
             if (fighter) {
-                await fighterService.update(fighter.id, data)
-                message = 'fighter updated'
+                console.log('fighter.id', fighter.id)
+                await fighterService.update(fighter.id, updatedData)
+                message = 'Fighter updated'
             } else {
-                await fighterService.createFighter(data)
+                await fighterService.createFighter(updatedData)
                 message = 'Fighter added'
             }
 
             // redirect to user list with success message
-            router.push('/createfighter')
+            router.push('/fighters')
             alertService.success(message, true)
         } catch (error) {
             alertService.error(error)
             console.error(error)
         }
     }
-    const handleSexChange = (event) => {
-        setSelectedSex(event.target.value)
-    }
-    const handleCategoryChange = (event) => {
-        setSelectedAge(event.target.value)
-    }
-
-    const handleWeightChange = (event) => {
-        setSelectedWeight(event.target.value)
-    }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="row">
-                <div className="mb-3 col">
+        <form className="flex " onSubmit={handleSubmit(onSubmit)}>
+            <div className=" ">
+                <div className="mb-3">
                     <label className="form-label">First Name</label>
                     <input
                         name="firstName"
@@ -97,7 +99,7 @@ function AddEditFighter(props) {
                         {errors.firstName?.message}
                     </div>
                 </div>
-                <div className="mb-3 col">
+                <div className="mb-3 ">
                     <label className="form-label">Last Name</label>
                     <input
                         name="lastName"
@@ -111,116 +113,126 @@ function AddEditFighter(props) {
                         {errors.lastName?.message}
                     </div>
                 </div>
-            </div>
-            <div className="row">
-                <div className="mb-3 col">
-                    <label className="form-label">Country</label>
-                    <input
-                        name="country"
-                        type="text"
-                        {...register('country')}
-                        className={`form-control ${
-                            errors.country ? 'is-invalid' : ''
-                        }`}
-                    />
-                    <div className="invalid-feedback">
-                        {errors.country?.message}
+
+                <div className=" ">
+                    <div className="mb-3">
+                        <label className="form-label">Country</label>
+                        <input
+                            name="country"
+                            type="text"
+                            {...register('country')}
+                            className={`form-control ${
+                                errors.country ? 'is-invalid' : ''
+                            }`}
+                        />
+                        <div className="invalid-feedback">
+                            {errors.country?.message}
+                        </div>
                     </div>
-                </div>
-                <div className="mb-3 col">
-                    <label className="form-label">birthday</label>
-                    <input
-                        name="birthday"
-                        type="text"
-                        {...register('birthday')}
-                        className={`form-control ${
-                            errors.birthday ? 'is-invalid' : ''
-                        }`}
-                    />
-                    <div className="invalid-feedback">
-                        {errors.birthday?.message}
+                    <div className="mb-3 w-[50%]">
+                        <label className="form-label">birthday</label>
+                        <input
+                            name="birthDate"
+                            type="text"
+                            {...register('birthDate')}
+                            className={`form-control ${
+                                errors.birthday ? 'is-invalid' : ''
+                            }`}
+                        />
+                        <div className="invalid-feedback">
+                            {errors.birthday?.message}
+                        </div>
                     </div>
-                </div>
-                <div className="mb-3 col">
-                    <label className="form-label">Age Category</label>
-                    <Controller
-                        name="category"
-                        control={control}
-                        defaultValue=""
-                        rules={{ required: 'Age Category is required' }}
-                        render={({ field }) => (
-                            <AgeSelect
-                                selectedAge={selectedAge}
-                                handleAgeChange={handleCategoryChange}
-                            />
-                        )}
-                    />
-                    <div className="invalid-feedback">
-                        {errors.category?.message}
+                    <div className="mb-3  ">
+                        <div className="justify-center">
+                            <div className="mb-3 row">
+                                <label className="">Sex</label>
+                                <Controller
+                                    name="sex"
+                                    control={control}
+                                    defaultValue=""
+                                    rules={{ required: 'Sex is required' }}
+                                    render={({ field }) => (
+                                        <SexSelect
+                                            {...field} // Ajoutez ceci pour lier le champ à la valeur de l'état du composant
+                                        />
+                                    )}
+                                />
+                                <div className="invalid-feedback">
+                                    {errors.sex?.message}
+                                </div>
+                            </div>
+                            <div className="mb-3 row ">
+                                <label className="form-label">
+                                    Age Category
+                                </label>
+                                <Controller
+                                    name="category"
+                                    className="form-control w-8"
+                                    control={control}
+                                    defaultValue=""
+                                    rules={{
+                                        required: 'Age Category is required',
+                                    }}
+                                    render={({ field }) => (
+                                        <AgeSelect
+                                            {...field} // Ajoutez ceci pour lier le champ à la valeur de l'état du composant
+                                        />
+                                    )}
+                                />
+                                <div className="invalid-feedback">
+                                    {errors.category?.message}
+                                </div>
+                            </div>
+                            <div className="mb-3  row">
+                                <label className="form-label">
+                                    Weight Category
+                                </label>
+                                <Controller
+                                    name="weightCategory"
+                                    control={control}
+                                    defaultValue=""
+                                    rules={{
+                                        required: 'Weight Category is required',
+                                    }}
+                                    render={({ field }) => (
+                                        <WeightSelect
+                                            {...field} // Ajoutez ceci pour lier le champ à la valeur de l'état du composant
+                                            availableWeights={availableWeights}
+                                        />
+                                    )}
+                                />
+                                <div className="invalid-feedback">
+                                    {errors.weightCategory?.message}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div className="mb-3 col">
-                    <label className="form-label">Sex</label>
-                    <Controller
-                        name="sex"
-                        control={control}
-                        defaultValue=""
-                        rules={{ required: 'Sex is required' }}
-                        render={({ field }) => (
-                            <SexSelect
-                                selectedSex={field.value}
-                                handleSexChange={field.onChange}
-                            />
+                <div className="mb-3 ">
+                    <button
+                        type="submit"
+                        disabled={formState.isSubmitting}
+                        className="btn btn-primary me-2 text-black"
+                    >
+                        {formState.isSubmitting && (
+                            <span className="spinner-border spinner-border-sm me-1"></span>
                         )}
-                    />
-                    <div className="invalid-feedback">
-                        {errors.sex?.message}
-                    </div>
+                        Save
+                    </button>
+                    <button
+                        onClick={() => reset(formOptions.defaultValues)}
+                        type="button"
+                        disabled={formState.isSubmitting}
+                        className="btn btn-secondary text-black"
+                    >
+                        Reset
+                    </button>
+                    <Link href="/fighters" className="btn btn-link">
+                        Cancel
+                    </Link>
                 </div>
-
-                <div className="mb-3 col">
-                    <label className="form-label">Weight Category</label>
-                    <Controller
-                        name="weightCategory"
-                        control={control}
-                        defaultValue=""
-                        rules={{ required: 'Weight Category is required' }}
-                        render={({ field }) => (
-                            <WeightSelect
-                                selectedWeight={selectedWeight}
-                                handleWeightChange={handleWeightChange}
-                                availableWeights={availableWeights}
-                            />
-                        )}
-                    />
-                    <div className="invalid-feedback">
-                        {errors.weightCategory?.message}
-                    </div>
-                </div>
-            </div>
-            <div className="mb-3">
-                <button
-                    type="submit"
-                    disabled={formState.isSubmitting}
-                    className="btn btn-primary me-2"
-                >
-                    {formState.isSubmitting && (
-                        <span className="spinner-border spinner-border-sm me-1"></span>
-                    )}
-                    Save
-                </button>
-                <button
-                    onClick={() => reset(formOptions.defaultValues)}
-                    type="button"
-                    disabled={formState.isSubmitting}
-                    className="btn btn-secondary"
-                >
-                    Reset
-                </button>
-                <Link href="/fighters" className="btn btn-link">
-                    Cancel
-                </Link>
             </div>
         </form>
     )

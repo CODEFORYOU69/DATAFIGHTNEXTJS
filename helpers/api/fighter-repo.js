@@ -44,6 +44,7 @@ async function createFighter(params) {
 }
 
 async function update(id, params) {
+  console.log('paramsupdate', params)
   const fighter = await Fighter.findById(id)
 
   // validate

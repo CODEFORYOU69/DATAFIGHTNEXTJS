@@ -1,9 +1,9 @@
 // SexSelect.js
 import { sexes } from './data'
 
-export function SexSelect({ selectedSex, handleSexChange }) {
+export function SexSelect({ value, onChange, selectedSex, handleSexChange }) {
     return (
-        <select name="sex" value={selectedSex} onChange={handleSexChange}>
+        <select name="sex" value={value} onChange={onChange}>
             <option value="">Select a sex</option>
             {sexes.map((sex) => (
                 <option key={sex} value={sex}>

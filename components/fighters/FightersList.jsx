@@ -50,7 +50,7 @@ function FightersList() {
     return (
         <div className="mt-3">
             <h5>Fighters:</h5>
-            <div className="flex flex-row w-[100%]">
+            <div className="flex flex-row flex-wrap w-[100%]">
                 {fighters.map(
                     (fighter) => (
                         console.log('fighter:', fighter), // Ajoutez cette ligne pour vérifier la valeur de fighter

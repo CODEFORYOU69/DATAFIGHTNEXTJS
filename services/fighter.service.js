@@ -20,6 +20,7 @@ export const fighterService = {
     update,
     uploadPhoto,
     delete: _delete,
+    fightersFilter,
 };
 
 async function createFighter(data) {
@@ -65,4 +66,16 @@ async function uploadPhoto(fighterid, file) {
             "Content-Type": "",
         },
     });
+}
+
+async function fightersFilter(params) {
+
+    console.log('paramsservice', params)
+    const queryString = Object.entries(params)
+        .filter(([_, value]) => value !== '') // Ignore les entrées vides
+        .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+        .join('&');
+    console.log('query string', queryString)
+    const url = `${baseUrl}/fightersFilter?${queryString}`;
+    return await fetchWrapper.get(url);
 }

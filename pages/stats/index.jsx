@@ -30,6 +30,17 @@ const StatsPage = () => {
 
     const [data, setData] = useState(null)
 
+    // Supposons que "data" est le tableau de combats que vous recevez
+    let allRounds = []
+
+    data &&
+        data[0] &&
+        data.forEach((fight) => {
+            allRounds = allRounds.concat(fight.rounds)
+        })
+    console.log('allRounds', allRounds)
+    // Maintenant, "allRounds" contient tous les rounds de tous les combats
+
     console.log('datafilter', data)
     const handleInputChange = (event) => {
         setFilters({
@@ -373,7 +384,11 @@ const StatsPage = () => {
                     </div>
                 </div>
                 <div className="flex  h-60 border border-r-red-600">
-                    <ChartsDash labels={labels} dataset1={dataset1} />
+                    <ChartsDash
+                        labels={labels}
+                        dataset1={dataset1}
+                        rounds={allRounds}
+                    />
                 </div>
             </div>
         </div>

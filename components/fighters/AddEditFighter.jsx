@@ -46,7 +46,7 @@ function AddEditFighter(props) {
 
     const selectedSex = watch('sex')
     const selectedAge = watch('category')
-
+    const [selectedWeight, setSelectedWeight] = useState('')
     const availableWeights = getWeightCategories(selectedSex, selectedAge)
 
     async function onSubmit(data) {
@@ -191,7 +191,6 @@ function AddEditFighter(props) {
                                 <Controller
                                     name="weightCategory"
                                     control={control}
-                                    defaultValue=""
                                     rules={{
                                         required: 'Weight Category is required',
                                     }}
@@ -199,6 +198,11 @@ function AddEditFighter(props) {
                                         <WeightSelect
                                             {...field} // Ajoutez ceci pour lier le champ à la valeur de l'état du composant
                                             availableWeights={availableWeights}
+                                            selectedWeight={field.value}
+                                            onChange={(value) => {
+                                                field.onChange(value)
+                                                setSelectedWeight(value)
+                                            }}
                                         />
                                     )}
                                 />

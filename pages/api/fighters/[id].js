@@ -1,5 +1,6 @@
 import { apiHandler, fightersRepo } from 'helpers/api';
 
+const mongoose = require('mongoose');
 export default apiHandler({
     get: getById,
     put: update,
@@ -7,6 +8,8 @@ export default apiHandler({
 });
 
 async function getById(req, res) {
+    req.query.id = new mongoose.Types.ObjectId(req.query.id);
+
     const fighter = await fightersRepo.getById(req.query.id);
 
     if (!fighter) throw 'Fighter Not Found';

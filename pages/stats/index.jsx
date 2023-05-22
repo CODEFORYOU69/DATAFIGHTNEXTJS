@@ -31,17 +31,7 @@ const StatsPage = () => {
     const [data, setData] = useState(null)
 
     // Supposons que "data" est le tableau de combats que vous recevez
-    let allRounds = []
 
-    data &&
-        data[0] &&
-        data.forEach((fight) => {
-            allRounds = allRounds.concat(fight.rounds)
-        })
-    console.log('allRounds', allRounds)
-    // Maintenant, "allRounds" contient tous les rounds de tous les combats
-
-    console.log('datafilter', data)
     const handleInputChange = (event) => {
         setFilters({
             ...filters,
@@ -79,15 +69,10 @@ const StatsPage = () => {
     }
 
     // get the number of fight if fighter1 ||or fighter2|| or both are true
-    const numberOfFightFiltered = data && data.length
 
-    console.log('numberOfFightFiltered', numberOfFightFiltered)
-
-    const labels = ['Number of fight']
-    const dataset1 = [numberOfFightFiltered]
     // search photo from fighter if filter.fighter1 === true and filter.fighter1 === data[0].fighter1._id get data[0].fighter1.photo else get data[0].fighter2.photo
     const getPhoto = () => {
-        if (!data) {
+        if (!data || !filters.fighter1 || !filters.fighter2) {
             return []
         } else if (data.length > 1) {
             if (filters.fighter1 === data[0].fighter1._id) {
@@ -124,10 +109,11 @@ const StatsPage = () => {
         setPhotoData(getPhoto())
     }, [data, filters])
     console.log('photoData', photoData)
+
     return (
-        <div className="pt-20">
+        <div className="pt-20 pb-10 m-5 ">
             <h1 className="text-3xl text-center font-bold mb-8">Stats</h1>
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4 ">
                 <div className="flex justify-center">
                     <label className="w-1/4">
                         Year
@@ -369,25 +355,42 @@ const StatsPage = () => {
                 </button>
             </form>
 
-            <div className="flex  h-60 border border-r-red-600 gap-4">
+            <div className="flex conatainer h-60 border border-r-red-600 gap-4">
                 <div className="flex flex-row ">
                     <div className="flex flex-col">
-                        <h2 className="text-2xl font-bold">Fighter Selected</h2>
-                        <p className="text-xl font-bold">
-                            {photoData[1]} {photoData[2]}
-                        </p>
-                        <img
-                            className="w-40 h-40 rounded"
-                            src={photoData[0]}
-                            alt=""
-                        />
+                        {getPhoto().length > 0 && (
+                            <>
+                                <h2 className="text-2xl font-bold">
+                                    Fighter Selected
+                                </h2>
+                                <p className="text-xl font-bold">
+                                    {photoData[1]} {photoData[2]}
+                                </p>
+                                <img
+                                    className="w-40 h-40 rounded"
+                                    src={photoData[0]}
+                                    alt=""
+                                />
+                            </>
+                        )}
                     </div>
                 </div>
-                <div className="flex  h-60 border border-r-red-600">
+                <div className="flex flex-col border border-r-red-600">
+                    <div className="flex  justify-center items-center">
+                        <p className=" flex flex-col text-lg font-bold ">
+                            Current filters:
+                            {filters.fighter1 || ''} {filters.fighter2 || ''}
+                            {filters.eventyear || ''} {filters.country || ''}
+                            {filters.category || ''}
+                            {filters.weightcat || ''}
+                            {filters.sex || ''}
+                            {filters.eventname || ''}
+                            {filters.eventtype || ''}
+                        </p>
+                    </div>
                     <ChartsDash
-                        labels={labels}
-                        dataset1={dataset1}
-                        rounds={allRounds}
+                        data={data}
+                        selectedFighters={filters.fighter1}
                     />
                 </div>
             </div>

@@ -17,7 +17,7 @@ export const options = {
     scales: {
         y: {
             beginAtZero: true,
-            max: 100, // Define maximum value
+            max: 10, // Define maximum value
         },
     },
     maintainAspectRatio: false, // Add this

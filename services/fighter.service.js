@@ -33,6 +33,7 @@ async function getAll() {
 }
 
 async function getById(id) {
+    
     return await fetchWrapper.get(`${baseUrl}/${id}`);
 }
 

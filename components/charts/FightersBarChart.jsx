@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { fighterService } from 'services'
+import {fighterService}  from '../../services'
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -11,7 +11,6 @@ import {
 } from 'chart.js'
 import { Bar } from 'react-chartjs-2'
 
-const mongoose = require('mongoose')
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
@@ -99,6 +98,7 @@ export const options4 = {
     },
 }
 const AttOgFightersBarChart = ({
+
     dataset3,
     dataset4,
     dataset5,
@@ -108,17 +108,23 @@ const AttOgFightersBarChart = ({
     dataset9,
     dataset10,
     dataset11,
-    selectedFighters,
+    selectedFighter, // Ajouter la prop selectedFighter
 }) => {
-    const [fighters, setFighters] = useState([])
-    console.log('fightersdjksbkjdsbk', fighters)
+
+    const [fighter, setFighter] = useState(null)
 
     useEffect(() => {
-        if (selectedFighters)
-            fighterService
-                .getById({ selectedFighters })
-                .then((x) => setFighters(x))
-    }, [selectedFighters])
+        const fetchFighter = async () => {
+            const fighterData = await fighterService.getById(selectedFighter)
+            console.log("🚀 ~ file: FightersBarChart.jsx:119 ~ fetchFighter ~ fighterData:", fighterData)
+            setFighter(fighterData)
+        }
+        fetchFighter()
+    }, [selectedFighter])
+
+    //get fighters from data prop
+
+
     const labels = ['att og', 'att od', 'att fg', 'att fd']
     const label = ['def og', 'def od', 'def fg', 'def fd']
     const labelcac = ['cac og', 'cac od', 'cac fg', 'cac fd']
@@ -128,7 +134,7 @@ const AttOgFightersBarChart = ({
         labels,
         datasets: [
             {
-                label: fighters.lastName,
+                label: fighter?.name, // Utiliser le nom du fighter récupéré
                 data: dataset3,
                 backgroundColor: 'rgba(54, 162, 235, 0.8)', // darker color
                 borderColor: 'rgba(54, 162, 235, 1)', // same color as background but fully opaque
@@ -147,7 +153,7 @@ const AttOgFightersBarChart = ({
         labels: label,
         datasets: [
             {
-                label: 'fighter1',
+                label: fighter?.name, // Utiliser le nom du fighter récupéré
                 data: dataset5,
                 backgroundColor: 'rgba(54, 162, 235, 0.8)', // darker color
                 borderColor: 'rgba(54, 162, 235, 1)', // same color as background but fully opaque
@@ -166,7 +172,7 @@ const AttOgFightersBarChart = ({
         labels: labelcac,
         datasets: [
             {
-                label: 'fighter1',
+                label: fighter?.name, // Utiliser le nom du fighter récupéré
                 data: dataset7,
                 backgroundColor: 'rgba(54, 162, 235, 0.8)', // darker color
                 borderColor: 'rgba(54, 162, 235, 1)', // same color as background but fully opaque

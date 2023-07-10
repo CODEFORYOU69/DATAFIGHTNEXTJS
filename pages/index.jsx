@@ -1,6 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
-import { userService } from 'services';
 import { motion } from 'framer-motion';
 
 function Home() {

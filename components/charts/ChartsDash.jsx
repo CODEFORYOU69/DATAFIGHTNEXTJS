@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import NumberFightBarChart from './Bar'
 import RadarChart from './Radar1'
 import assignRoundData from './dataFilters'
@@ -70,7 +70,12 @@ const ChartsDash = ({
     console.log('data', data)
 
     const selectedFighterId = { selectedFighters } // Remplacer par l'ID du combattant sélectionné
-    const updatedFightsData = assignRoundData(data, selectedFighterId)
+    const [updatedFightsData, setUpdatedFightsData] = useState([])
+
+    useEffect(() => {
+      const updatedData = assignRoundData(data, selectedFighterId)
+      setUpdatedFightsData(updatedData)
+    }, [data, selectedFighterId])
 
     console.log('updatedFightsData', updatedFightsData)
     let allRounds = []
@@ -771,6 +776,7 @@ const ChartsDash = ({
                     options3={options3}
                     options4={options4}
                     selectedFighters={selectedFighters}
+                    data={data}
                 />
             </div>
         </div>

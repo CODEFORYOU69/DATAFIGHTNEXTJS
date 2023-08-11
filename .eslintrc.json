@@ -1,6 +1,7 @@
 {
     "extends": ["eslint:recommended", "plugin:react/recommended", "prettier"],
     "parserOptions": {
+        "requireConfigFile": false,
         "ecmaFeatures": {
             "jsx": true
         },

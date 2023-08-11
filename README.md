@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-#DATAFIGHT
-
-=======
 # Datafight
 
 Application d'analyse de données de taekwondo pour optimisation des entrainements et la recherche de performance
@@ -36,5 +32,7 @@ Application d'analyse de données de taekwondo pour optimisation des entrainemen
 ## Auteur
 
 - younes ouasmi y.ouasmi@gmail.com
->>>>>>> dafc64166077c0b878a9e2275eb5ec5c95833fd8
 
+## Licence
+
+- Indiquez la licence que vous utilisez pour votre projet

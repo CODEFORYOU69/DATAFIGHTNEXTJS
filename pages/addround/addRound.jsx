@@ -290,26 +290,6 @@ function AddRound() {
         })
     }, [state2])
 
-    // const updateBlueScore = (key, oldValue, newValue) => {
-    //     const incrementValue = getIncrementValue(key)
-    //     console.log('incrementBlueValue', incrementValue)
-    //     if (newValue > oldValue) {
-    //         setBlueScore((prevScore) => prevScore + incrementValue)
-    //     } else if (newValue < oldValue) {
-    //         setBlueScore((prevScore) => prevScore - incrementValue)
-    //     }
-    // }
-
-    // const updateRedScore = (key, oldValue, newValue) => {
-    //     const incrementValue = getIncrementValue(key)
-    //     console.log('incrementRedValue', incrementValue)
-    //     if (newValue > oldValue) {
-    //         setRedScore((prevScore) => prevScore + incrementValue)
-    //     } else if (newValue < oldValue) {
-    //         setRedScore((prevScore) => prevScore - incrementValue)
-    //     }
-    // }
-
     const fightId = router.query.fightId
 
     //get fighters from api
@@ -503,7 +483,7 @@ function AddRound() {
                 contentLabel="Add Fight"
             >
                 <h4 className="card-header">Add Fight</h4>
-                <div className="flex flex-col form-group">
+                <div className="flex flex-col pt-12 form-group">
                     <label>Fighter Blue</label>
                     <p>
                         {fighter1.firstName} {fighter1.lastName}
@@ -517,7 +497,7 @@ function AddRound() {
                     <p>{roundCount + 1}</p>
                 </div>
                 <form onSubmit={onSubmit}>
-                    <div className="grid grid-cols-9 grid-rows-11 gap-4 border-1 text-center border-double border-red-600">
+                    <div className="grid pt-32 grid-cols-9 grid-rows-11 gap-4 border-1 text-center border-double border-red-600">
                         <div className="text-center  border-red-600">
                             Round:{roundCount + 1}
                         </div>
@@ -864,114 +844,170 @@ function AddRound() {
                         <div className="row-start-7">
                             <IncrementDecrementField
                                 value={att_od_4_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setAtt_od_4_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        att_od_4_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-7">
                             <IncrementDecrementField
                                 value={att_od_4_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setAtt_od_4_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        att_od_4_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-7">
                             <IncrementDecrementField
                                 value={att_fd_4_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setAtt_fd_4_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        att_fd_4_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-7">
                             <IncrementDecrementField
                                 value={att_fd_4_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setAtt_fd_4_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        att_fd_4_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-7">
                             <IncrementDecrementField
                                 value={att_og_4_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setAtt_og_4_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        att_og_4_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-7">
                             <IncrementDecrementField
                                 value={att_og_4_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setAtt_og_4_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        att_og_4_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div>5 POINTS</div>
                         <div>
                             <IncrementDecrementField
                                 value={att_od_5_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setAtt_od_5_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        att_od_5_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-8">
                             <IncrementDecrementField
                                 value={att_od_5_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setAtt_od_5_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        att_od_5_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-8">
                             <IncrementDecrementField
                                 value={att_fd_5_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setAtt_fd_5_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        att_fd_5_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-8">
                             <IncrementDecrementField
                                 value={att_fd_5_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setAtt_fd_5_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        att_fd_5_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-8">
                             <IncrementDecrementField
                                 value={att_og_5_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setAtt_og_5_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        att_og_5_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-8">
                             <IncrementDecrementField
                                 value={att_og_5_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setAtt_og_5_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        att_og_5_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-8">
                             <IncrementDecrementField
                                 value={att_fg_5_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setAtt_fg_5_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        att_fg_5_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-8">
                             <IncrementDecrementField
                                 value={att_fg_5_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setAtt_fg_5_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        att_fg_5_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                     </div>
@@ -1003,82 +1039,122 @@ function AddRound() {
                         <div>
                             <IncrementDecrementField
                                 value={def_fg_1_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_fg_1_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        def_fg_1_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div>
                             <IncrementDecrementField
                                 value={def_fg_1_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_fg_1_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        def_fg_1_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-4">1 POINTS</div>
                         <div className="row-start-4">
                             <IncrementDecrementField
                                 value={def_od_1_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_od_1_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        def_od_1_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-4">
                             <IncrementDecrementField
                                 value={def_od_1_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_od_1_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        def_od_1_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-4">
                             <IncrementDecrementField
                                 value={def_fd_1_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_fd_1_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        def_fd_1_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-4">
                             <IncrementDecrementField
                                 value={def_fd_1_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_fd_1_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        def_fd_1_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-4">
                             <IncrementDecrementField
                                 value={def_og_1_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_og_1_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        def_og_1_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-4">
                             <IncrementDecrementField
                                 value={def_og_1_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_og_1_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        def_og_1_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div>
                             <IncrementDecrementField
                                 value={def_fg_2_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_fg_2_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        def_fg_2_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div>
                             <IncrementDecrementField
                                 value={def_fg_2_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_fg_2_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        def_fg_2_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-5">2 POINTS</div>
@@ -1086,244 +1162,364 @@ function AddRound() {
                             {' '}
                             <IncrementDecrementField
                                 value={def_od_2_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_od_2_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        def_od_2_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-5">
                             <IncrementDecrementField
                                 value={def_od_2_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_od_2_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        def_od_2_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-5">
                             <IncrementDecrementField
                                 value={def_fd_2_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_fd_2_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        def_fd_2_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-5">
                             <IncrementDecrementField
                                 value={def_fd_2_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_fd_2_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        def_fd_2_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-5">
                             <IncrementDecrementField
                                 value={def_og_2_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_og_2_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        def_og_2_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-5">
                             <IncrementDecrementField
                                 value={def_og_2_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_og_2_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        def_og_2_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div>
                             <IncrementDecrementField
                                 value={def_fg_3_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_fg_3_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        def_fg_3_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div>
                             <IncrementDecrementField
                                 value={def_fg_3_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_fg_3_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        def_fg_3_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-6">3 POINTS</div>
                         <div className="row-start-6">
                             <IncrementDecrementField
                                 value={def_od_3_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_od_3_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        def_od_3_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-6">
                             <IncrementDecrementField
                                 value={def_od_3_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_od_3_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        def_od_3_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-6">
                             <IncrementDecrementField
                                 value={def_fd_3_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_fd_3_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        def_fd_3_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-6">
                             <IncrementDecrementField
                                 value={def_fd_3_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_fd_3_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        def_fd_3_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-6">
                             <IncrementDecrementField
                                 value={def_og_3_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_og_3_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        def_og_3_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-6">
                             <IncrementDecrementField
                                 value={def_og_3_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_og_3_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        def_og_3_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div>
                             <IncrementDecrementField
                                 value={def_fg_4_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_fg_4_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        def_fg_4_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div>
                             <IncrementDecrementField
                                 value={def_fg_4_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_fg_4_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        def_fg_4_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-7">4 POINTS</div>
                         <div className="row-start-7">
                             <IncrementDecrementField
                                 value={def_od_4_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_od_4_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        def_od_4_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-7">
                             <IncrementDecrementField
                                 value={def_od_4_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_od_4_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        def_od_4_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-7">
                             <IncrementDecrementField
                                 value={def_fd_4_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_fd_4_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        def_fd_4_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-7">
                             <IncrementDecrementField
                                 value={def_fd_4_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_fd_4_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        def_fd_4_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-7">
                             <IncrementDecrementField
                                 value={def_og_4_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_og_4_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        def_og_4_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-7">
                             <IncrementDecrementField
                                 value={def_og_4_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_og_4_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        def_og_4_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div>5 POINTS</div>
                         <div>
                             <IncrementDecrementField
                                 value={def_od_5_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_od_5_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        def_od_5_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-8">
                             <IncrementDecrementField
                                 value={def_od_5_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_od_5_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        def_od_5_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-8">
                             <IncrementDecrementField
                                 value={def_fd_5_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_fd_5_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        def_fd_5_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-8">
                             <IncrementDecrementField
                                 value={def_fd_5_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_fd_5_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        def_fd_5_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-8">
                             <IncrementDecrementField
                                 value={def_og_5_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_og_5_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        def_og_5_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-8">
                             <IncrementDecrementField
                                 value={def_og_5_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_og_5_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        def_og_5_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-8">
                             <IncrementDecrementField
                                 value={def_fg_5_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_fg_5_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        def_fg_5_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-8">
                             <IncrementDecrementField
                                 value={def_fg_5_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setDef_fg_5_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        def_fg_5_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                     </div>
@@ -1355,82 +1551,122 @@ function AddRound() {
                         <div>
                             <IncrementDecrementField
                                 value={cac_fg_1_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_fg_1_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        cac_fg_1_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div>
                             <IncrementDecrementField
                                 value={cac_fg_1_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_fg_1_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        cac_fg_1_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-4">1 POINTS</div>
                         <div className="row-start-4">
                             <IncrementDecrementField
                                 value={cac_od_1_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_od_1_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        cac_od_1_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-4">
                             <IncrementDecrementField
                                 value={cac_od_1_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_od_1_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        cac_od_1_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-4">
                             <IncrementDecrementField
                                 value={cac_fd_1_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_fd_1_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        cac_fd_1_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-4">
                             <IncrementDecrementField
                                 value={cac_fd_1_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_fd_1_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        cac_fd_1_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-4">
                             <IncrementDecrementField
                                 value={cac_og_1_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_og_1_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        cac_og_1_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-4">
                             <IncrementDecrementField
                                 value={cac_og_1_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_og_1_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        cac_og_1_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div>
                             <IncrementDecrementField
                                 value={cac_fg_2_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_fg_2_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        cac_fg_2_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div>
                             <IncrementDecrementField
                                 value={cac_fg_2_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_fg_2_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        cac_fg_2_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-5">2 POINTS</div>
@@ -1438,244 +1674,364 @@ function AddRound() {
                             {' '}
                             <IncrementDecrementField
                                 value={cac_od_2_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_od_2_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        cac_od_2_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-5">
                             <IncrementDecrementField
                                 value={cac_od_2_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_od_2_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        cac_od_2_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-5">
                             <IncrementDecrementField
                                 value={cac_fd_2_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_fd_2_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        cac_fd_2_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-5">
                             <IncrementDecrementField
                                 value={cac_fd_2_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_fd_2_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        cac_fd_2_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-5">
                             <IncrementDecrementField
                                 value={cac_og_2_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_og_2_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        cac_og_2_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-5">
                             <IncrementDecrementField
                                 value={cac_og_2_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_og_2_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        cac_og_2_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div>
                             <IncrementDecrementField
                                 value={cac_fg_3_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_fg_3_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        cac_fg_3_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div>
                             <IncrementDecrementField
                                 value={cac_fg_3_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_fg_3_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        cac_fg_3_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-6">3 POINTS</div>
                         <div className="row-start-6">
                             <IncrementDecrementField
                                 value={cac_od_3_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_od_3_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        cac_od_3_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-6">
                             <IncrementDecrementField
                                 value={cac_od_3_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_od_3_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        cac_od_3_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-6">
                             <IncrementDecrementField
                                 value={cac_fd_3_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_fd_3_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        cac_fd_3_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-6">
                             <IncrementDecrementField
                                 value={cac_fd_3_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_fd_3_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        cac_fd_3_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-6">
                             <IncrementDecrementField
                                 value={cac_og_3_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_og_3_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        cac_og_3_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-6">
                             <IncrementDecrementField
                                 value={cac_og_3_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_og_3_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        cac_og_3_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div>
                             <IncrementDecrementField
                                 value={cac_fg_4_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_fg_4_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        cac_fg_4_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div>
                             <IncrementDecrementField
                                 value={cac_fg_4_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_fg_4_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        cac_fg_4_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-7">4 POINTS</div>
                         <div className="row-start-7">
                             <IncrementDecrementField
                                 value={cac_od_4_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_od_4_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        cac_od_4_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-7">
                             <IncrementDecrementField
                                 value={cac_od_4_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_od_4_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        cac_od_4_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-7">
                             <IncrementDecrementField
                                 value={cac_fd_4_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_fd_4_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        cac_fd_4_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-7">
                             <IncrementDecrementField
                                 value={cac_fd_4_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_fd_4_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        cac_fd_4_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-7">
                             <IncrementDecrementField
                                 value={cac_og_4_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_og_4_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        cac_og_4_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-7">
                             <IncrementDecrementField
                                 value={cac_og_4_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_og_4_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        cac_og_4_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div>5 POINTS</div>
                         <div>
                             <IncrementDecrementField
                                 value={cac_od_5_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_od_5_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        cac_od_5_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-8">
                             <IncrementDecrementField
                                 value={cac_od_5_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_od_5_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        cac_od_5_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-8">
                             <IncrementDecrementField
                                 value={cac_fd_5_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_fd_5_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        cac_fd_5_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-8">
                             <IncrementDecrementField
                                 value={cac_fd_5_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_fd_5_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        cac_fd_5_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-8">
                             <IncrementDecrementField
                                 value={cac_og_5_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_og_5_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        cac_og_5_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-8">
                             <IncrementDecrementField
                                 value={cac_og_5_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_og_5_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        cac_og_5_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-8">
                             <IncrementDecrementField
                                 value={cac_fg_5_by_fighter1}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_fg_5_by_fighter1(value)
-                                }
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        cac_fg_5_by_fighter1: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div className="row-start-8">
                             <IncrementDecrementField
                                 value={cac_fg_5_by_fighter2}
-                                onChange={(value) =>
+                                onChange={(value) => {
                                     setCac_fg_5_by_fighter2(value)
-                                }
+                                    setState2((prevState) => ({
+                                        ...prevState,
+                                        cac_fg_5_by_fighter2: value,
+                                    }))
+                                }}
                             />
                         </div>
                         <div>gj and hits</div>
@@ -1760,7 +2116,7 @@ function AddRound() {
                         Cancel
                     </button>
                 </form>
-                <div className="fixed top-0 left-0 w-full z-10 pt-10 overflow-auto">
+                <div className="fixed top-0 left-0 w-full z-10 pt-20 overflow-auto">
                     <Scoreboard
                         redScore={redScore}
                         setRedScore={setRedScore}

@@ -70,6 +70,7 @@ async function handleResponse(response) {
 
         // get error message from body or default to response status
         const error = (data && data.message) || response.statusText
+        console.log('errornjnj', error)
         // eslint-disable-next-line no-undef
         return Promise.reject(error)
     }

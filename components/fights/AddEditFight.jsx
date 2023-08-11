@@ -40,6 +40,7 @@ function AddEditFight(props) {
     const { errors } = formState
 
     async function onSubmit(data) {
+        console.log('datasubmit', data)
         alertService.clear()
         try {
             // create or update user based on user prop
@@ -53,10 +54,12 @@ function AddEditFight(props) {
             }
 
             // redirect to user list with success message
+            console.log(message)
             router.push('/fights')
+            console.log(router)
             alertService.success(message, true)
         } catch (error) {
-            alertService.error(error)
+            alertService.error(error.message)
             console.error(error)
         }
     }

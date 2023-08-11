@@ -52,7 +52,7 @@ function fighterModel() {
       weightCategory: { type: String, required: true },
       photo: { type: String, required: false },
 
-      // store fight object ids in array
+      // store fight object ids in array and for each fight store his round objectid data
       fights: [{ type: Schema.Types.ObjectId, ref: 'Fight' }],
     },
     {

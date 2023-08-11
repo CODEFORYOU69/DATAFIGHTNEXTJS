@@ -1,15 +1,15 @@
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 
-async function connectToDatabase() {
-    if (mongoose.connection.readyState >= 1) {
-        return;
-    }
+// async function connectToDatabase() {
+//     if (mongoose.connection.readyState >= 1) {
+//         return;
+//     }
 
-    return mongoose.connect(process.env.MONGODBDB_URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useFindAndModify: false,
-    });
-}
+//     return mongoose.connect(process.env.MONGODBDB_URI, {
+//         useNewUrlParser: true,
+//         useUnifiedTopology: true,
+//         useFindAndModify: false,
+//     });
+// }
 
-module.exports = connectToDatabase;
+// module.exports = connectToDatabase;

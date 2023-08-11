@@ -9,6 +9,7 @@ export const fightersRepo = {
   createFighter,
   update,
   delete: _delete,
+  fightersFilter,
 }
 
 export { updateFighterPhoto }
@@ -44,6 +45,7 @@ async function createFighter(params) {
 }
 
 async function update(id, params) {
+  console.log('paramsupdate', params)
   const fighter = await Fighter.findById(id)
 
   // validate
@@ -87,4 +89,40 @@ async function updateFighterPhoto(fighterId, imagePath) {
   console.log('fighter.photo:', fighter.photo)
 
   await fighter.save()
+}
+
+async function fightersFilter(filters) {
+  console.log('filtersapi', filters);
+
+  const query = {}
+
+  if (filters.firstName) {
+    query.firstName = filters.firstName;
+  }
+
+  if (filters.lastName) {
+    query.lastName = filters.lastName;
+  }
+
+  if (filters.sex) {
+    query.sex = filters.sex;
+  }
+
+  if (filters.category) {
+    query.category = filters.category;
+  }
+
+  if (filters.weightCategory) {
+    query.weightCategory = parseInt(filters.weightCategory)
+  }
+
+  if (filters.country) {
+    query.country = filters.country;
+  }
+
+  console.log('query', query)
+
+  const result = await Fighter.find(query);
+
+  return result;
 }

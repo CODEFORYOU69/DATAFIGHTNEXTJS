@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { Spinner } from 'components'
 import { Layout } from 'components/fighters'
 import { fighterService } from 'services'
+import FightersFilters from 'components/fighters/FightersFilters'
 import FightersList from 'components/fighters/FightersList'
 
 export default Index

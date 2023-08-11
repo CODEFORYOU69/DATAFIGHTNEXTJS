@@ -20,6 +20,7 @@ export const fighterService = {
     update,
     uploadPhoto,
     delete: _delete,
+    fightersFilter,
 };
 
 async function createFighter(data) {
@@ -32,21 +33,23 @@ async function getAll() {
 }
 
 async function getById(id) {
+    
     return await fetchWrapper.get(`${baseUrl}/${id}`);
 }
 
 async function update(id, params) {
+    console.log("update", id, params);
     await fetchWrapper.put(`${baseUrl}/${id}`, params);
 
     // update stored fighter if the logged in fighter updated their own record
-    if (id === fighterSubject.value.id) {
-        // update local storage
-        const fighter = { ...fighterSubject.value, ...params };
-        localStorage.setItem("fighter", JSON.stringify(fighter));
+    // if (id === fighterSubject.value.id) {
+    //     // update local storage
+    //     const fighter = { ...fighterSubject.value, ...params };
+    //     localStorage.setItem("fighter", JSON.stringify(fighter));
 
-        // publish updated fighter to subscribers
-        fighterSubject.next(fighter);
-    }
+    //     // publish updated fighter to subscribers
+    //     fighterSubject.next(fighter);
+    // }
 }
 
 // prefixed with underscored because delete is a reserved word in javascript
@@ -64,4 +67,16 @@ async function uploadPhoto(fighterid, file) {
             "Content-Type": "",
         },
     });
+}
+
+async function fightersFilter(params) {
+
+    console.log('paramsservice', params)
+    const queryString = Object.entries(params)
+        .filter(([_, value]) => value !== '') // Ignore les entrées vides
+        .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+        .join('&');
+    console.log('query string', queryString)
+    const url = `${baseUrl}/fightersFilter?${queryString}`;
+    return await fetchWrapper.get(url);
 }

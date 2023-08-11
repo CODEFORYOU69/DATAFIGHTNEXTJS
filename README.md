@@ -33,3 +33,6 @@ Application d'analyse de données de taekwondo pour optimisation des entrainemen
 
 - younes ouasmi y.ouasmi@gmail.com
 
+## Licence
+
+- Indiquez la licence que vous utilisez pour votre projet

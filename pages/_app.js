@@ -52,7 +52,7 @@ function App({ Component, pageProps }) {
     }
 
     return (
-        <>
+        <div>
             <Head>
                 <title>DATAFIGHT</title>
             </Head>
@@ -65,6 +65,6 @@ function App({ Component, pageProps }) {
                     <Component {...pageProps} />
                 }
             </div>
-        </>
+        </div>
     );
 }

@@ -359,7 +359,7 @@ const StatsPage = () => {
                 <div className="flex flex-row ">
                     <div className="flex flex-col">
                         {getPhoto().length > 0 && (
-                            <>
+                            <div>
                                 <h2 className="text-2xl font-bold">
                                     Fighter Selected
                                 </h2>
@@ -371,7 +371,7 @@ const StatsPage = () => {
                                     src={photoData[0]}
                                     alt=""
                                 />
-                            </>
+                            </div>
                         )}
                     </div>
                 </div>

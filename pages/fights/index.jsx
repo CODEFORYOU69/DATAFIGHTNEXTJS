@@ -46,6 +46,7 @@ function Index() {
 
     return (
         <Layout>
+            <div className="">
             <h1>Fights</h1>
             <Link
                 href="/fights/addFight"
@@ -167,6 +168,7 @@ function Index() {
                     )}
                 </tbody>
             </table>
+            </div>
         </Layout>
     )
 }

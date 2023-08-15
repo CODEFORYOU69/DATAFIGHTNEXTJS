@@ -1,9 +1,13 @@
 /** @type {import('next').NextConfig} */
+
+require('dotenv').config();
+
+
 const nextConfig = {
   reactStrictMode: true,
   serverRuntimeConfig: {
     connectionString: "mongodb://localhost/datafight",
-    secret: "bhjzè!778B$H2bnb9+jk%LJLJljaZRvj8!J",
+    secret: process.env.SECRET,
   },
   publicRuntimeConfig: {
     apiUrl:

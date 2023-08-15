@@ -21,6 +21,12 @@ function userModel() {
       hash: { type: String, required: true },
       firstName: { type: String, required: true },
       lastName: { type: String, required: true },
+      country: { type: String, required: true },
+      role: { type: String, required: true, default: 'user' },
+      resetPasswordToken: { type: String, required: false },
+      resetPasswordExpires: { type: Date, required: false },
+
+
     },
     {
       // add createdAt and updatedAt timestamps

@@ -4,18 +4,47 @@ import { useState, useEffect } from 'react';
 import { Spinner } from 'components';
 import { Layout } from 'components/users';
 import { userService } from 'services';
+const mongoose = require('mongoose');
+
 
 export default Index;
+// visible just for admin users 
+
+
 
 function Index() {
-    const [users, setUsers] = useState(null);
 
-    useEffect(() => {
-        userService.getAll().then(x => setUsers(x));
-    }, []);
+    
+
+        const [users, setUsers] = useState(null);
+        const [isAdmin, setIsAdmin] = useState(false); 
+
+        // get email from local storage and check if admin
+const user = userService.userValue;
+
+const ObjectId = mongoose.Types.ObjectId;
+
+const Id = new ObjectId(user.id);
+
+
+useEffect(() => {
+    userService.isAdmin(Id)
+        .then(user => {
+            if (user.role === "admin") {
+                setIsAdmin(true); // Set isAdmin to true if the user is an admin
+                userService.getAll().then(x => setUsers(x));
+            } else {
+                setIsAdmin(false); // Set isAdmin to false otherwise
+                userService.getById(Id).then(user => setUsers([user]));
+            }
+        })
+        .catch(error => {
+            console.error("Error checking admin status:", error);
+        });
+}, []);
 
     function deleteUser(id) {
-        setUsers(users.map(x => {
+        setUsers(users && users.map(x => {
             if (x.id === id) { x.isDeleting = true; }
             return x;
         }));
@@ -27,7 +56,7 @@ function Index() {
     return (
         <Layout>
             <h1>Users</h1>
-            <Link href="/users/add" className="btn btn-sm btn-success mb-2">Add User</Link>
+            {isAdmin && <Link href="/users/add" className="btn btn-sm btn-success mb-2">Add User</Link>}
             <table className="table table-striped">
                 <thead>
                     <tr>
@@ -39,7 +68,7 @@ function Index() {
                     </tr>
                 </thead>
                 <tbody>
-                    {users && users.map(user =>
+                    { users && users.map(user =>
                         <tr key={user.id}>
                             <td>{user.firstName}</td>
                             <td>{user.lastName}</td>
@@ -75,3 +104,5 @@ function Index() {
         </Layout>
     );
 }
+
+

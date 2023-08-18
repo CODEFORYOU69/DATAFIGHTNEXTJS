@@ -33,7 +33,7 @@ export function Nav() {
                     >
                         {isOpen ? (
                             <Image
-                                className='mr-4'
+                                className='mr-4 mt-4'
                                 src="uploads/cross.svg"
                                 alt="Cross icon"
                                 width={24}
@@ -41,7 +41,7 @@ export function Nav() {
                             />
                         ) : (
                             <Image
-                                className='mr-4'
+                                className='mr-4 pt-4 pb-4'
                                 src="uploads/burger-menu.svg"
                                 alt="Burger menu icon"
                                 width={24}
@@ -110,3 +110,4 @@ export function Nav() {
         </nav>
     )
 }
+

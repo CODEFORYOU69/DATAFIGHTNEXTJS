@@ -61,16 +61,9 @@ const StatsPage = () => {
         event.preventDefault()
 
         fightService.filterFights(filters).then((x) => setData(x))
-        // const response = await axios.get('/api/fights', {
-        //     params: filters,
-        // })
 
-        // setData(response.data)
     }
 
-    // get the number of fight if fighter1 ||or fighter2|| or both are true
-
-    // search photo from fighter if filter.fighter1 === true and filter.fighter1 === data[0].fighter1._id get data[0].fighter1.photo else get data[0].fighter2.photo
     const getPhoto = () => {
         if (!data || !filters.fighter1 || !filters.fighter2) {
             return []
@@ -111,39 +104,37 @@ const StatsPage = () => {
     console.log('photoData', photoData)
 
     return (
-        <div className="pt-20 pb-10 m-5 ">
+        <div className="flex flex-col md:flex-row pt-20 pb-10 m-5 ">
             <h1 className="text-3xl text-center font-bold mb-8">Stats</h1>
             <form onSubmit={handleSubmit} className="space-y-4 ">
-                <div className="flex justify-center">
-                    <label className="w-1/4">
-                        Year
-                        <select
-                            name="eventyear"
-                            value={filters.eventyear}
-                            onChange={handleInputChange}
-                            className={`p-2 border rounded focus:outline-none ${
-                                filters.eventyear
-                                    ? 'border-green-500'
-                                    : 'border-gray-300'
-                            }`}
-                        >
-                            <option value="">Select a year</option>
-                            {fights &&
-                                fights[0] &&
-                                fights.map((fight) => (
-                                    <option
-                                        key={fight.id}
-                                        value={fight.eventyear}
-                                    >
-                                        {fight.eventyear}
-                                    </option>
-                                ))}
-                        </select>
-                    </label>
-                </div>
-
-                <div className="grid grid-cols-4 gap-4 mx-auto w-3/4 ">
-                    <label className="w-1/4">
+            <div className="flex justify-center">
+    <label className="w-96 mx-auto md:w-1/4">
+        Year
+        <select
+            name="eventyear"
+            value={filters.eventyear}
+            onChange={handleInputChange}
+            className={`w-full p-2 border rounded focus:outline-none ${
+                filters.eventyear
+                    ? 'border-green-500'
+                    : 'border-gray-300'
+            }`}
+        >
+            <option value="">Select a year</option>
+            {fights &&
+                fights[0] &&
+                fights.map((fight) => (
+                    <option
+                        key={fight.id}
+                        value={fight.eventyear}
+                    >
+                        {fight.eventyear}
+                    </option>
+                ))}
+        </select>
+    </label>
+<div className="grid grid-cols-1 md:grid-cols-4 gap-4 mx-auto w-full md:w-3/4">
+                <label className="w-96 mx-auto md:w-1/4">
                         EVENT
                         <select
                             name="eventtype"
@@ -168,7 +159,8 @@ const StatsPage = () => {
                                 ))}
                         </select>
                     </label>
-                    <label className="w-1/4">
+
+                    <label className="w-96 mx-auto md:w-1/4">
                         Name
                         <select
                             name="eventname"
@@ -193,7 +185,8 @@ const StatsPage = () => {
                                 ))}
                         </select>
                     </label>
-                    <label className="w-1/4">
+
+                    <label className="w-96 mx-auto md:w-1/4">
                         Sex
                         <select
                             name="sex"
@@ -212,7 +205,7 @@ const StatsPage = () => {
                         </select>
                     </label>
 
-                    <label className="w-1/4">
+                    <label className="w-96 mx-auto md:w-1/4">
                         Fighter 1
                         <select
                             name="fighter1"
@@ -235,7 +228,8 @@ const StatsPage = () => {
                         </select>
                     </label>
 
-                    <label className="w-1/4">
+
+                    <label className="w-96 mx-auto md:w-1/4">
                         Fighter 2
                         <select
                             name="fighter2"
@@ -257,7 +251,8 @@ const StatsPage = () => {
                                 ))}
                         </select>
                     </label>
-                    <label className="w-1/4">
+
+                    <label className="w-96 mx-auto md:w-1/4">
                         Country
                         <select
                             name="country"
@@ -282,7 +277,9 @@ const StatsPage = () => {
                                 ))}
                         </select>
                     </label>
-                    <label className="w-1/4">
+
+
+                    <label className="w-96 mx-auto md:w-1/4">
                         Category
                         <select
                             name="category"
@@ -308,7 +305,8 @@ const StatsPage = () => {
                         </select>
                     </label>
 
-                    <label className="w-1/4">
+
+                    <label className="w-96 mx-auto md:w-1/4">
                         Weight
                         <select
                             name="weightcat"
@@ -333,6 +331,7 @@ const StatsPage = () => {
                                 ))}
                         </select>
                     </label>
+                    </div>
                 </div>
                 <div className="my-4">
                     {Object.keys(filters).map(
@@ -346,13 +345,13 @@ const StatsPage = () => {
                             ),
                     )}
                 </div>
-                {/* Continuez à ajouter les autres lignes ici, en utilisant le même format */}
                 <button
                     type="submit"
                     className="w-full py-2 px-4 rounded bg-green-500 text-white"
                 >
                     Filter
                 </button>
+                
             </form>
 
             <div className="flex conatainer h-60 border border-r-red-600 gap-4">

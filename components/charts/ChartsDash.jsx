@@ -750,17 +750,15 @@ const ChartsDash = ({
 
     const dataset1 = [numberOfFightFiltered]
     return (
-        <div className="flex flex-col justify-center items-center">
-            <h1>Dashboard</h1>
-            <div className="flex flex-wrap ">
+        <div className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4">
+            <h1 className="text-center">Dashboard</h1>
+            <div className="flex flex-col space-y-4">
                 <NumberFightBarChart
                     labels={labels}
                     dataset1={dataset1}
                     dataset2={dataset2}
                     options={options}
                 />
-
-                {/* <RadarChart rounds={allRounds} /> */}
                 <AttOgFightersBarChart
                     label={label}
                     dataset3={arrayOfSumAtt1}
@@ -781,6 +779,7 @@ const ChartsDash = ({
             </div>
         </div>
     )
+    
 }
 
 export default ChartsDash

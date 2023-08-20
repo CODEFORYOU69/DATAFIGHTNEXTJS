@@ -57,7 +57,9 @@ function App({ Component, pageProps }) {
                 <title>DATAFIGHT</title>
             </Head>
 
-            <div className={`app-container ${user ? 'bg-light' : ''}`}>
+            <div className={`app-container ${user ? 'bg-white' : ''}`}>
+                {/* if Nav is open add push all element on the bottom */}
+
                 <Nav />
                 <div className="h-16"></div>
                 <Alert />

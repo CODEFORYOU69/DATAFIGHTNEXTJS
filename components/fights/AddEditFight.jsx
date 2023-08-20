@@ -40,7 +40,6 @@ function AddEditFight(props) {
     const { errors } = formState
 
     async function onSubmit(data) {
-        console.log('datasubmit', data)
         alertService.clear()
         try {
             // create or update user based on user prop
@@ -49,6 +48,8 @@ function AddEditFight(props) {
                 await fightService.update(fight.id, data)
                 message = 'fight updated'
             } else {
+                // add user id for new fights in createdBy field
+
                 await fightService.createFight(data)
                 message = 'Fight added'
             }

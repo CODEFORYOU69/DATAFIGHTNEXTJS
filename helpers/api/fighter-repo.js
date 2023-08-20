@@ -45,7 +45,6 @@ async function createFighter(params) {
 }
 
 async function update(id, params) {
-  console.log('paramsupdate', params)
   const fighter = await Fighter.findById(id)
 
   // validate
@@ -76,23 +75,18 @@ async function _delete(id) {
 }
 
 async function updateFighterPhoto(fighterId, imagePath) {
-  console.log('fighterId:updateFighterPhoto', fighterId)
-  console.log('imagePath:updateFighterPhoto', imagePath)
+
   const fighter = await Fighter.findById(fighterId)
-  console.log('fighter:updateFighterPhoto', fighter)
 
   if (!fighter) throw 'Fighter not found'
 
   // Mettez à jour le chemin d'accès à la photo du combattant
   fighter.photo = '/uploads/' + path.basename(imagePath)
 
-  console.log('fighter.photo:', fighter.photo)
-
   await fighter.save()
 }
 
 async function fightersFilter(filters) {
-  console.log('filtersapi', filters);
 
   const query = {}
 

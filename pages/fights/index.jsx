@@ -13,7 +13,7 @@ function Index() {
     useEffect(() => {
         fightService.getAll().then((x) => setFights(x))
     }, [])
-    // for each fight  determine the winner in winner_id field if two same id is the winner of the current fight
+    // for each fight  determine the winner in winner_id field if two same id  set this id in fight wineer  of the current fight
 
     const fightWinner = fights
         ? fights.map((fight) => {
@@ -27,8 +27,6 @@ function Index() {
               } else return fight.winner_id[0]
           })
         : []
-    console.log('fights', fights)
-    console.log('fightWinner', fightWinner)
 
     function deleteFight(id) {
         setFights(
@@ -57,6 +55,7 @@ function Index() {
             <table className="table table-striped">
                 <thead>
                     <tr>
+                        <th style={{ width: '30%' }}>Created By</th>
                         <th style={{ width: '30%' }}>Event Year</th>
                         <th style={{ width: '30%' }}>Event Type</th>
                         <th style={{ width: '30%' }}>Event Name</th>
@@ -86,6 +85,10 @@ function Index() {
                                 index < fightWinner.length ? index : -1
                             return (
                                 <tr key={fight.id}>
+                                    <td>
+                                        {fight.createdBy.firstName}{' '}
+                                        {fight.createdBy.lastName}
+                                    </td>
                                     <td>{fight.eventyear}</td>
                                     <td>{fight.eventtype}</td>
                                     <td>{fight.eventname}</td>

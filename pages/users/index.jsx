@@ -55,7 +55,10 @@ useEffect(() => {
 
     return (
         <Layout>
-            <h1>Users</h1>
+           {/* if mobile device, layout be under nav component  */}
+
+<div className="d-flex flex-column flex-md-row  ">
+            {isAdmin ? <h1>Users</h1> : <h1>My Profile</h1>}
             {isAdmin && <Link href="/users/add" className="btn btn-sm btn-success mb-2">Add User</Link>}
             <table className="table table-striped">
                 <thead>
@@ -101,6 +104,7 @@ useEffect(() => {
                     }
                 </tbody>
             </table>
+        </div>
         </Layout>
     );
 }

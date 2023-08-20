@@ -23,7 +23,7 @@ export const roundService = {
 };
 
 async function createRound(data) {
-    console.log('data round service', data)
+    data.createdBy = JSON.parse(localStorage.getItem('user')).id;
     return await fetchWrapper.post(`${baseUrl}/createRound`, data);
 }
 

@@ -4,13 +4,14 @@ import { useState, useEffect } from 'react'
 import { Spinner } from 'components'
 import { Layout } from 'components/fighters'
 import { fighterService } from 'services'
-import FightersFilters from 'components/fighters/FightersFilters'
-import FightersList from 'components/fighters/FightersList'
 
 export default Index
 
 function Index() {
     const [fighters, setFighters] = useState(null)
+
+    console.log("fightershbbjh", fighters)
+
 
     useEffect(() => {
         fighterService.getAll().then((x) => setFighters(x))
@@ -42,6 +43,7 @@ function Index() {
             <table className="table table-striped">
                 <thead>
                     <tr>
+                        <th style={{ width: '30%' }}>photo</th>
                         <th style={{ width: '30%' }}>First Name</th>
                         <th style={{ width: '30%' }}>Last Name</th>
                         <th style={{ width: '30%' }}>Sex</th>
@@ -56,6 +58,12 @@ function Index() {
                     {fighters &&
                         fighters.map((fighter) => (
                             <tr key={fighter.id}>
+                                <td>
+                                    <img
+
+                                    src={fighter?.photo} alt="fighter photo" />
+                                    
+                                    </td>
                                 <td>{fighter.firstName}</td>
                                 <td>{fighter.lastName}</td>
                                 <td>{fighter.sex}</td>
@@ -105,7 +113,6 @@ function Index() {
                     )}
                 </tbody>
             </table>
-            <FightersList />
         </Layout>
     )
 }

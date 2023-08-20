@@ -57,6 +57,7 @@ function fighterModel() {
       category: { type: String, required: true },
       weightCategory: { type: String, required: true },
       photo: { type: String, required: false },
+      createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },
 
       // store fight object ids in array and for each fight store his round objectid data
       fights: [{ type: Schema.Types.ObjectId, ref: 'Fight' }],
@@ -215,6 +216,11 @@ function roundModel() {
         type: Schema.Types.ObjectId,
         ref: 'Fighter',
       },
+      createdBy: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+      },
     },
     {
       // add createdAt and updatedAt timestamps
@@ -227,6 +233,7 @@ function roundModel() {
     versionKey: false,
     transform: function (doc, ret) {
       delete ret._id
+      delete ret.hash
     },
   })
 
@@ -241,6 +248,7 @@ function fightModel() {
       eventname: { type: String, required: true },
       category: { type: String, required: true },
       weightcat: { type: Number, required: true },
+      createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },
       fighter1_id: {
         type: Schema.Types.ObjectId,
         ref: 'Fighter',
@@ -254,8 +262,8 @@ function fightModel() {
         ref: 'Fighter',
 
       }],
-      //round Ids for this fight
-      rounds: [{ type: Schema.Types.ObjectId, ref: 'Round' }],
+      //round Ids for this fight max 3 rounds
+      rounds: [{ type: Schema.Types.ObjectId, ref: 'Round' }]
     },
     {
       // add createdAt and updatedAt timestamps
@@ -268,6 +276,7 @@ function fightModel() {
     versionKey: false,
     transform: function (doc, ret) {
       delete ret._id
+      delete ret.hash
     },
   })
 

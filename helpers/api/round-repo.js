@@ -1,4 +1,5 @@
 import { db } from 'helpers/api'
+import { userAgent } from 'next/server'
 
 
 const Round = db.Round
@@ -17,7 +18,7 @@ export const roundRepo = {
 
 // get all fights and populate fighter1 and fighter2
 async function getAll() {
-    return await Round.find().populate('fight')
+    return await Round.find().populate('fight').populate('createdBy')
 }
 
 async function getById(id) {
@@ -155,6 +156,7 @@ async function createRound(params) {
         hits_by_fighter1: params.hits_by_fighter1,
         hits_by_fighter2: params.hits_by_fighter2,
         round_winner_id: params.round_winner_id,
+        createdBy: params.createdBy,
 
 
     });

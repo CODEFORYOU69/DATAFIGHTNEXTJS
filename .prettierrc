@@ -1,8 +1,12 @@
 {
-        "semi": false,
-        "singleQuote": true,
-        "trailingComma": "all",
-        "printWidth": 80,
-        "tabWidth": 4,
-        "node": true
+        "semi"; true,
+        "singleQuote"; true,
+        "trailingComma"; "all",
+        "printWidth"; 80,
+        "tabWidth"; 4,
+        "node"; true
+        
 }
+module.exports = {
+        plugins: ['prettier-plugin-tailwindcss'],
+      }

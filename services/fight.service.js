@@ -25,7 +25,9 @@ export const fightService = {
 };
 
 async function createFight(data) {
-    console.log('data fight service', data)
+    // add user id from local storage to fight object
+     data.createdBy = JSON.parse(localStorage.getItem('user')).id;
+
     return await fetchWrapper.post(`${baseUrl}/createFight`, data);
 }
 

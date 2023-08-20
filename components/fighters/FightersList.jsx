@@ -11,14 +11,12 @@ function FightersList() {
         })
     }, [])
 
-    console.log(fighters)
 
     // Fonction pour gérer la soumission du formulaire de téléchargement de l'image
     const handleUploadPhoto = async (fighterId, formData) => {
         console.log('fighterId:handle', fighterId)
         console.log('formData:handle', formData)
         try {
-            // Call the API to upload the photo
             const response = await fetch(
                 `/api/fighters/uploadPhoto?fighterId=${fighterId}`,
                 {
@@ -53,8 +51,6 @@ function FightersList() {
             <div className="flex flex-row flex-wrap w-[100%]">
                 {fighters.map(
                     (fighter) => (
-                        console.log('fighter:', fighter), // Ajoutez cette ligne pour vérifier la valeur de fighter
-                        console.log('fighter._id:', fighter.id), // Ajoutez cette ligne pour vérifier la valeur de fighter._id
                         (
                             <div
                                 key={fighter.id}

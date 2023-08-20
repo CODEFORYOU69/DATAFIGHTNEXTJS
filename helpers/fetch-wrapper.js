@@ -35,6 +35,13 @@ function request(method) {
 
 function authHeader(url) {
     // return auth header with jwt if user is logged in and request is to the api url
+
+    if (url.includes('resetpassword') || url.includes('forgotPassword')) {
+        return {
+            'Content-Type': 'application/json',
+            
+        }
+    }
     const user = userService.userValue
     console.log('user', user)
     const isLoggedIn = user?.token

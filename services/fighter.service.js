@@ -24,7 +24,7 @@ export const fighterService = {
 };
 
 async function createFighter(data) {
-    console.log("createFighter2", data);
+    data.createdBy = JSON.parse(localStorage.getItem('user')).id;
     return await fetchWrapper.post(`${baseUrl}/createFighter`, data);
 }
 
@@ -41,15 +41,7 @@ async function update(id, params) {
     console.log("update", id, params);
     await fetchWrapper.put(`${baseUrl}/${id}`, params);
 
-    // update stored fighter if the logged in fighter updated their own record
-    // if (id === fighterSubject.value.id) {
-    //     // update local storage
-    //     const fighter = { ...fighterSubject.value, ...params };
-    //     localStorage.setItem("fighter", JSON.stringify(fighter));
-
-    //     // publish updated fighter to subscribers
-    //     fighterSubject.next(fighter);
-    // }
+ 
 }
 
 // prefixed with underscored because delete is a reserved word in javascript

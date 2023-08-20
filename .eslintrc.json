@@ -16,7 +16,7 @@
         ],
         "react/prop-types": 0
     },
-    "parser": "babel-eslint",
+    "parser": "react-babel",
     "env": {
         "browser": true,
         "node": true,

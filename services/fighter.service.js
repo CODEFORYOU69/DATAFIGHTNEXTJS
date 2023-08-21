@@ -38,6 +38,8 @@ async function getById(id) {
 }
 
 async function update(id, params) {
+    params.createdBy = JSON.parse(localStorage.getItem('user')).id;
+
     console.log("update", id, params);
     await fetchWrapper.put(`${baseUrl}/${id}`, params);
 
@@ -49,17 +51,10 @@ async function _delete(id) {
     await fetchWrapper.delete(`${baseUrl}/${id}`);
 }
 
-async function uploadPhoto(fighterid, file) {
-    const formData = new FormData();
-    formData.append("photo", file);
-
-    await fetchWrapper.put(`${baseUrl}/uploadPhoto/${fighterid}`, formData, {
-        headers: {
-            // Remove the 'Content-Type' header to allow the browser to set it with the correct boundary
-            "Content-Type": "",
-        },
-    });
+async function uploadPhoto(fighterId, formData) {
+    return await fetchWrapper.putFormData(`/api/fighters/uploadPhoto?fighterId=${fighterId}`, formData);
 }
+
 
 async function fightersFilter(params) {
 

@@ -26,7 +26,7 @@ async function authenticate({ email, password }) {
     const user = await User.findOne({ email })
 
     if (!(user && bcrypt.compareSync(password, user.hash))) {
-        throw 'email or password is incorrect'
+        throw 'email or password incorrect'
     }
 
     // create a jwt token with id and role 

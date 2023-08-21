@@ -1,7 +1,9 @@
 const express = require("express");
 const next = require("next");
 const mongoose = require("mongoose");
-const rateLimit = require("express-rate-limit");
+
+
+
 
 //  options de limitation
 
@@ -9,6 +11,7 @@ const rateLimit = require("express-rate-limit");
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
+
 
 const serverRuntimeConfig = require("./next.config").serverRuntimeConfig;
 

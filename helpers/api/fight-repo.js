@@ -26,7 +26,6 @@ async function getById(id) {
 
 // create fight with body params
 async function createFight(params) {
-    console.log(params)
     const fight = new Fight({
         eventyear: params.eventyear,
         eventtype: params.eventtype,

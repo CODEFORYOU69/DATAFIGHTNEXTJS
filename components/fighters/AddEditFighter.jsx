@@ -80,7 +80,6 @@ function AddEditFighter(props) {
     const availableWeights = getWeightCategories(selectedSex, selectedAge)
 
     async function onSubmit(data) {
-        console.log('datasubmit', data)
         alertService.clear()
         try {
             // Merge selected values with form data
@@ -92,11 +91,9 @@ function AddEditFighter(props) {
                 photo: fighters?.photo,
             }
 
-            console.log('updatedData', updatedData)
             // create or update user based on user prop
             let message
             if (fighter) {
-                console.log('fighter.id', fighter.id)
 
                 await fighterService.update(fighter.id, updatedData)
                 message = 'Fighter updated'
@@ -135,7 +132,6 @@ function AddEditFighter(props) {
                         if (fighter) {
                             onChangeImage(fighter.id, e.target.files[0])
                         }
-                        console.log('e.target.files[0]:', e.target.files[0])
                         e.target.value = null // Reset the file input value
                     }}
                 />

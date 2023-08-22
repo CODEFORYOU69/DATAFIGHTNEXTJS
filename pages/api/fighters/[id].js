@@ -9,7 +9,6 @@ export default apiHandler({
 
 async function getById(req, res) {
 
-console.log("req.query.id", req.query);
      const id = new mongoose.Types.ObjectId(req.query.id)
     try {
 

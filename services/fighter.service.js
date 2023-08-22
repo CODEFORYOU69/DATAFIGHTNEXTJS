@@ -46,7 +46,6 @@ async function getById(id) {
 async function update(id, params) {
     params.createdBy = JSON.parse(localStorage.getItem('user')).id;
 
-    console.log("update", id, params);
     await fetchWrapper.put(`${baseUrl}/${id}`, params);
 
  

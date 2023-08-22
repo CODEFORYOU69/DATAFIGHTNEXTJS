@@ -40,8 +40,7 @@ async function getById(id) {
 }
 
 async function update(id, params) {
-    console.log('params', params)
-    console.log('id', id)
+    
     await fetchWrapper.put(`${baseUrl}/${id}`, params);
 
 }

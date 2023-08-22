@@ -20,7 +20,6 @@ function jwtMiddleware(req, res) {
         ]
     });
 
-    console.log('jwtMiddleware', middleware);
 
     return util.promisify(middleware)(req, res);
 }

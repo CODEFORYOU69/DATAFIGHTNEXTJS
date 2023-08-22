@@ -10,7 +10,6 @@ const StatsPage = () => {
     const [isFilterPanelOpen, setIsFilterPanelOpen] = useState(false);
 
 
-    console.log('fighters', fighters)
 
     useEffect(() => {
         fighterService.getAll().then((x) => setFighters(x))
@@ -39,7 +38,6 @@ const StatsPage = () => {
         })
     }
 
-    console.log('filters', filters)
     const FilterTag = ({ filterName, onDelete }) => (
         <div className="inline-block bg-gray-400 rounded w-1/2 px-3 py-1 text-sm font-semibold text-BLACK-700 mr-2 mb-2">
             {filterName}

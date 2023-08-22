@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { useForm, Controller } from 'react-hook-form'
@@ -11,14 +11,53 @@ import { AgeSelect } from './AgeSelect'
 import { SexSelect } from './SexSelect'
 import { WeightSelect } from './WeightSelect'
 import { getWeightCategories } from './utilities'
+import { set } from 'mongoose'
 
 export { AddEditFighter }
+
+
 
 function AddEditFighter(props) {
     const fighter = props?.fighter
     const router = useRouter()
 
-    console.log('fighterprops', fighter)
+    const [fighters, setFighters] = useState([])
+
+    useEffect(() => {
+        setFighters(fighter)
+    }, [fighter])
+
+
+
+    const handleUploadPhoto = async (fighterId, formData) => {
+        console.log('fighterId:handle', fighterId);
+        console.log('formData:handle', formData);
+        try {
+            const response = await fighterService.uploadPhoto(fighterId, formData);
+
+            console.log('responsebjkbkbk', response);
+
+
+
+            // Reload fighters to update the photo display
+            const updatedFighter = await fighterService.getById(fighterId);
+
+            console.log('updatedFighter', updatedFighter);
+            setFighters(updatedFighter);
+
+        } catch (error) {
+            console.error('Error while uploading the photo:', error);
+        }
+    }
+
+
+    const onChangeImage = async (fighterId, file) => {
+        console.log('fighterId:change', fighterId)
+        console.log('file:change', file)
+        const formData = new FormData()
+        formData.append('photo', file)
+        await handleUploadPhoto(fighterId, formData)
+    }
 
     // form validation rules
 
@@ -30,6 +69,7 @@ function AddEditFighter(props) {
         birthDate: Yup.string().required('Birth Date is required'),
         category: Yup.string().required('Category is required'),
         weightCategory: Yup.string().required('Weight Category is required'),
+
     })
 
     const formOptions = { resolver: yupResolver(fighterValidationSchema) }
@@ -59,6 +99,7 @@ function AddEditFighter(props) {
                 sex: selectedSex,
                 category: selectedAge,
                 weightCategory: selectedWeight,
+                photo: fighters?.photo,
             }
 
             console.log('updatedData', updatedData)
@@ -66,6 +107,7 @@ function AddEditFighter(props) {
             let message
             if (fighter) {
                 console.log('fighter.id', fighter.id)
+
                 await fighterService.update(fighter.id, updatedData)
                 message = 'Fighter updated'
             } else {
@@ -83,161 +125,191 @@ function AddEditFighter(props) {
     }
 
     return (
-        <form className="flex " onSubmit={handleSubmit(onSubmit)}>
-            <div className=" ">
-                <div className="mb-3">
-                    <label className="form-label">First Name</label>
-                    <input
-                        name="firstName"
-                        type="text"
-                        {...register('firstName')}
-                        className={`form-control ${
-                            errors.firstName ? 'is-invalid' : ''
-                        }`}
-                    />
-                    <div className="invalid-feedback">
-                        {errors.firstName?.message}
-                    </div>
-                </div>
-                <div className="mb-3 ">
-                    <label className="form-label">Last Name</label>
-                    <input
-                        name="lastName"
-                        type="text"
-                        {...register('lastName')}
-                        className={`form-control ${
-                            errors.lastName ? 'is-invalid' : ''
-                        }`}
-                    />
-                    <div className="invalid-feedback">
-                        {errors.lastName?.message}
-                    </div>
-                </div>
+        <div className="flex flex-col md:flex-row justify-around ">
+            <div className="flex flex-col sm:flex-row flex-wrap items-center gap-8">
+                <img
+                    alt="fighter"
+                    src={
+                        fighters?.photo ||
+                        '/uploads/defaultPhoto.jpg'
+                    }
+                    className="w-16 h-16 sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-48 lg:h-48 xl:w-64 xl:h-64 object-cover rounded border-2 border-gray-300"
+                />
 
-                <div className=" ">
-                    <div className="mb-3">
-                        <label className="form-label">Country</label>
-                        <input
-                            name="country"
-                            type="text"
-                            {...register('country')}
-                            className={`form-control ${
-                                errors.country ? 'is-invalid' : ''
-                            }`}
-                        />
-                        <div className="invalid-feedback">
-                            {errors.country?.message}
-                        </div>
-                    </div>
-                    <div className="mb-3 w-[50%]">
-                        <label className="form-label">birthday</label>
-                        <input
-                            name="birthDate"
-                            type="text"
-                            {...register('birthDate')}
-                            className={`form-control ${
-                                errors.birthday ? 'is-invalid' : ''
-                            }`}
-                        />
-                        <div className="invalid-feedback">
-                            {errors.birthday?.message}
-                        </div>
-                    </div>
-                    <div className="mb-3  ">
-                        <div className="justify-center">
-                            <div className="mb-3 row">
-                                <label className="">Sex</label>
-                                <Controller
-                                    name="sex"
-                                    control={control}
-                                    defaultValue=""
-                                    rules={{ required: 'Sex is required' }}
-                                    render={({ field }) => (
-                                        <SexSelect
-                                            {...field} // Ajoutez ceci pour lier le champ à la valeur de l'état du composant
-                                        />
-                                    )}
-                                />
-                                <div className="invalid-feedback">
-                                    {errors.sex?.message}
-                                </div>
-                            </div>
-                            <div className="mb-3 row ">
-                                <label className="form-label">
-                                    Age Category
-                                </label>
-                                <Controller
-                                    name="category"
-                                    className="form-control w-8"
-                                    control={control}
-                                    defaultValue=""
-                                    rules={{
-                                        required: 'Age Category is required',
-                                    }}
-                                    render={({ field }) => (
-                                        <AgeSelect
-                                            {...field} // Ajoutez ceci pour lier le champ à la valeur de l'état du composant
-                                        />
-                                    )}
-                                />
-                                <div className="invalid-feedback">
-                                    {errors.category?.message}
-                                </div>
-                            </div>
-                            <div className="mb-3  row">
-                                <label className="form-label">
-                                    Weight Category
-                                </label>
-                                <Controller
-                                    name="weightCategory"
-                                    control={control}
-                                    rules={{
-                                        required: 'Weight Category is required',
-                                    }}
-                                    render={({ field }) => (
-                                        <WeightSelect
-                                            {...field} // Ajoutez ceci pour lier le champ à la valeur de l'état du composant
-                                            availableWeights={availableWeights}
-                                            selectedWeight={field.value}
-                                            onChange={(value) => {
-                                                field.onChange(value)
-                                                setSelectedWeight(value)
-                                            }}
-                                        />
-                                    )}
-                                />
-                                <div className="invalid-feedback">
-                                    {errors.weightCategory?.message}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    id={`file-input-${fighter?.id || 'new'}`}
+                    onChange={(e) => {
+                        if (fighter) {
+                            onChangeImage(fighter.id, e.target.files[0])
+                        }
+                        console.log('e.target.files[0]:', e.target.files[0])
+                        e.target.value = null // Reset the file input value
+                    }}
+                />
 
-                <div className="mb-3 ">
-                    <button
-                        type="submit"
-                        disabled={formState.isSubmitting}
-                        className="btn btn-primary me-2 text-black"
-                    >
-                        {formState.isSubmitting && (
-                            <span className="spinner-border spinner-border-sm me-1"></span>
-                        )}
-                        Save
-                    </button>
-                    <button
-                        onClick={() => reset(formOptions.defaultValues)}
-                        type="button"
-                        disabled={formState.isSubmitting}
-                        className="btn btn-secondary text-black"
-                    >
-                        Reset
-                    </button>
-                    <Link href="/fighters" className="btn btn-link">
-                        Cancel
-                    </Link>
-                </div>
+                <label htmlFor={`file-input-${fighter?.id || 'new'}`} className="cursor-pointer">
+                    <span className="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded inline-block">
+                        Change Image
+                    </span>
+                </label>
+
             </div>
-        </form>
+            <form className="flex flex-col md:flex-row" onSubmit={handleSubmit(onSubmit)}>
+                <div className="flex flex-col ">
+                    <div className="flex flex-col ">
+                        <label className="form-label">First Name</label>
+                        <input
+                            name="firstName"
+                            type="text"
+                            {...register('firstName')}
+                            className={`form-control w-full ${errors.firstName ? 'is-invalid' : ''
+                                }`}
+                        />
+                        <div className="invalid-feedback">
+                            {errors.firstName?.message}
+                        </div>
+                    </div>
+                    <div className="flex flex-col ">
+                        <label className="form-label">Last Name</label>
+                        <input
+                            name="lastName"
+                            type="text"
+                            {...register('lastName')}
+                            className={`form-control w-full ${errors.lastName ? 'is-invalid' : ''
+                                }`}
+                        />
+                        <div className="invalid-feedback">
+                            {errors.lastName?.message}
+                        </div>
+                    </div>
+
+                    <div className=" ">
+                        <div className="flex flex-col ">
+                            <label className="form-label">Country</label>
+                            <input
+                                name="country"
+                                type="text"
+                                {...register('country')}
+                                className={`form-control ${errors.country ? 'is-invalid' : ''
+                                    }`}
+                            />
+                            <div className="invalid-feedback">
+                                {errors.country?.message}
+                            </div>
+                        </div>
+                        <div className="flex flex-col ">
+                            <label className="form-label">birthday</label>
+                            <input
+                                name="birthDate"
+                                type="text"
+                                {...register('birthDate')}
+                                className={`form-control ${errors.birthday ? 'is-invalid' : ''
+                                    }`}
+                            />
+                            <div className="invalid-feedback">
+                                {errors.birthday?.message}
+                            </div>
+                        </div>
+                        <div className="flex flex-col ">
+                            <div className="justify-center">
+                                <div className="flex flex-col ">
+                                    <label className="">Sex</label>
+                                    <Controller
+                                        name="sex"
+                                        control={control}
+                                        defaultValue=""
+                                        rules={{ required: 'Sex is required' }}
+                                        render={({ field }) => (
+                                            <SexSelect
+                                                {...field} // Ajoutez ceci pour lier le champ à la valeur de l'état du composant
+                                            />
+                                        )}
+                                    />
+                                    <div className="invalid-feedback">
+                                        {errors.sex?.message}
+                                    </div>
+                                </div>
+                                <div className="flex flex-col ">
+                                    <label className="form-label">
+                                        Age Category
+                                    </label>
+                                    <Controller
+                                        name="category"
+                                        className="form-control w-8"
+                                        control={control}
+                                        defaultValue=""
+                                        rules={{
+                                            required: 'Age Category is required',
+                                        }}
+                                        render={({ field }) => (
+                                            <AgeSelect
+                                                {...field} // Ajoutez ceci pour lier le champ à la valeur de l'état du composant
+                                            />
+                                        )}
+                                    />
+                                    <div className="invalid-feedback">
+                                        {errors.category?.message}
+                                    </div>
+                                </div>
+                                <div className="flex flex-col mb-3 ">
+                                    <label className="form-label">
+                                        Weight Category
+                                    </label>
+                                    <Controller
+                                        name="weightCategory"
+                                        control={control}
+                                        rules={{
+                                            required: 'Weight Category is required',
+                                        }}
+                                        render={({ field }) => (
+                                            <WeightSelect
+                                                {...field} // Ajoutez ceci pour lier le champ à la valeur de l'état du composant
+                                                availableWeights={availableWeights}
+                                                selectedWeight={field.value}
+                                                onChange={(value) => {
+                                                    field.onChange(value)
+                                                    setSelectedWeight(value)
+                                                }}
+                                            />
+                                        )}
+                                    />
+                                    <div className="invalid-feedback">
+                                        {errors.weightCategory?.message}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div className=" ">
+                        <button
+                            type="submit"
+                            disabled={formState.isSubmitting}
+                            className="btn btn-primary me-2 text-black"
+                        >
+                            {formState.isSubmitting && (
+                                <span className="spinner-border spinner-border-sm me-1"></span>
+                            )}
+                            Save
+                        </button>
+                        <button
+                            onClick={() => reset(formOptions.defaultValues)}
+                            type="button"
+                            disabled={formState.isSubmitting}
+                            className="btn btn-secondary text-black"
+                        >
+                            Reset
+                        </button>
+                        <Link href="/fighters" className="btn btn-link">
+                            Cancel
+                        </Link>
+                    </div>
+                </div>
+            </form>
+        </div>
     )
 }

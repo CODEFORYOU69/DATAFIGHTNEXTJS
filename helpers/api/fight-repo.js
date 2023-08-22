@@ -1,4 +1,5 @@
 import { db } from 'helpers/api'
+import { userAgent } from 'next/server'
 const mongoose = require('mongoose')
 
 
@@ -16,7 +17,7 @@ export const fightRepo = {
 
 // get all fights and populate fighter1 and fighter2
 async function getAll() {
-    return await Fight.find().populate('fighter1_id').populate('fighter2_id').populate('winner_id')
+    return await Fight.find().populate('fighter1_id').populate('fighter2_id').populate('winner_id').populate('createdBy')
 }
 
 async function getById(id) {
@@ -25,7 +26,7 @@ async function getById(id) {
 
 // create fight with body params
 async function createFight(params) {
-    console.log('ok2')
+    console.log(params)
     const fight = new Fight({
         eventyear: params.eventyear,
         eventtype: params.eventtype,
@@ -35,6 +36,7 @@ async function createFight(params) {
         fighter1_id: params.fighter1_id,
         fighter2_id: params.fighter2_id,
         rounds: params.rounds,
+        createdBy: params.createdBy,
     });
 
     // save fight
@@ -64,6 +66,10 @@ async function update(id, params) {
 
 
 async function _delete(id) {
+    const fight = await Fight.findById(id)
+    if (fight.createdBy.toString() === userSubject.value.id.toString()) {
+        throw 'You cannot delete this fight'
+    }
     await Fight.findByIdAndRemove(id)
 }
 
@@ -71,8 +77,7 @@ async function _delete(id) {
 
 
 async function filterFights(filters) {
-    console.log('filtersapi', filters);
-    console.log('fighter1', filters.fighter1);
+
     const query = []
 
     if (filters.eventyear) {
@@ -132,7 +137,6 @@ async function filterFights(filters) {
 
         { $unwind: "$fighter2" },
     ];
-    console.log('query', query)
     if (filters.country) {
         query.push({ $or: [{ "fighter1.country": filters.country }, { "fighter2.country": filters.country }] });
     }
@@ -151,7 +155,6 @@ async function filterFights(filters) {
     if (filters.sex) {
         query.push({ $or: [{ "fighter1.sex": filters.sex }, { "fighter2.sex": filters.sex }] });
     }
-    console.log('query2', query)
     pipeline.push({ $match: { $and: query } });
 
     const result = await Fight.aggregate(pipeline);

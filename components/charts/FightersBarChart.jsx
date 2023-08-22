@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {fighterService}  from '../../services'
+import { fighterService } from '../../services'
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -215,11 +215,14 @@ const AttOgFightersBarChart = ({
     }
 
     return (
-        <div className="flex flex-row ">
-            <Bar options={options} data={data} />
-            <Bar options={options2} data={data2} />
-            <Bar options={options3} data={data3} />
-            <Bar options={options4} data={data4} />
+        <div className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4">
+            <div className="flex flex-col space-y-4">
+
+                <Bar options={options} data={data} />
+                <Bar options={options2} data={data2} />
+                <Bar options={options3} data={data3} />
+                <Bar options={options4} data={data4} />
+            </div>
         </div>
     )
 }

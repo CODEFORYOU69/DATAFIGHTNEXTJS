@@ -1,12 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Modal from 'react-modal'
 import { useRouter } from 'next/router'
-import { Box, Button, TextField } from '@mui/material'
-import validationRoundSchema from 'components/fights/validationRoundSchema'
 import Scoreboard from './scoreBoard'
-import AddIcon from '@mui/icons-material/Add'
-import RemoveIcon from '@mui/icons-material/Remove'
-import IconButton from '@mui/material/IconButton'
+import IncrementDecrementField from 'components/fights/IncrementDecrementField'
 
 import { Layout } from 'components/fights'
 import {
@@ -20,56 +16,6 @@ Modal.setAppElement('#__next')
 
 export default AddRound
 
-const IncrementDecrementField = ({ value, onChange }) => {
-    return (
-        <Box
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                textAlign: 'center',
-                justifyContent: 'space-between',
-            }}
-        >
-            <TextField
-                value={value}
-                onChange={(event) => onChange(event.target.value)}
-                margin="small"
-                label=""
-                name=""
-                id="password"
-                autoFocus
-                InputProps={{
-                    sx: {
-                        display: 'flex',
-                        flexDirection: 'column-reverse',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        padding: '0.5rem',
-                    },
-                    startAdornment: (
-                        <IconButton
-                            onClick={() => onChange(value - 1)}
-                            size="small"
-                            sx={{ color: '#1976d2' }}
-                        >
-                            <RemoveIcon fontSize="small" />
-                        </IconButton>
-                    ),
-                    endAdornment: (
-                        <IconButton
-                            onClick={() => onChange(value + 1)}
-                            size="small"
-                            sx={{ color: '#1976d2' }}
-                        >
-                            <AddIcon fontSize="small" />
-                        </IconButton>
-                    ),
-                }}
-            />
-        </Box>
-    )
-}
 
 function AddRound() {
     const router = useRouter()
@@ -211,11 +157,6 @@ function AddRound() {
         /* initial state */
     })
 
-    // const stateRef = useRef()
-    // stateRef.current = state
-
-    // const stateRef2 = useRef()
-    // stateRef2.current = state2
 
     const getIncrementValue = (key) => {
         // récupérer la valeur après le deuxième '_'

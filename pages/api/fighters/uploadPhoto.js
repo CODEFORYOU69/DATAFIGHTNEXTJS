@@ -9,7 +9,6 @@ export default async function handler(req, res) {
     console.log('Fighter ID:', fighterId);
 
     try {
-      // eslint-disable-next-line no-undef
       await new Promise((resolve, reject) => {
         upload.single("photo")(req, res, async (err) => {
           if (err) {

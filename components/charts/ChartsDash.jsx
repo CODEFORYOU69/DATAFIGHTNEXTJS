@@ -5,57 +5,6 @@ import assignRoundData from './dataFilters'
 
 import AttOgFightersBarChart from './FightersBarChart'
 
-// function assignRoundData(fightsData, selectedFighterId) {
-//     return (
-//         fightsData &&
-//         fightsData[0] &&
-//         fightsData.map((fight) => {
-//             const isFighter1 = fight.fighter1._id === selectedFighterId
-
-//             // Créer un nouvel objet pour chaque round
-//             const rounds = fight.rounds.map((round) => {
-//                 // Créer deux nouveaux objets pour les données de fighter1 et fighter2
-//                 const fighter1Data = {}
-//                 const fighter2Data = {}
-
-//                 // Parcourir chaque propriété de l'objet round
-//                 for (let key in round) {
-//                     // Si la clé contient 'fighter1', attribuez cette valeur à fighter1Data
-//                     if (key.includes('fighter1')) {
-//                         fighter1Data[key] = round[key]
-//                     }
-//                     // Si la clé contient 'fighter2', attribuez cette valeur à fighter2Data
-//                     else if (key.includes('fighter2')) {
-//                         fighter2Data[key] = round[key]
-//                     }
-//                 }
-
-//                 // Attribuez les données correspondantes au combattant sélectionné
-//                 const selectedFighterData = isFighter1
-//                     ? fighter1Data
-//                     : fighter2Data
-//                 const otherFighterData = isFighter1
-//                     ? fighter2Data
-//                     : fighter1Data
-
-//                 // Retournez un nouvel objet round avec les données de combattants séparées
-//                 return {
-//                     ...round,
-//                     selectedFighterData,
-//                     otherFighterData,
-//                 }
-//             })
-
-//             // Retournez un nouvel objet fight avec les nouvelles données de rounds
-//             return {
-//                 ...fight,
-//                 rounds,
-//             }
-//         })
-//     )
-// }
-
-// Utilisation de la fonction
 
 const ChartsDash = ({
     data,
@@ -69,13 +18,15 @@ const ChartsDash = ({
 }) => {
     console.log('data', data)
 
-    const selectedFighterId = { selectedFighters } // Remplacer par l'ID du combattant sélectionné
     const [updatedFightsData, setUpdatedFightsData] = useState([])
 
+   
+
     useEffect(() => {
-      const updatedData = assignRoundData(data, selectedFighterId)
-      setUpdatedFightsData(updatedData)
-    }, [data, selectedFighterId])
+        const updatedData = assignRoundData(data, selectedFighters)
+        setUpdatedFightsData(updatedData)
+      }, [data, selectedFighters])
+      
 
     console.log('updatedFightsData', updatedFightsData)
     let allRounds = []
@@ -750,17 +701,15 @@ const ChartsDash = ({
 
     const dataset1 = [numberOfFightFiltered]
     return (
-        <div className="flex flex-col justify-center items-center">
-            <h1>Dashboard</h1>
-            <div className="flex flex-wrap ">
+        <div className="flex flex-col  justify-center items-center mt-10">
+            <h1 className="text-center">Dashboard</h1>
+            
                 <NumberFightBarChart
                     labels={labels}
                     dataset1={dataset1}
                     dataset2={dataset2}
                     options={options}
                 />
-
-                {/* <RadarChart rounds={allRounds} /> */}
                 <AttOgFightersBarChart
                     label={label}
                     dataset3={arrayOfSumAtt1}
@@ -778,9 +727,10 @@ const ChartsDash = ({
                     selectedFighters={selectedFighters}
                     data={data}
                 />
-            </div>
+            
         </div>
     )
+    
 }
 
 export default ChartsDash

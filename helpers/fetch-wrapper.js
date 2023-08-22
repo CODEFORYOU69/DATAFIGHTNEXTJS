@@ -9,32 +9,43 @@ export const fetchWrapper = {
     post: request('POST'),
     put: request('PUT'),
     delete: request('DELETE'),
+    putFormData: request('PUT', true),
 }
 
-function request(method) {
-    console.log('method', method)
+function request(method, isFormData = false) {
     return async (url, body) => {
-        console.log('url', url)
-        console.log('body', body)
+        const headers = authHeader(url);
+        if (isFormData) {
+            // Si c'est FormData, supprimez l'en-tête 'Content-Type'
+            delete headers['Content-Type'];
+        } else if (body && !isFormData) {
+            headers['Content-Type'] = 'application/json';
+            body = JSON.stringify(body);
+        }
+
         const requestOptions = {
             method,
-            headers: authHeader(url),
-        }
-        console.log('requestOptions', requestOptions)
-        if (body) {
-            requestOptions.headers['Content-Type'] = 'application/json'
-            requestOptions.body = JSON.stringify(body)
-        }
-        const response = await fetch(url, requestOptions)
-        console.log('responseoko', response)
-        return handleResponse(response)
+            headers,
+            body
+        };
+
+        const response = await fetch(url, requestOptions);
+        return handleResponse(response);
     }
 }
+
 
 // helper functions
 
 function authHeader(url) {
     // return auth header with jwt if user is logged in and request is to the api url
+
+    if (url.includes('resetpassword') || url.includes('forgotPassword')) {
+        return {
+            'Content-Type': 'application/json',
+            
+        }
+    }
     const user = userService.userValue
     console.log('user', user)
     const isLoggedIn = user?.token

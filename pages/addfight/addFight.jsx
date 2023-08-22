@@ -54,6 +54,7 @@ function AddFight() {
 
     return (
         <Layout>
+            <div className=''>
             <button onClick={openModal} className="btn btn-primary">
                 Add Fight
             </button>
@@ -197,6 +198,7 @@ function AddFight() {
                     </div>
                 </div>
             </Modal>
+            </div>
         </Layout>
     )
 }

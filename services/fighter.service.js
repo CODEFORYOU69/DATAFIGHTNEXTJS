@@ -24,7 +24,7 @@ export const fighterService = {
 };
 
 async function createFighter(data) {
-    console.log("createFighter2", data);
+    data.createdBy = JSON.parse(localStorage.getItem('user')).id;
     return await fetchWrapper.post(`${baseUrl}/createFighter`, data);
 }
 
@@ -38,18 +38,12 @@ async function getById(id) {
 }
 
 async function update(id, params) {
+    params.createdBy = JSON.parse(localStorage.getItem('user')).id;
+
     console.log("update", id, params);
     await fetchWrapper.put(`${baseUrl}/${id}`, params);
 
-    // update stored fighter if the logged in fighter updated their own record
-    // if (id === fighterSubject.value.id) {
-    //     // update local storage
-    //     const fighter = { ...fighterSubject.value, ...params };
-    //     localStorage.setItem("fighter", JSON.stringify(fighter));
-
-    //     // publish updated fighter to subscribers
-    //     fighterSubject.next(fighter);
-    // }
+ 
 }
 
 // prefixed with underscored because delete is a reserved word in javascript
@@ -57,17 +51,10 @@ async function _delete(id) {
     await fetchWrapper.delete(`${baseUrl}/${id}`);
 }
 
-async function uploadPhoto(fighterid, file) {
-    const formData = new FormData();
-    formData.append("photo", file);
-
-    await fetchWrapper.put(`${baseUrl}/uploadPhoto/${fighterid}`, formData, {
-        headers: {
-            // Remove the 'Content-Type' header to allow the browser to set it with the correct boundary
-            "Content-Type": "",
-        },
-    });
+async function uploadPhoto(fighterId, formData) {
+    return await fetchWrapper.putFormData(`/api/fighters/uploadPhoto?fighterId=${fighterId}`, formData);
 }
+
 
 async function fightersFilter(params) {
 

@@ -15,6 +15,9 @@ export const userService = {
     login,
     logout,
     register,
+    isAdmin,
+    forgotPassword,
+    resetPassword,
     getAll,
     getById,
     update,
@@ -28,6 +31,28 @@ async function login(email, password) {
     userSubject.next(user);
     localStorage.setItem('user', JSON.stringify(user));
 }
+
+async function forgotPassword(email) {
+    await fetchWrapper.post(`${baseUrl}/forgotPassword`, { email });
+
+    
+    alertService.success('Please check your email for password reset instructions');
+}
+
+async function resetPassword({ token, password, confirmPassword}) {
+    await fetchWrapper.post(`${baseUrl}/resetPassword`, { token, password, confirmPassword });
+
+    Router.push('/account/login');
+    alertService.success('Password reset successful, you can now login');
+}
+async function isAdmin(id) {
+
+    const user = await fetchWrapper.get(`${baseUrl}/${id}`);
+
+    console.log('response is admin', user)
+    return user;
+}
+
 
 function logout() {
     alertService.clear();

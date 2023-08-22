@@ -30,19 +30,11 @@ function AddEditFighter(props) {
 
 
     const handleUploadPhoto = async (fighterId, formData) => {
-        console.log('fighterId:handle', fighterId);
-        console.log('formData:handle', formData);
         try {
             const response = await fighterService.uploadPhoto(fighterId, formData);
 
-            console.log('responsebjkbkbk', response);
-
-
-
             // Reload fighters to update the photo display
             const updatedFighter = await fighterService.getById(fighterId);
-
-            console.log('updatedFighter', updatedFighter);
             setFighters(updatedFighter);
 
         } catch (error) {
@@ -52,8 +44,6 @@ function AddEditFighter(props) {
 
 
     const onChangeImage = async (fighterId, file) => {
-        console.log('fighterId:change', fighterId)
-        console.log('file:change', file)
         const formData = new FormData()
         formData.append('photo', file)
         await handleUploadPhoto(fighterId, formData)

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { fightService, fighterService } from 'services'
 import ChartsDash from 'components/charts/ChartsDash'
 
+
 const StatsPage = () => {
     const [fighters, setFighters] = useState([])
     const [fights, setFights] = useState([])
@@ -30,10 +31,7 @@ const StatsPage = () => {
         weightcat: '',
     })
 
-    const [data, setData] = useState(null)
-
-    // Supposons que "data" est le tableau de combats que vous recevez
-
+    const [data, setData] = useState(null)    
     const handleInputChange = (event) => {
         setFilters({
             ...filters,
@@ -58,6 +56,7 @@ const StatsPage = () => {
             return newFilters
         })
     }
+
 
     const handleSubmit = async (event) => {
         event.preventDefault()

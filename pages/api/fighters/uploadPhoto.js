@@ -3,7 +3,6 @@ import { updateFighterPhoto } from "../../../helpers/api/fighter-repo";
 import upload from "./uploadMiddleware";
 
 export default async function handler(req, res) {
-  console.log("req.query.id:", req.query.fighterId)
   if (req.method === "PUT") {
     const fighterId = req.query.fighterId;
     console.log('Fighter ID:', fighterId);

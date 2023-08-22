@@ -20,13 +20,13 @@ const ChartsDash = ({
 
     const [updatedFightsData, setUpdatedFightsData] = useState([])
 
-   
+
 
     useEffect(() => {
         const updatedData = assignRoundData(data, selectedFighters)
         setUpdatedFightsData(updatedData)
-      }, [data, selectedFighters])
-      
+    }, [data, selectedFighters])
+
 
     console.log('updatedFightsData', updatedFightsData)
     let allRounds = []
@@ -703,34 +703,34 @@ const ChartsDash = ({
     return (
         <div className="flex flex-col  justify-center items-center mt-10">
             <h1 className="text-center">Dashboard</h1>
-            
-                <NumberFightBarChart
-                    labels={labels}
-                    dataset1={dataset1}
-                    dataset2={dataset2}
-                    options={options}
-                />
-                <AttOgFightersBarChart
-                    label={label}
-                    dataset3={arrayOfSumAtt1}
-                    dataset4={arrayOfSumAtt2}
-                    dataset5={arrayOfSumDef1}
-                    dataset6={arrayOfSumDef2}
-                    dataset7={arrayOfSumCac1}
-                    dataset8={arrayOfSumCac2}
-                    dataset9={arrayofSumAtt}
-                    dataset10={arrayofSumDef}
-                    dataset11={arrayofSumCac}
-                    options2={options2}
-                    options3={options3}
-                    options4={options4}
-                    selectedFighters={selectedFighters}
-                    data={data}
-                />
-            
+
+            <NumberFightBarChart
+                labels={labels}
+                dataset1={dataset1}
+                dataset2={dataset2}
+                options={options}
+            />
+            <AttOgFightersBarChart
+                label={label}
+                dataset3={arrayOfSumAtt1}
+                dataset4={arrayOfSumAtt2}
+                dataset5={arrayOfSumDef1}
+                dataset6={arrayOfSumDef2}
+                dataset7={arrayOfSumCac1}
+                dataset8={arrayOfSumCac2}
+                dataset9={arrayofSumAtt}
+                dataset10={arrayofSumDef}
+                dataset11={arrayofSumCac}
+                options2={options2}
+                options3={options3}
+                options4={options4}
+                selectedFighters={selectedFighters}
+                data={data}
+            />
+
         </div>
     )
-    
+
 }
 
 export default ChartsDash

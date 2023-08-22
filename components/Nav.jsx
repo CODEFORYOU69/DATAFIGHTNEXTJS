@@ -15,7 +15,7 @@ function useScrollDirection() {
         const handleScroll = () => {
             window.requestAnimationFrame(() => {
                 const st = window.scrollY || document.documentElement.scrollTop;
-        
+
                 if (st > lastScrollTop) {
                     setIsScrollingUp(false);
                 } else {
@@ -43,7 +43,7 @@ export function Nav() {
     const toggleMenu = () => {
         setIsOpen(!isOpen)
     }
-// subscribe to user observable so can show/hide nav bar elements based on login status
+    // subscribe to user observable so can show/hide nav bar elements based on login status
     useEffect(() => {
         const subscription = userService.user.subscribe((x) => setUser(x))
         return () => subscription.unsubscribe()
@@ -58,7 +58,7 @@ export function Nav() {
         >
 
             <div className={`h-[100%]  ml-4 items-center  justify-between ${isOpen ? 'flex-col ' : 'flex-row mb-0'}`}>
-                
+
                 <div className="md:hidden ml-auto">
                     <button
                         onClick={toggleMenu}
@@ -85,16 +85,15 @@ export function Nav() {
                     </button>
                 </div>
                 <div
-                    className={`md:flex md:flex-row md:justify-between md:items-center  ${
-                        isOpen ? 'flex flex-col items-center' : 'hidden'
-                    }`}
+                    className={`md:flex md:flex-row md:justify-between md:items-center  ${isOpen ? 'flex flex-col items-center' : 'hidden'
+                        }`}
                 >
                     <div>
-                    <NavLink href="/" exact>
-                    <span className={`text-white text-lg font-bold hover:text-gray-300 transition-colors duration-300 ease-in-out ${isOpen ? 'ml-0' : 'ml-4'}`}>
-                        Home
-                    </span>
-                </NavLink>
+                        <NavLink href="/" exact>
+                            <span className={`text-white text-lg font-bold hover:text-gray-300 transition-colors duration-300 ease-in-out ${isOpen ? 'ml-0' : 'ml-4'}`}>
+                                Home
+                            </span>
+                        </NavLink>
                     </div>
                     <div>
                         <NavLink href="/howtouse" exact>

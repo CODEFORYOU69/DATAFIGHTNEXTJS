@@ -25,6 +25,10 @@ function AddEdit(props) {
             // password optional in edit mode
             .concat(user ? null : Yup.string().required('Password is required'))
             .min(6, 'Password must be at least 6 characters')
+            .matches(
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
+                "Must contain at least one uppercase letter, one lowercase letter, one number and one special character"
+            )
     });
     const formOptions = { resolver: yupResolver(validationSchema) };
 
@@ -89,18 +93,18 @@ function AddEdit(props) {
                 </div>
             </div>
             <div className="row">
-            <div className="mb-3 col">
+                <div className="mb-3 col">
                     <label className="form-label">country</label>
                     <input name="country" type="text" {...register('country')} className={`form-control ${errors.country ? 'is-invalid' : ''}`} />
                     <div className="invalid-feedback">{errors.country?.message}</div>
                 </div>
-                </div>
+            </div>
             <div className="mb-3">
-                <button type="submit" disabled={formState.isSubmitting} className="btn btn-primary me-2">
+                <button type="submit" disabled={formState.isSubmitting} className="btn btn-primary me-2 text-black">
                     {formState.isSubmitting && <span className="spinner-border spinner-border-sm me-1"></span>}
                     Save
                 </button>
-                <button onClick={() => reset(formOptions.defaultValues)} type="button" disabled={formState.isSubmitting} className="btn btn-secondary">Reset</button>
+                <button onClick={() => reset(formOptions.defaultValues)} type="button" disabled={formState.isSubmitting} className="btn btn-secondary text-black">Reset</button>
                 <Link href="/users" className="btn btn-link">Cancel</Link>
             </div>
         </form>

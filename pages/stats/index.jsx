@@ -110,18 +110,26 @@ const StatsPage = () => {
 
     return (
         <div className='flex flex-col'>
-            <div className={`fixed top-0 left-0 w-screen h md:h-screen  md:w-1/4 bg-gray-200 p-4 transform ${isFilterPanelOpen ? 'translate-x-0' : '-translate-x-3/4'}`}>
+            <div className={`fixed top-0 left-0 w-screen md:h-screen md:w-1/4 bg-gray-200 p-4 transform transition-transform ease-in-out duration-300 ${isFilterPanelOpen ? 'translate-x-0  min-h-[52rem]' : '-translate-x-3/4 h-52'} `}>
+
                 <button
                     onClick={() => setIsFilterPanelOpen(!isFilterPanelOpen)}
-                    className="absolute top-1/2 right-6 w-10 h-10 transform-x-1/2 z-10"
+                    className="absolute top-1/2 right-12 w-6 h-6 transform-x-1/2 z-10 transition-transform ease-in-out duration-300"
                 >
                     {isFilterPanelOpen ?
-                        <img src="/uploads/yeux-fermes.jpg" alt="Fermer les filtres" /> :
-                        <img src="/uploads/oeil.jpg" alt="Ouvrir les filtres" />
+                        <label>
+                            <img src="/uploads/yeux-fermes.jpg" alt="Fermer les filtres" />
+                            Hide filters
+                        </label>
+                        :
+                        <label>
+                            <img src="/uploads/oeil.jpg" alt="Ouvrir les filtres" />
+                            Show filters
+                        </label>
                     }
                 </button>
                 <h2 className="pt-12 text-2xl font-bold">Filters</h2>
-                <div className=" flex flex-col my-4">
+                <div className="flex flex-col my-4">
                     {Object.keys(filters).map(
                         (filterName) =>
                             filters[filterName] && (
@@ -135,7 +143,8 @@ const StatsPage = () => {
                 </div>
             </div>
 
-            <div className="flex flex-col  pt-20 pb-12 ml-0 md:ml-20 px-2 md:pl-10  mb-12 ">
+
+            <div className="flex flex-col w-full pt-20 pb-12 ml-0 md:ml-28 px-2 md:pl-10  mb-12 ">
                 <h1 className="text-3xl text-center font-bold mb-8">Stats</h1>
                 <form onSubmit={handleSubmit} className=" flex flex-col ">
                     <label>
@@ -392,18 +401,6 @@ const StatsPage = () => {
 
 
                     <div className="flex flex-col border border-r-red-600">
-                        {/* <div className="flex  justify-center items-center">
-                            <p className=" flex flex-row flex-wrap text-lg font-bold ">
-                                Current filters:
-                                {filters.fighter1 || ''} {filters.fighter2 || ''}
-                                {filters.eventyear || ''} {filters.country || ''}
-                                {filters.category || ''}
-                                {filters.weightcat || ''}
-                                {filters.sex || ''}
-                                {filters.eventname || ''}
-                                {filters.eventtype || ''}
-                            </p>
-                        </div> */}
                         <ChartsDash
                             data={data}
                             selectedFighters={filters.fighter1}

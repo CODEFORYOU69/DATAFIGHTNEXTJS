@@ -66,6 +66,10 @@ async function update(id, params) {
 
 
 async function _delete(id) {
+    const fight = await Fight.findById(id)
+    if (fight.createdBy.toString() === userSubject.value.id.toString()) {
+        throw 'You cannot delete this fight'
+    }
     await Fight.findByIdAndRemove(id)
 }
 

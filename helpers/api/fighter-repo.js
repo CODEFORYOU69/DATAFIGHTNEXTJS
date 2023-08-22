@@ -23,22 +23,18 @@ async function getById(id) {
 }
 
 async function createFighter(params) {
-  const fighter = new Fighter(params)
+  
   // validate lastnames firstname and birthdate must be unique in the same fighter
-  if (
-    fighter.lastName !== params.lastName &&
-    (await Fighter.findOne({ lastName: params.lastName })) &&
-    fighter.birthDate !== params.birthDate &&
-    (await Fighter.findOne({ birthDate: params.birthDate }))
-  ) {
-    throw (
-      'Fighter "' +
-      params.lastName +
-      ' ' +
-      params.birthDate +
-      '" is already exist'
-    )
-  }
+  const existingFighter = await Fighter.findOne({ 
+    lastName: params.lastName, 
+    birthDate: params.birthDate 
+});
+
+if (existingFighter ) {
+  throw `Fighter "  ${params.firstName} ${params.lastName} ${params.birthDate}" already exists`;
+
+ }
+const fighter = new Fighter(params)
 
   // save fighter
   await fighter.save()
@@ -49,20 +45,6 @@ async function update(id, params) {
 
   // validate
   if (!fighter) throw 'Fighter not found'
-  if (
-    fighter.lastName !== params.lastName &&
-    (await Fighter.findOne({ lastName: params.lastName })) &&
-    fighter.birthDate !== params.birthDate &&
-    (await Fighter.findOne({ birthDate: params.birthDate }))
-  ) {
-    throw (
-      'Fighter "' +
-      params.lastName +
-      ' ' +
-      params.birthDate +
-      '" is already exist'
-    )
-  }
 
   // copy params properties to user
   Object.assign(fighter, params)

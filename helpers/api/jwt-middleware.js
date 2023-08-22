@@ -4,6 +4,8 @@ import getConfig from 'next/config';
 
 const { serverRuntimeConfig } = getConfig();
 
+require('dotenv').config();
+
 export { jwtMiddleware };
 
 function jwtMiddleware(req, res) {
@@ -17,6 +19,8 @@ function jwtMiddleware(req, res) {
             '/api/users/forgotPassword'
         ]
     });
+
+    console.log('jwtMiddleware', middleware);
 
     return util.promisify(middleware)(req, res);
 }

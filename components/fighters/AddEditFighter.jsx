@@ -30,34 +30,26 @@ function AddEditFighter(props) {
 
 
     const handleUploadPhoto = async (fighterId, formData) => {
-
-        console.log('fighterId:handle', fighterId)
-        console.log('formData:handle', formData)
+        console.log('fighterId:handle', fighterId);
+        console.log('formData:handle', formData);
         try {
-            const response = await fetch(
-                `/api/fighters/uploadPhoto?fighterId=${fighterId}`,
-                {
-                    method: 'PUT',
-                    body: formData,
-                },
-            )
-
-            console.log('responsebjkbkbk', response)
-
-            if (!response.ok) {
-                throw new Error('Error while uploading the photo')
-            }
-
+            const response = await fighterService.uploadPhoto(fighterId, formData);
+    
+            console.log('responsebjkbkbk', response);
+    
+            
+    
             // Reload fighters to update the photo display
-            const updatedFighter = await fighterService.getById(fighterId)
-
-            console.log('updatedFighter', updatedFighter)
-            setFighters(updatedFighter)
-
+            const updatedFighter = await fighterService.getById(fighterId);
+    
+            console.log('updatedFighter', updatedFighter);
+            setFighters(updatedFighter);
+    
         } catch (error) {
-            console.error('Error while uploading the photo:', error)
+            console.error('Error while uploading the photo:', error);
         }
     }
+    
 
     const onChangeImage = async (fighterId, file) => {
         console.log('fighterId:change', fighterId)
@@ -133,7 +125,7 @@ function AddEditFighter(props) {
     }
 
     return (
-        <div className="mt-3">
+        <div className="flex flex-col md:flex-row justify-around ">
             <div className="flex flex-col sm:flex-row flex-wrap items-center gap-8">
                 <img
                     alt="fighter"
@@ -165,28 +157,28 @@ function AddEditFighter(props) {
                 </label>
 
             </div>
-            <form className="flex " onSubmit={handleSubmit(onSubmit)}>
-                <div className=" ">
-                    <div className="mb-3">
+            <form className="flex flex-col md:flex-row" onSubmit={handleSubmit(onSubmit)}>
+                <div className="flex flex-col ">
+                    <div className="flex flex-col ">
                         <label className="form-label">First Name</label>
                         <input
                             name="firstName"
                             type="text"
                             {...register('firstName')}
-                            className={`form-control ${errors.firstName ? 'is-invalid' : ''
+                            className={`form-control w-full ${errors.firstName ? 'is-invalid' : ''
                                 }`}
                         />
                         <div className="invalid-feedback">
                             {errors.firstName?.message}
                         </div>
                     </div>
-                    <div className="mb-3 ">
+                    <div className="flex flex-col ">
                         <label className="form-label">Last Name</label>
                         <input
                             name="lastName"
                             type="text"
                             {...register('lastName')}
-                            className={`form-control ${errors.lastName ? 'is-invalid' : ''
+                            className={`form-control w-full ${errors.lastName ? 'is-invalid' : ''
                                 }`}
                         />
                         <div className="invalid-feedback">
@@ -195,7 +187,7 @@ function AddEditFighter(props) {
                     </div>
 
                     <div className=" ">
-                        <div className="mb-3">
+                    <div className="flex flex-col ">
                             <label className="form-label">Country</label>
                             <input
                                 name="country"
@@ -208,7 +200,7 @@ function AddEditFighter(props) {
                                 {errors.country?.message}
                             </div>
                         </div>
-                        <div className="mb-3 w-[50%]">
+                        <div className="flex flex-col ">
                             <label className="form-label">birthday</label>
                             <input
                                 name="birthDate"
@@ -221,9 +213,9 @@ function AddEditFighter(props) {
                                 {errors.birthday?.message}
                             </div>
                         </div>
-                        <div className="mb-3  ">
+                        <div className="flex flex-col ">
                             <div className="justify-center">
-                                <div className="mb-3 row">
+                            <div className="flex flex-col ">
                                     <label className="">Sex</label>
                                     <Controller
                                         name="sex"
@@ -240,7 +232,7 @@ function AddEditFighter(props) {
                                         {errors.sex?.message}
                                     </div>
                                 </div>
-                                <div className="mb-3 row ">
+                                <div className="flex flex-col ">
                                     <label className="form-label">
                                         Age Category
                                     </label>
@@ -262,7 +254,7 @@ function AddEditFighter(props) {
                                         {errors.category?.message}
                                     </div>
                                 </div>
-                                <div className="mb-3  row">
+                                <div className="flex flex-col mb-3 ">
                                     <label className="form-label">
                                         Weight Category
                                     </label>
@@ -293,7 +285,7 @@ function AddEditFighter(props) {
                     </div>
 
 
-                    <div className="mb-3 ">
+                    <div className=" ">
                         <button
                             type="submit"
                             disabled={formState.isSubmitting}

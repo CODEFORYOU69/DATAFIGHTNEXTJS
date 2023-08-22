@@ -10,7 +10,6 @@ export default Index
 function Index() {
     const [fighters, setFighters] = useState(null)
 
-    console.log("fightershbbjh", fighters)
 
 
     useEffect(() => {

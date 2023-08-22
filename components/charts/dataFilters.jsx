@@ -20,8 +20,8 @@ export default function assignRoundData(fightsData, selectedFighterId) {
                         const newKey = key.replace('_by_fighter1', '') // Enlevez le suffixe '_by_fighter1'
                         // Si le combattant sélectionné est 'fighter1', alors assignez la valeur à 'selectedFighterData', sinon à 'otherFighterData'
                         if (
-                            fight.fighter1.toString() ===
-                            selectedFighterId.toString()
+                            fight.fighter1 ===
+                            selectedFighterId
                         ) {
                             selectedFighterData[newKey] = round[key]
                         } else {

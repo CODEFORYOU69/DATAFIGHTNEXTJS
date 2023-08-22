@@ -74,9 +74,8 @@ function AddEditFight(props) {
                         name="eventyear"
                         type="text"
                         {...register('eventyear')}
-                        className={`form-control ${
-                            errors.eventyear ? 'is-invalid' : ''
-                        }`}
+                        className={`form-control ${errors.eventyear ? 'is-invalid' : ''
+                            }`}
                     />
                     <div className="invalid-feedback">
                         {errors.eventyear?.message}
@@ -88,9 +87,8 @@ function AddEditFight(props) {
                         name="eventtype"
                         type="text"
                         {...register('eventtype')}
-                        className={`form-control ${
-                            errors.eventtype ? 'is-invalid' : ''
-                        }`}
+                        className={`form-control ${errors.eventtype ? 'is-invalid' : ''
+                            }`}
                     />
                     <div className="invalid-feedback">
                         {errors.eventtype?.message}
@@ -104,9 +102,8 @@ function AddEditFight(props) {
                         name="eventname"
                         type="text"
                         {...register('eventname')}
-                        className={`form-control ${
-                            errors.eventname ? 'is-invalid' : ''
-                        }`}
+                        className={`form-control ${errors.eventname ? 'is-invalid' : ''
+                            }`}
                     />
                     <div className="invalid-feedback">
                         {errors.eventname?.message}
@@ -118,9 +115,8 @@ function AddEditFight(props) {
                         name="category"
                         type="text"
                         {...register('category')}
-                        className={`form-control ${
-                            errors.category ? 'is-invalid' : ''
-                        }`}
+                        className={`form-control ${errors.category ? 'is-invalid' : ''
+                            }`}
                     />
                     <div className="invalid-feedback">
                         {errors.category?.message}
@@ -132,9 +128,8 @@ function AddEditFight(props) {
                         name="weightcat"
                         type="text"
                         {...register('weightcat')}
-                        className={`form-control ${
-                            errors.weightcat ? 'is-invalid' : ''
-                        }`}
+                        className={`form-control ${errors.weightcat ? 'is-invalid' : ''
+                            }`}
                     />
                     <div className="invalid-feedback">
                         {errors.weightcat?.message}
@@ -146,9 +141,8 @@ function AddEditFight(props) {
                     </label>
 
                     <select
-                        className={`form-control ${
-                            errors.fighter1_id ? 'is-invalid' : ''
-                        }`}
+                        className={`form-control ${errors.fighter1_id ? 'is-invalid' : ''
+                            }`}
                         id="fighter1Id"
                         {...register('fighter1_id')}
                     >
@@ -169,9 +163,8 @@ function AddEditFight(props) {
                     </label>
 
                     <select
-                        className={`form-control ${
-                            errors.fighter2_id ? 'is-invalid' : ''
-                        }`}
+                        className={`form-control ${errors.fighter2_id ? 'is-invalid' : ''
+                            }`}
                         id="fighter2Id"
                         {...register('fighter2_id')}
                     >

@@ -16,57 +16,6 @@ Modal.setAppElement('#__next')
 
 export default AddRound
 
-// const IncrementDecrementField = ({ value, onChange }) => {
-//     return (
-//         <Box
-//             sx={{
-//                 display: 'flex',
-//                 flexDirection: 'column',
-//                 alignItems: 'center',
-//                 textAlign: 'center',
-//                 justifyContent: 'space-between',
-//             }}
-//         >
-//             <TextField
-//                 value={value}
-//                 onChange={(event) => onChange(event.target.value)}
-//                 margin="small"
-//                 label=""
-//                 name=""
-//                 id="password"
-//                 autoFocus
-//                 InputProps={{
-//                     sx: {
-//                         display: 'flex',
-//                         flexDirection: 'column-reverse',
-//                         alignItems: 'center',
-//                         justifyContent: 'center',
-//                         padding: '0px',
-//                     },
-//                     startAdornment: (
-//                         <IconButton
-//                             onClick={() => onChange(value - 1)}
-//                             size="small"
-//                             sx={{ color: '#1976d2' 
-//                         }}
-//                         >
-//                             <RemoveIcon fontSize="small" />
-//                         </IconButton>
-//                     ),
-//                     endAdornment: (
-//                         <IconButton
-//                             onClick={() => onChange(value + 1)}
-//                             size="small"
-//                             sx={{ color: '#1976d2' }}
-//                         >
-//                             <AddIcon fontSize="small" />
-//                         </IconButton>
-//                     ),
-//                 }}
-//             />
-//         </Box>
-//     )
-// }
 
 function AddRound() {
     const router = useRouter()

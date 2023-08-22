@@ -68,37 +68,14 @@ async function updateFighterPhoto(fighterId, imagePath) {
   await fighter.save()
 }
 
-async function fightersFilter(filters) {
 
-  const query = {}
-
-  if (filters.firstName) {
-    query.firstName = filters.firstName;
-  }
-
-  if (filters.lastName) {
-    query.lastName = filters.lastName;
-  }
-
-  if (filters.sex) {
-    query.sex = filters.sex;
-  }
-
-  if (filters.category) {
-    query.category = filters.category;
-  }
-
-  if (filters.weightCategory) {
-    query.weightCategory = parseInt(filters.weightCategory)
-  }
-
-  if (filters.country) {
-    query.country = filters.country;
-  }
-
-  console.log('query', query)
-
-  const result = await Fighter.find(query);
-
+async function fightersFilter(params) {
+  const db = await connectToDatabase();
+  const collection = db.collection('fighters');
+  
+  const query = buildFilterQuery(params);
+  const result = await collection.find(query).toArray();
+  
   return result;
 }
+

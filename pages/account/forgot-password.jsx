@@ -58,5 +58,5 @@ function ForgotPassword() {
         </Layout>
     );
 
-    
+
 }

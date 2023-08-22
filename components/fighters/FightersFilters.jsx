@@ -63,11 +63,10 @@ function FilterFighters() {
                             name="firstName"
                             value={filters.firstName}
                             onChange={handleInputChange}
-                            className={`p-2 border rounded focus:outline-none ${
-                                filters.firstName
+                            className={`p-2 border rounded focus:outline-none ${filters.firstName
                                     ? 'border-green-500'
                                     : 'border-gray-300'
-                            }`}
+                                }`}
                         >
                             <option value="">Select a year</option>
                             {fighters &&
@@ -91,11 +90,10 @@ function FilterFighters() {
                             name="lastName"
                             value={filters.lastName}
                             onChange={handleInputChange}
-                            className={`p-2 border rounded focus:outline-none ${
-                                filters.lastName
+                            className={`p-2 border rounded focus:outline-none ${filters.lastName
                                     ? 'border-green-500'
                                     : 'border-gray-300'
-                            }`}
+                                }`}
                         >
                             <option value="">Select a type</option>
                             {fighters &&
@@ -116,11 +114,10 @@ function FilterFighters() {
                             name="birthDate"
                             value={filters.birthDate}
                             onChange={handleInputChange}
-                            className={`p-2 border rounded focus:outline-none ${
-                                filters.birthDate
+                            className={`p-2 border rounded focus:outline-none ${filters.birthDate
                                     ? 'border-green-500'
                                     : 'border-gray-300'
-                            }`}
+                                }`}
                         >
                             <option value="">Select an event</option>
                             {fighters &&
@@ -141,11 +138,10 @@ function FilterFighters() {
                             name="sex"
                             value={filters.sex}
                             onChange={handleInputChange}
-                            className={`p-2 border rounded focus:outline-none ${
-                                filters.sex
+                            className={`p-2 border rounded focus:outline-none ${filters.sex
                                     ? 'border-green-500'
                                     : 'border-gray-300'
-                            }`}
+                                }`}
                         >
                             <option value="">Select a gender</option>
 
@@ -160,11 +156,10 @@ function FilterFighters() {
                             name="country"
                             value={filters.country}
                             onChange={handleInputChange}
-                            className={`p-2 border rounded focus:outline-none ${
-                                filters.country
+                            className={`p-2 border rounded focus:outline-none ${filters.country
                                     ? 'border-green-500'
                                     : 'border-gray-300'
-                            }`}
+                                }`}
                         >
                             <option value="">Selectionnez un Pays</option>
                             {fighters &&
@@ -185,11 +180,10 @@ function FilterFighters() {
                             name="category"
                             value={filters.category}
                             onChange={handleInputChange}
-                            className={`p-2 border rounded focus:outline-none ${
-                                filters.category
+                            className={`p-2 border rounded focus:outline-none ${filters.category
                                     ? 'border-green-500'
                                     : 'border-gray-300'
-                            }`}
+                                }`}
                         >
                             <option value="">Selectionnez un combattant</option>
                             {fighters &&
@@ -211,11 +205,10 @@ function FilterFighters() {
                             name="weightCategory"
                             value={filters.weightCategory}
                             onChange={handleInputChange}
-                            className={`p-2 border rounded focus:outline-none ${
-                                filters.weightCategory
+                            className={`p-2 border rounded focus:outline-none ${filters.weightCategory
                                     ? 'border-green-500'
                                     : 'border-gray-300'
-                            }`}
+                                }`}
                         >
                             <option value="">Selectionnez un poids</option>
                             {fighters &&

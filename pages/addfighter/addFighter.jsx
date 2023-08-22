@@ -73,9 +73,8 @@ function CreateFighter() {
                   name="firstName"
                   type="text"
                   {...register('firstName')}
-                  className={`form-control ${
-                    errors.firstName ? 'is-invalid' : ''
-                  }`}
+                  className={`form-control ${errors.firstName ? 'is-invalid' : ''
+                    }`}
                 />
                 <div className="invalid-feedback">
                   {errors.firstName?.message}
@@ -87,9 +86,8 @@ function CreateFighter() {
                   name="lastName"
                   type="text"
                   {...register('lastName')}
-                  className={`form-control ${
-                    errors.lastName ? 'is-invalid' : ''
-                  }`}
+                  className={`form-control ${errors.lastName ? 'is-invalid' : ''
+                    }`}
                 />
                 <div className="invalid-feedback">
                   {errors.lastName?.message}
@@ -114,9 +112,8 @@ function CreateFighter() {
                   name="country"
                   type="text"
                   {...register('country')}
-                  className={`form-control ${
-                    errors.country ? 'is-invalid' : ''
-                  }`}
+                  className={`form-control ${errors.country ? 'is-invalid' : ''
+                    }`}
                 />
                 <div className="invalid-feedback">
                   {errors.country?.message}
@@ -128,9 +125,8 @@ function CreateFighter() {
                   name="birthDate"
                   type="date"
                   {...register('birthDate')}
-                  className={`form-control ${
-                    errors.birthDate ? 'is-invalid' : ''
-                  }`}
+                  className={`form-control ${errors.birthDate ? 'is-invalid' : ''
+                    }`}
                 />
                 <div className="invalid-feedback">
                   {errors.birthDate?.message}
@@ -142,9 +138,8 @@ function CreateFighter() {
                   name="category"
                   type="text"
                   {...register('category')}
-                  className={`form-control ${
-                    errors.category ? 'is-invalid' : ''
-                  }`}
+                  className={`form-control ${errors.category ? 'is-invalid' : ''
+                    }`}
                 />
                 <div className="invalid-feedback">
                   {errors.category?.message}
@@ -156,9 +151,8 @@ function CreateFighter() {
                   name="weightCategory"
                   type="text"
                   {...register('weightCategory')}
-                  className={`form-control ${
-                    errors.weightCategory ? 'is-invalid' : ''
-                  }`}
+                  className={`form-control ${errors.weightCategory ? 'is-invalid' : ''
+                    }`}
                 />
                 <div className="invalid-feedback">
                   {errors.weightCategory?.message}

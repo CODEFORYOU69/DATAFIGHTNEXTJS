@@ -34,22 +34,22 @@ function AddEditFighter(props) {
         console.log('formData:handle', formData);
         try {
             const response = await fighterService.uploadPhoto(fighterId, formData);
-    
+
             console.log('responsebjkbkbk', response);
-    
-            
-    
+
+
+
             // Reload fighters to update the photo display
             const updatedFighter = await fighterService.getById(fighterId);
-    
+
             console.log('updatedFighter', updatedFighter);
             setFighters(updatedFighter);
-    
+
         } catch (error) {
             console.error('Error while uploading the photo:', error);
         }
     }
-    
+
 
     const onChangeImage = async (fighterId, file) => {
         console.log('fighterId:change', fighterId)
@@ -187,7 +187,7 @@ function AddEditFighter(props) {
                     </div>
 
                     <div className=" ">
-                    <div className="flex flex-col ">
+                        <div className="flex flex-col ">
                             <label className="form-label">Country</label>
                             <input
                                 name="country"
@@ -215,7 +215,7 @@ function AddEditFighter(props) {
                         </div>
                         <div className="flex flex-col ">
                             <div className="justify-center">
-                            <div className="flex flex-col ">
+                                <div className="flex flex-col ">
                                     <label className="">Sex</label>
                                     <Controller
                                         name="sex"

@@ -28,7 +28,7 @@ export const options = {
     plugins: {
         tooltip: {
             callbacks: {
-                label: function(context) {
+                label: function (context) {
                     return 'Fights: ' + context.parsed.y;
                 }
             }
@@ -63,7 +63,7 @@ const NumberFightBarChart = ({ labels, dataset1 }) => {
                     colors: ['rgba(255, 99, 132, 0.8)', 'rgba(255, 159, 64, 0.8)'],
                     positions: [0, 1]
                 },
-                
+
                 borderColor: 'rgba(255, 99, 132, 1)', // same color as background but fully opaque
                 borderWidth: 2, // thicker border
             },

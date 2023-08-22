@@ -1,7 +1,7 @@
 const express = require("express");
 const next = require("next");
 const mongoose = require("mongoose");
-const rateLimit = require("express-rate-limit");
+// const rateLimit = require("express-rate-limit");
 
 
 
@@ -31,7 +31,7 @@ app.prepare().then(async () => {
     return handle(req, res);
   });
 
-  server.use(limiter);
+  // server.use(limiter);
   const port = process.env.PORT || 3000;
   server.listen(port, (err) => {
     if (err) throw err;
@@ -39,11 +39,11 @@ app.prepare().then(async () => {
   });
 });
 
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limite chaque IP à 100 requêtes par fenêtre
-  message: "Trop de requêtes depuis cette IP, veuillez réessayer plus tard."
-});
+// const limiter = rateLimit({
+//   windowMs: 15 * 60 * 1000, // 15 minutes
+//   max: 100, // limite chaque IP à 100 requêtes par fenêtre
+//   message: "Trop de requêtes depuis cette IP, veuillez réessayer plus tard."
+// });
 
 // Appliquez la limite de taux à toutes les requêtes
 

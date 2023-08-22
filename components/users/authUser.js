@@ -14,10 +14,10 @@
 //       {!session ? (
 //         <button onClick={() => signIn("google")}>Se connecter</button>
 //       ) : (
-//         <>
+//         <div>
 //           <p>Bonjour {session.user.name} !</p>
 //           <button onClick={() => signOut()}>Se déconnecter</button>
-//         </>
+//         </div>
 //       )}
 //     </header>
 //   );

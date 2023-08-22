@@ -17,11 +17,7 @@
         ],
         "react/prop-types": 0
     },
-<<<<<<< HEAD
-    "parser": "@babel/eslint-parser",
-=======
     "parser": "react-babel",
->>>>>>> 28699f6f5ce9b870a2b5f93c9c040ed3c2ff4907
     "env": {
         "browser": true,
         "node": true,

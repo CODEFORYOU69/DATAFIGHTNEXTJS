@@ -35,8 +35,4 @@ Application d'analyse de données de taekwondo pour optimisation des entrainemen
 
 ## Licence
 
-<<<<<<< HEAD
 - Indiquez la licence que vous utilisez pour votre projet
-=======
-- Indiquez la licence que vous utilisez pour votre projet
->>>>>>> 28699f6f5ce9b870a2b5f93c9c040ed3c2ff4907

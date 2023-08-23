@@ -8,7 +8,7 @@ import 'styles/tailwind.css';
 import 'styles/globals.css';
 
 import { userService } from 'services';
-import { Nav, Alert } from 'components';
+import { Nav, Footer, Alert } from 'components';
 
 export default App;
 
@@ -57,8 +57,8 @@ function App({ Component, pageProps }) {
                 <title>DATAFIGHT</title>
             </Head>
 
-            <div className={`app-container ${user ? 'bg-white' : ''}`}>
-                {/* if Nav is open add push all element on the bottom */}
+            <div className={`app-container h-screen ${user ? 'bg-white' : ''}`}>
+               
 
                 <Nav />
                 <div className="h-16"></div>
@@ -66,6 +66,7 @@ function App({ Component, pageProps }) {
                 {authorized &&
                     <Component {...pageProps} />
                 }
+                <Footer />
             </div>
         </div>
     );

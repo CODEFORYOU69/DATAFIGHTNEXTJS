@@ -5,7 +5,6 @@ export default apiHandler({
 });
 
 async function createRound(req, res) {
-    console.log('ok1')
     await roundRepo.createRound(req.body);
     return res.status(200).json({});
 }

@@ -26,7 +26,6 @@ async function getById(id) {
 
 // create fight with body params
 async function createFight(params) {
-    console.log(params)
     const fight = new Fight({
         eventyear: params.eventyear,
         eventtype: params.eventtype,
@@ -80,25 +79,19 @@ async function filterFights(filters) {
 
     const query = []
 
-    if (filters.eventyear) {
-        query.push({ eventyear: parseInt(filters.eventyear) });
-    }
+    const filterMap = {
+        eventyear: (value) => ({ eventyear: parseInt(value) }),
+        eventtype: (value) => ({ eventtype: value }),
+        eventname: (value) => ({ eventname: value }),
+        category: (value) => ({ category: value }),
+        weightcat: (value) => ({ weightcat: parseInt(value) }),
+    };
 
-    if (filters.eventtype) {
-        query.push({ eventtype: filters.eventtype });
-    }
-
-    if (filters.eventname) {
-        query.push({ eventname: filters.eventname });
-    }
-
-    if (filters.category) {
-        query.push({ category: filters.category });
-    }
-
-    if (filters.weightcat) {
-        query.push({ weightcat: parseInt(filters.weightcat) });
-    }
+    Object.keys(filterMap).forEach((key) => {
+        if (filters[key]) {
+            query.push(filterMap[key](filters[key]));
+        }
+    });
 
     const pipeline = [
         {
@@ -137,20 +130,19 @@ async function filterFights(filters) {
 
         { $unwind: "$fighter2" },
     ];
+
+    const addFighterFilter = (fighterKey, filterKey) => {
+        if (filters[filterKey]) {
+            const fighterId = new mongoose.Types.ObjectId(filters[filterKey]);
+            query.push({ [fighterKey]: fighterId });
+        }
+    };
+
+    addFighterFilter("fighter1._id", "fighter1");
+    addFighterFilter("fighter2._id", "fighter2");
     if (filters.country) {
         query.push({ $or: [{ "fighter1.country": filters.country }, { "fighter2.country": filters.country }] });
     }
-
-    if (filters.fighter1) {
-        const fighter1Id = new mongoose.Types.ObjectId(filters.fighter1);
-        query.push({ $or: [{ "fighter1._id": fighter1Id }, { "fighter2._id": fighter1Id }] });
-    }
-
-    if (filters.fighter2) {
-        const fighter2Id = new mongoose.Types.ObjectId(filters.fighter2);
-        query.push({ $or: [{ "fighter1._id": fighter2Id }, { "fighter2._id": fighter2Id }] });
-    }
-
 
     if (filters.sex) {
         query.push({ $or: [{ "fighter1.sex": filters.sex }, { "fighter2.sex": filters.sex }] });
@@ -158,6 +150,5 @@ async function filterFights(filters) {
     pipeline.push({ $match: { $and: query } });
 
     const result = await Fight.aggregate(pipeline);
-
     return result;
 }

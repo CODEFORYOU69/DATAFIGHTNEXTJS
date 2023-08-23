@@ -4,7 +4,6 @@ import FightersList from './FightersList'
 
 function FilterFighters() {
     const [fighters, setFighters] = useState([])
-    console.log('fighters found', fighters)
 
     useEffect(() => {
         fighterService.getAll().then((x) => setFighters(x))
@@ -19,7 +18,6 @@ function FilterFighters() {
         category: '',
         weightCategory: '',
     })
-    console.log('filters', filters)
 
     const [data, setData] = useState(null)
 

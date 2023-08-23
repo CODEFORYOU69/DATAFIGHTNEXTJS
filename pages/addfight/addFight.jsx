@@ -34,12 +34,10 @@ function AddFight() {
         fighterService.getAll().then((x) => setFighters(x))
     }, [])
     //fight object to send to api
-    console.log('fighters', fighters)
 
     const [isModalOpen, setIsModalOpen] = useState(false)
 
     function onSubmit(fight) {
-        console.log('ok1')
         return fightService
             .createFight(fight)
             .then(() => {

@@ -1,5 +1,6 @@
 import { BehaviorSubject } from "rxjs";
 import getConfig from "next/config";
+const mongoose = require("mongoose");
 
 import { fetchWrapper } from "helpers";
 
@@ -33,14 +34,18 @@ async function getAll() {
 }
 
 async function getById(id) {
+
+//convert string in mongoose objectid  
+
+    const _id = new mongoose.Types.ObjectId(id);
     
-    return await fetchWrapper.get(`${baseUrl}/${id}`);
+    
+    return await fetchWrapper.get(`${baseUrl}/${_id}`);
 }
 
 async function update(id, params) {
     params.createdBy = JSON.parse(localStorage.getItem('user')).id;
 
-    console.log("update", id, params);
     await fetchWrapper.put(`${baseUrl}/${id}`, params);
 
  
@@ -62,6 +67,6 @@ async function fightersFilter(params) {
         .filter(([_, value]) => value !== '') // Ignore les entrées vides
         .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
         .join('&');
-    const url = `${baseUrl}/fightersFilter?${queryString}`;
+    const url = `${baseUrl}/fightersFilters?${queryString}`;
     return await fetchWrapper.get(url);
 }

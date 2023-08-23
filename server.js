@@ -31,6 +31,8 @@ app.prepare().then(async () => {
     return handle(req, res);
   });
 
+  server.use(limiter);
+
   const port = process.env.PORT || 3000;
   server.listen(port, (err) => {
     if (err) throw err;
@@ -45,4 +47,4 @@ const limiter = rateLimit({
 });
 
 // Appliquez la limite de taux à toutes les requêtes
-app.use(limiter);
+

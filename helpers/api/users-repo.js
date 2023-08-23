@@ -69,7 +69,6 @@ async function forgotPassword({ email }) {
     );
     
 
-    console.log(mailjetConnection)
     const request = mailjetConnection.post('send', { version: 'v3.1' }).request({
         Messages: [
             {
@@ -88,7 +87,6 @@ async function forgotPassword({ email }) {
             }
         ]
     })
-    console.log('request', request)
     request
         .then(result => {
             console.log(result.body)
@@ -134,7 +132,6 @@ async function resetPassword({ token, password }) {
 
 async function isAdmin({ id}) {
 
-    console.log('emailrepo is admin', email)
      const user = await User.getById({ id })
 
         if (!user) { throw 'user not found' }

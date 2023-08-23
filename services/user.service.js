@@ -49,7 +49,6 @@ async function isAdmin(id) {
 
     const user = await fetchWrapper.get(`${baseUrl}/${id}`);
 
-    console.log('response is admin', user)
     return user;
 }
 

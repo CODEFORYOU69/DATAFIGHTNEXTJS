@@ -16,7 +16,6 @@ const ChartsDash = ({
     label,
     selectedFighters,
 }) => {
-    console.log('data', data)
 
     const [updatedFightsData, setUpdatedFightsData] = useState([])
 
@@ -28,7 +27,6 @@ const ChartsDash = ({
     }, [data, selectedFighters])
 
 
-    console.log('updatedFightsData', updatedFightsData)
     let allRounds = []
     let datafighter = []
 
@@ -38,7 +36,6 @@ const ChartsDash = ({
             datafighter = datafighter.concat(fight.rounds)
         })
 
-    console.log('datafighterhvjvj', datafighter)
 
     data &&
         data[0] &&
@@ -272,19 +269,6 @@ const ChartsDash = ({
             round.otherFighterData.cac_fg_5,
         )
     }
-
-    console.log('att_fd_data2szd', att_fd_data2)
-    console.log('att_od_data2dz', att_od_data2)
-    console.log('att_fg_data2dz', att_fg_data2)
-    console.log('att_og_data2d', att_og_data2)
-    console.log('def_fd_data2d', def_fd_data2)
-    console.log('def_od_data2d', def_od_data2)
-    console.log('def_fg_data2d', def_fg_data2)
-    console.log('def_og_data2d', def_og_data2)
-    console.log('cac_fd_data2d', cac_fd_data2)
-    console.log('cac_od_data2d', cac_od_data2)
-    console.log('cac_fg_data2d', cac_fg_data2)
-    console.log('cac_og_data2d', cac_og_data2)
 
     // Parcourir les rounds et extraire les données
     for (let round of allRounds) {
@@ -691,11 +675,9 @@ const ChartsDash = ({
         sum_cac_fg_data2,
         sum_cac_fd_data2,
     )
-    console.log('sum_att_od_data1', sum_att_od_data1)
-    console.log('sum_att_od_data2', sum_att_od_data2)
+    
     const numberOfFightFiltered = data && data.length
 
-    console.log('numberOfFightFiltered', numberOfFightFiltered)
 
     const labels = ['Number of fight']
 

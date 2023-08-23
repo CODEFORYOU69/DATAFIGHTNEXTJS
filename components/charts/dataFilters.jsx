@@ -9,10 +9,8 @@ export default function assignRoundData(fightsData, selectedFighterId) {
             // Pour chaque combat, séparez les données du round en deux objets : un pour le combattant sélectionné et un pour l'autre combattant.
             updatedFight.rounds = fight.rounds.map((round) => {
                 const selectedFighterData = {}
-                console.log("🚀 ~ file: dataFilters.jsx:64 ~ updatedFight.rounds=fight.rounds.map ~ selectedFighterData:", selectedFighterData)
 
                 const otherFighterData = {}
-                console.log("🚀 ~ file: dataFilters.jsx:67 ~ updatedFight.rounds=fight.rounds.map ~ otherFighterData:", otherFighterData)
 
                 for (let key in round) {
                     // Pour chaque clé dans le round, vérifiez si elle se termine par '_by_fighter1' ou '_by_fighter2'

@@ -419,6 +419,7 @@ function AddRound() {
             >
                 <h4 className="card-header">Add Fight</h4>
                 <div className="flex flex-col pt-12 form-group">
+                <img src="/uploads/df.png" alt="round" className='left-4 w-20 h-20'/>
                     <label>Fighter Blue</label>
                     <p>
                         {fighter1.firstName} {fighter1.lastName}
@@ -431,6 +432,7 @@ function AddRound() {
 
                     <p>{roundCount + 1}</p>
                 </div>
+                
                 <form onSubmit={onSubmit}>
                     <div className="grid pt-32 grid-cols-9 grid-rows-11 gap-4 border-1 text-center border-double border-red-600">
                         <div className="text-center  border-red-600">

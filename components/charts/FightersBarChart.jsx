@@ -50,6 +50,7 @@ export const options = {
             }
         },
     },
+    
 }
 export const options2 = {
     animation: {
@@ -178,18 +179,31 @@ const AttOgFightersBarChart = ({
     dataset9,
     dataset10,
     dataset11,
-    selectedFighter, // Ajouter la prop selectedFighter
+    selectedFighters, // Ajouter la prop selectedFighter
 }) => {
 
     const [fighter, setFighter] = useState(null)
+    console.log("fighter", fighter)
+    console.log("dataset3", dataset3)
+    console.log("dataset4", dataset4)
+    console.log("dataset5", dataset5)
+    console.log("dataset6", dataset6)
+    console.log("dataset7", dataset7)
+    console.log("dataset8", dataset8)
+    console.log("dataset9", dataset9)
+    console.log("dataset10", dataset10)
+    console.log("dataset11", dataset11)
 
     useEffect(() => {
         const fetchFighter = async () => {
-            const fighterData = await fighterService.getById(selectedFighter)
+            if (!selectedFighters) 
+            return null;
+
+            const fighterData = await fighterService.getById(selectedFighters[0])
             setFighter(fighterData)
         }
         fetchFighter()
-    }, [selectedFighter])
+    }, [selectedFighters])
 
     //get fighters from data prop
 
@@ -203,7 +217,7 @@ const AttOgFightersBarChart = ({
         labels,
         datasets: [
             {
-                label: fighter?.name, // Utiliser le nom du fighter récupéré
+                label: fighter?.lastName, // Utiliser le nom du fighter récupéré
                 data: dataset3,
                 backgroundColor: 'rgba(54, 162, 235, 0.8)', // darker color
                 borderColor: 'rgba(54, 162, 235, 1)', // same color as background but fully opaque
@@ -222,7 +236,7 @@ const AttOgFightersBarChart = ({
         labels: label,
         datasets: [
             {
-                label: fighter?.name, // Utiliser le nom du fighter récupéré
+                label: fighter?.lastName, // Utiliser le nom du fighter récupéré
                 data: dataset5,
                 backgroundColor: 'rgba(54, 162, 235, 0.8)', // darker color
                 borderColor: 'rgba(54, 162, 235, 1)', // same color as background but fully opaque
@@ -241,7 +255,7 @@ const AttOgFightersBarChart = ({
         labels: labelcac,
         datasets: [
             {
-                label: fighter?.name, // Utiliser le nom du fighter récupéré
+                label: fighter?.lastName, // Utiliser le nom du fighter récupéré
                 data: dataset7,
                 backgroundColor: 'rgba(54, 162, 235, 0.8)', // darker color
                 borderColor: 'rgba(54, 162, 235, 1)', // same color as background but fully opaque
@@ -257,7 +271,7 @@ const AttOgFightersBarChart = ({
         ],
     }
     const data4 = {
-        labels: labelcac,
+        labels: labelgardes,
         datasets: [
             {
                 label: 'attaques',
@@ -282,6 +296,8 @@ const AttOgFightersBarChart = ({
             },
         ],
     }
+
+    console.log("selectedFighter", selectedFighters)
 
     return (
         <div className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4">

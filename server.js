@@ -23,6 +23,17 @@ app.prepare().then(async () => {
     useUnifiedTopology: true,
   });
 
+  mongoose.connection.on('connected', () => {
+    console.log('Connecté à la base de données MongoDB');
+});
+
+mongoose.connection.on('error', (err) => {
+    console.error('Erreur de connexion à MongoDB:', err);
+});
+
+mongoose.connection.on('disconnected', () => {
+    console.warn('Déconnecté de MongoDB');
+});
   const server = express();
 
   server.use(express.json());

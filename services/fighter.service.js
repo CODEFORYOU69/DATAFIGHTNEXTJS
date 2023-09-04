@@ -35,12 +35,9 @@ async function getAll() {
 
 async function getById(id) {
 
-//convert string in mongoose objectid  
-
-    const _id = new mongoose.Types.ObjectId(id);
     
     
-    return await fetchWrapper.get(`${baseUrl}/${_id}`);
+    return await fetchWrapper.get(`${baseUrl}/${id}`);
 }
 
 async function update(id, params) {

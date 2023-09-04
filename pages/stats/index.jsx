@@ -9,7 +9,7 @@ const StatsPage = () => {
     const [fights, setFights] = useState([])
     const [isFilterPanelOpen, setIsFilterPanelOpen] = useState(false);
     const chartRef = useRef(null);
-    
+
     useEffect(() => {
         fighterService.getAll().then((x) => setFighters(x))
     }, [])
@@ -29,7 +29,6 @@ const StatsPage = () => {
         weightcat: '',
     })
 
-    console.log("filters", filters)
     const [data, setData] = useState(null)
     const handleInputChange = (event) => {
         setFilters({
@@ -64,7 +63,6 @@ const StatsPage = () => {
 
 
     }
-    console.log("data", data)
 
 
 

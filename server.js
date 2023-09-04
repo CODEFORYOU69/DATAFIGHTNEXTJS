@@ -44,6 +44,7 @@ mongoose.connection.on('disconnected', () => {
 
   server.use(limiter);
 
+
   const port = process.env.PORT || 3000;
   server.listen(port, (err) => {
     if (err) throw err;
@@ -55,7 +56,7 @@ const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // limite chaque IP à 100 requêtes par fenêtre
   message: "Trop de requêtes depuis cette IP, veuillez réessayer plus tard."
-});
+ });
 
 // Appliquez la limite de taux à toutes les requêtes
 

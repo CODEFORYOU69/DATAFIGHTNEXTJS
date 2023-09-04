@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+
+import React, { useState, useEffect, useRef } from 'react'
 import { fightService, fighterService } from 'services'
 import ChartsDash from 'components/charts/ChartsDash'
 
@@ -6,10 +7,8 @@ import ChartsDash from 'components/charts/ChartsDash'
 const StatsPage = () => {
     const [fighters, setFighters] = useState([])
     const [fights, setFights] = useState([])
-    const [photoData, setPhotoData] = useState([])
     const [isFilterPanelOpen, setIsFilterPanelOpen] = useState(false);
-
-
+    const chartRef = useRef(null);
 
     useEffect(() => {
         fighterService.getAll().then((x) => setFighters(x))
@@ -30,7 +29,7 @@ const StatsPage = () => {
         weightcat: '',
     })
 
-    const [data, setData] = useState(null)    
+    const [data, setData] = useState(null)
     const handleInputChange = (event) => {
         setFilters({
             ...filters,
@@ -60,49 +59,11 @@ const StatsPage = () => {
         event.preventDefault()
 
         fightService.filterFights(filters).then((x) => setData(x))
+        chartRef.current.scrollIntoView({ behavior: 'smooth' });
+
 
     }
 
-    const getPhoto = () => {
-        if (!data || !filters.fighter1 || !filters.fighter2) {
-            return []
-        } else if (data.length > 1) {
-            if (filters.fighter1 === data[0].fighter1._id) {
-                return [
-                    data[0].fighter1.photo,
-                    data[0].fighter1.firstName,
-                    data[0].fighter1.lastName,
-                ]
-            } else {
-                return [
-                    data[0].fighter2.photo,
-                    data[0].fighter2.firstName,
-                    data[0].fighter2.lastName,
-                ]
-            }
-        } else {
-            if (filters.fighter1 === data[0].fighter1._id) {
-                return [
-                    data[0].fighter1.photo,
-                    data[0].fighter1.firstName,
-                    data[0].fighter1.lastName,
-                ]
-            } else {
-                return [
-                    data[0].fighter2.photo,
-                    data[0].fighter2.firstName,
-                    data[0].fighter2.lastName,
-                ]
-            }
-        }
-    }
-
-    useEffect(() => {
-        const newPhotoData = getPhoto();
-        if (JSON.stringify(newPhotoData) !== JSON.stringify(photoData)) {
-            setPhotoData(newPhotoData);
-        }
-    }, [data, filters]);
 
 
     return (
@@ -139,8 +100,6 @@ const StatsPage = () => {
                     )}
                 </div>
             </div>
-
-
             <div className="flex flex-col w-full pt-20 pb-12 ml-0 md:ml-28 px-2 md:pl-10  mb-12 ">
                 <h1 className="text-3xl text-center font-bold mb-8">Stats</h1>
                 <form onSubmit={handleSubmit} className=" flex flex-col ">
@@ -373,34 +332,11 @@ const StatsPage = () => {
                     </button>
 
                 </form>
-
-
-
                 <div className="flex  flex-col gap-4">
-                    <div className="flex flex-col">
-                        {getPhoto().length > 0 && (
-                            <div>
-                                <h2 className="text-2xl font-bold">
-                                    Fighter Selected
-                                </h2>
-                                <p className="text-xl font-bold">
-                                    {photoData[1]} {photoData[2]}
-                                </p>
-                                <img
-                                    className="w-40 h-40 rounded"
-                                    src={photoData[0]}
-                                    alt=""
-                                />
-                            </div>
-                        )}
-                    </div>
-
-
-
-                    <div className="flex flex-col border border-r-red-600">
+                    <div className="flex flex-col border border-r-red-600" ref={chartRef}>
                         <ChartsDash
                             data={data}
-                            selectedFighters={filters.fighter1}
+                            selectedFighters={[filters.fighter1, filters.fighter2]}
                         />
                     </div>
                 </div>

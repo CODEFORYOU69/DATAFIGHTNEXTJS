@@ -35,6 +35,22 @@ const RadarChart = ({ rounds }) => {
     let cac_fg_data = []
     let cac_og_data = []
 
+    console.log("rounds", rounds)
+
+    console.log("att_fd_data", att_fd_data)
+    console.log("att_od_data", att_od_data)
+    console.log("att_fg_data", att_fg_data)
+    console.log("att_og_data", att_og_data)
+    console.log("def_fd_data", def_fd_data)
+    console.log("def_od_data", def_od_data)
+    console.log("def_fg_data", def_fg_data)
+    console.log("def_og_data", def_og_data)
+    console.log("cac_fd_data", cac_fd_data)
+    console.log("cac_od_data", cac_od_data)
+    console.log("cac_fg_data", cac_fg_data)
+    console.log("cac_og_data", cac_og_data)
+
+
     // Parcourir les rounds et extraire les données
     for (let round of rounds) {
         att_fd_data.push(

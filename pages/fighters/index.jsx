@@ -32,7 +32,7 @@ function Index() {
 
     return (
         <Layout>
-            <h1>Fighters</h1>
+            <h1 className='mt-4'>Fighters</h1>
             <Link
                 href="/fighters/addFighter"
                 className="btn btn-sm btn-success mb-2"

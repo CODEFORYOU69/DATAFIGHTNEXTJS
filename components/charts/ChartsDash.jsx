@@ -18,6 +18,7 @@ const ChartsDash = ({
 }) => {
 
     const [updatedFightsData, setUpdatedFightsData] = useState([])
+    console.log("🚀 ~ file: ChartsDash.jsx:21 ~ updatedFightsData:", updatedFightsData)
 
 
 
@@ -28,6 +29,7 @@ const ChartsDash = ({
 
 
     let allRounds = []
+    console.log("🚀 ~ file: ChartsDash.jsx:31 ~ allRounds:", allRounds)
     let datafighter = []
 
     updatedFightsData &&
@@ -78,6 +80,7 @@ const ChartsDash = ({
     let cac_od_data2 = []
     let cac_fg_data2 = []
     let cac_og_data2 = []
+    
 
     for (let round of datafighter) {
         // Attaque fermee droite par fighterseleced
@@ -285,6 +288,7 @@ const ChartsDash = ({
             round.att_fd_5_by_fighter1,
             round.att_fd_5_by_fighter2,
         )
+        console.log("att_od_data1:", att_od_data1);
 
         // Attaque ouverte droite par fighter1 et fighter2
         att_od_data.push(
@@ -709,6 +713,12 @@ const ChartsDash = ({
                 selectedFighters={selectedFighters}
                 data={data}
             />
+            <RadarChart
+                rounds={allRounds}
+                datafighter={datafighter}
+                options={options}
+                selectedFighters={selectedFighters}
+                />
 
         </div>
     )

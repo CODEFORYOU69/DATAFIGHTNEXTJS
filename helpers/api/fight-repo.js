@@ -21,7 +21,10 @@ async function getAll() {
 }
 
 async function getById(id) {
-    return await Fight.findById(id)
+    //convert string in mongoose objectid  
+
+    const _id = new mongoose.Types.ObjectId(id);
+    return await Fight.findById(_id)
 }
 
 // create fight with body params
@@ -138,8 +141,35 @@ async function filterFights(filters) {
         }
     };
 
-    addFighterFilter("fighter1._id", "fighter1");
-    addFighterFilter("fighter2._id", "fighter2");
+    if (filters.fighter1 && filters.fighter2) {
+        const fighter1Id = new mongoose.Types.ObjectId(filters.fighter1);
+        const fighter2Id = new mongoose.Types.ObjectId(filters.fighter2);
+        query.push({
+            $or: [
+                { $and: [{ "fighter1._id": fighter1Id }, { "fighter2._id": fighter2Id }] },
+                { $and: [{ "fighter1._id": fighter2Id }, { "fighter2._id": fighter1Id }] }
+            ]
+        });
+    } else {
+        if (filters.fighter1) {
+            const fighter1Id = new mongoose.Types.ObjectId(filters.fighter1);
+            query.push({
+                $or: [
+                    { "fighter1._id": fighter1Id },
+                    { "fighter2._id": fighter1Id }
+                ]
+            });
+        }
+        if (filters.fighter2) {
+            const fighter2Id = new mongoose.Types.ObjectId(filters.fighter2);
+            query.push({
+                $or: [
+                    { "fighter1._id": fighter2Id },
+                    { "fighter2._id": fighter2Id }
+                ]
+            });
+        }
+    }    
     if (filters.country) {
         query.push({ $or: [{ "fighter1.country": filters.country }, { "fighter2.country": filters.country }] });
     }

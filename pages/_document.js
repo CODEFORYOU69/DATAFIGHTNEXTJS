@@ -9,13 +9,11 @@ function Document() {
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
             </Head>
 
-            <body>
+            <body className=''>
                 <Main />
                 <NextScript />
 
-                <div className="text-center mt-4">
                 
-                </div>
             </body>
         </Html>
     );

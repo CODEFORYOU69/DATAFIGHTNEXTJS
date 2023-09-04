@@ -144,15 +144,12 @@ function AddRound() {
     const [hits_by_fighter1, setHits_by_fighter1] = useState(0)
     const [hits_by_fighter2, setHits_by_fighter2] = useState(0)
     const [round_winner_id, setRound_winner_id] = useState('')
-    console.log('round_winner_id', round_winner_id)
-
     const [blueScore, setBlueScore] = useState(0)
     const [redScore, setRedScore] = useState(0)
 
     const [state, setState] = useState({
         /* initial state */
     })
-    console.log('state', state)
     const [state2, setState2] = useState({
         /* initial state */
     })
@@ -189,7 +186,6 @@ function AddRound() {
                 key.startsWith('cac_od_') ||
                 (key.startsWith('cac_fd_') && key.endsWith('by_fighter1')),
         )
-        console.log('relevantKeys', relevantKeys)
         setBlueScore(0)
         relevantKeys.forEach((key) => {
             // for each key, get the increment value
@@ -250,10 +246,8 @@ function AddRound() {
     }, [fightId])
     //get firstname and lastname from api for each fighter
     const [fighter1, setFighter1] = useState([])
-    console.log('fighter1', fighter1)
 
     const [fighter2, setFighter2] = useState([])
-    console.log('fighter2', fighter2)
     useEffect(() => {
         if (fighters.length > 0) {
             fighterService.getById(fighters[0]).then((fighter) => {
@@ -425,6 +419,7 @@ function AddRound() {
             >
                 <h4 className="card-header">Add Fight</h4>
                 <div className="flex flex-col pt-12 form-group">
+                <img src="/uploads/df.png" alt="round" className='left-4 w-20 h-20'/>
                     <label>Fighter Blue</label>
                     <p>
                         {fighter1.firstName} {fighter1.lastName}
@@ -437,6 +432,7 @@ function AddRound() {
 
                     <p>{roundCount + 1}</p>
                 </div>
+                
                 <form onSubmit={onSubmit}>
                     <div className="grid pt-32 grid-cols-9 grid-rows-11 gap-4 border-1 text-center border-double border-red-600">
                         <div className="text-center  border-red-600">

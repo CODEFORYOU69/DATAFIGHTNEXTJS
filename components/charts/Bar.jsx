@@ -74,3 +74,4 @@ const NumberFightBarChart = ({ labels, dataset1 }) => {
 }
 
 export default NumberFightBarChart
+

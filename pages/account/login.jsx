@@ -36,7 +36,10 @@ function Login() {
 
     return (
         <Layout>
-            <div className="card">
+            <div>
+                <h1 className="mb-3 text-center ">Welcome to datafight</h1>
+                <p className="mb-3 text-center">Login or register to enjoy the power of datafight</p>
+            <div className="card mx-2">
                 <h4 className="card-header">Login</h4>
                 <div className="card-body">
                     <form onSubmit={handleSubmit(onSubmit)}>
@@ -58,6 +61,7 @@ function Login() {
                         <Link href="/account/forgot-password" className="btn btn-link">Forgot Password ?</Link>
                     </form>
                 </div>
+            </div>
             </div>
         </Layout>
     );

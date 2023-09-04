@@ -58,7 +58,6 @@
 
 
     async function handleResponse(response) {
-        console.log("Raw response:", response);
 
 
         const isJson = response.headers

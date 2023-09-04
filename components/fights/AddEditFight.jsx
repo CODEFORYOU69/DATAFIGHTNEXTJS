@@ -55,9 +55,9 @@ function AddEditFight(props) {
             }
 
             // redirect to user list with success message
-            console.log(message)
+           
             router.push('/fights')
-            console.log(router)
+            
             alertService.success(message, true)
         } catch (error) {
             alertService.error(error.message)

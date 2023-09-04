@@ -27,7 +27,6 @@ async function getById(id) {
 
 // create round with body params
 async function createRound(params) {
-    console.log('ok2')
     const round = new Round({
         fight: params.fight,
         round: params.round,

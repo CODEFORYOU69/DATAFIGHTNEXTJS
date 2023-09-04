@@ -55,6 +55,5 @@ async function _delete(id) {
 }
 
 async function getRoundCountByFightId(id) {
-    console.log('getid')
     return await fetchWrapper.get(`${baseUrl}/getRoundCountByFightId/${id}`);
 }

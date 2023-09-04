@@ -14,8 +14,7 @@ function FightersList() {
 
     // Fonction pour gérer la soumission du formulaire de téléchargement de l'image
     const handleUploadPhoto = async (fighterId, formData) => {
-        console.log('fighterId:handle', fighterId)
-        console.log('formData:handle', formData)
+       
         try {
             const response = await fetch(
                 `/api/fighters/uploadPhoto?fighterId=${fighterId}`,
@@ -38,8 +37,7 @@ function FightersList() {
     }
 
     const onChangeImage = async (fighterId, file) => {
-        console.log('fighterId:change', fighterId)
-        console.log('file:change', file)
+        
         const formData = new FormData()
         formData.append('photo', file)
         await handleUploadPhoto(fighterId, formData)
@@ -100,10 +98,7 @@ function FightersList() {
                                                     fighter.id,
                                                     e.target.files[0],
                                                 )
-                                                console.log(
-                                                    'e.target.files[0]:',
-                                                    e.target.files[0],
-                                                )
+                                               
                                                 e.target.value = null // Reset the file input value
                                             }}
                                         />

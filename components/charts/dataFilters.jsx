@@ -1,48 +1,44 @@
-
 export default function assignRoundData(fightsData, selectedFighterId) {
+    console.log("🚀 ~ file: dataFilters.jsx:2 ~ assignRoundData ~ fightsData:", fightsData)
+    console.log("Selected Fighter ID:", selectedFighterId);
+
     return (
         fightsData &&
-        fightsData[0] &&
         fightsData.map((fight) => {
-            const updatedFight = { ...fight }
+            console.log("Fighter 1 ID:", fight.fighter1);
+            console.log("Fighter 2 ID:", fight.fighter2);
 
-            // Pour chaque combat, séparez les données du round en deux objets : un pour le combattant sélectionné et un pour l'autre combattant.
+            const updatedFight = { ...fight }
             updatedFight.rounds = fight.rounds.map((round) => {
                 const selectedFighterData = {}
-                console.log("🚀 ~ file: dataFilters.jsx:64 ~ updatedFight.rounds=fight.rounds.map ~ selectedFighterData:", selectedFighterData)
-
                 const otherFighterData = {}
-                console.log("🚀 ~ file: dataFilters.jsx:67 ~ updatedFight.rounds=fight.rounds.map ~ otherFighterData:", otherFighterData)
 
                 for (let key in round) {
-                    // Pour chaque clé dans le round, vérifiez si elle se termine par '_by_fighter1' ou '_by_fighter2'
                     if (key.endsWith('_by_fighter1')) {
-                        const newKey = key.replace('_by_fighter1', '') // Enlevez le suffixe '_by_fighter1'
-                        // Si le combattant sélectionné est 'fighter1', alors assignez la valeur à 'selectedFighterData', sinon à 'otherFighterData'
-                        if (
-                            fight.fighter1 ===
-                            selectedFighterId
-                        ) {
+                        const newKey = key.replace('_by_fighter1', '')
+                        if (fight?.fighter1_id === selectedFighterId[0]) {
+                            console.log('fighter1??', fight.fighter1_id)
+                            console.log("Assigning to selectedFighterData:", newKey, round[key]);
                             selectedFighterData[newKey] = round[key]
                         } else {
+                            console.log("Assigning to otherFighterData:", newKey, round[key]);
                             otherFighterData[newKey] = round[key]
                         }
                     } else if (key.endsWith('_by_fighter2')) {
-                        const newKey = key.replace('_by_fighter2', '') // Enlevez le suffixe '_by_fighter2'
-                        // Si le combattant sélectionné est 'fighter2', alors assignez la valeur à 'selectedFighterData', sinon à 'otherFighterData'
-                        if (fight.fighter1 === selectedFighterId) {
+                        const newKey = key.replace('_by_fighter2', '')
+                        if (fight?.fighter2_id === selectedFighterId[0]) {
+                            console.log("Assigning to selectedFighterData:", newKey, round[key]);
                             selectedFighterData[newKey] = round[key]
                         } else {
+                            console.log("Assigning to otherFighterData:", newKey, round[key]);
                             otherFighterData[newKey] = round[key]
                         }
                     } else {
-                        // Pour les autres clés (qui ne se terminent pas par '_by_fighter1' ou '_by_fighter2'), ajoutez-les aux deux objets.
                         selectedFighterData[key] = round[key]
                         otherFighterData[key] = round[key]
                     }
                 }
 
-                // Return as a single round object, not a separate object
                 return {
                     round: round,
                     selectedFighterData: selectedFighterData,
@@ -54,4 +50,3 @@ export default function assignRoundData(fightsData, selectedFighterId) {
         })
     )
 }
-

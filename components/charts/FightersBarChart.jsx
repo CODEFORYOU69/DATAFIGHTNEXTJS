@@ -13,90 +13,161 @@ import { Bar } from 'react-chartjs-2'
 
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
-
 export const options = {
-    responsive: false,
+    animation: {
+        duration: 1000,
+        easing: 'easeInOutQuart'
+    },
+    responsive: true,
     scales: {
         y: {
             beginAtZero: true,
-            max: 20, // Define maximum value
+            max: 10, // Define maximum value
         },
     },
-    maintainAspectRatio: false, // Add this
+    maintainAspectRatio: true, // Add this
     plugins: {
+        tooltip: {
+            callbacks: {
+                label: function (context) {
+                    return 'Fights: ' + context.parsed.y;
+                }
+            }
+        },
         legend: {
-            position: 'top', // place legend on the right side of chart
+            position: 'bottom',
+            labels: {
+                boxWidth: 20,
+                padding: 15
+            }
         },
         title: {
             display: true,
-            text: ' SITUATIONS ATTAQUES ',
+            text: 'SITUATIONS ATTAQUES',
+            font: {
+                size: 24,
+                weight: 'bold'
+            }
         },
     },
+    
 }
 export const options2 = {
-    responsive: false,
+    animation: {
+        duration: 1000,
+        easing: 'easeInOutQuart'
+    },
+    responsive: true,
     scales: {
         y: {
             beginAtZero: true,
-            max: 20, // Define maximum value
+            max: 10, // Define maximum value
         },
     },
-    maintainAspectRatio: false, // Add this
+    maintainAspectRatio: true, // Add this
     plugins: {
+        tooltip: {
+            callbacks: {
+                label: function (context) {
+                    return 'Fights: ' + context.parsed.y;
+                }
+            }
+        },
         legend: {
-            position: 'top', // place legend on the right side of chart
+            position: 'bottom',
+            labels: {
+                boxWidth: 20,
+                padding: 15
+            }
         },
         title: {
             display: true,
-            text: ' SITUATIONS DEFENSIVES ',
+            text: 'SITUATIONS DEFENSIVES',
+            font: {
+                size: 24,
+                weight: 'bold'
+            }
         },
     },
 }
 export const options3 = {
-    responsive: false,
-    maintainAspectRatio: false,
-    width: 700,
-    height: 700,
     animation: {
-        duration: 2000, // durée de l'animation en millisecondes
-        easing: 'easeInOutBounce', // type d'animation
+        duration: 1000,
+        easing: 'easeInOutQuart'
     },
+    responsive: true,
     scales: {
         y: {
             beginAtZero: true,
-            max: 20, // Define maximum value
+            max: 10, // Define maximum value
         },
     },
-    maintainAspectRatio: false, // Add this
+    maintainAspectRatio: true, // Add this
     plugins: {
+        tooltip: {
+            callbacks: {
+                label: function (context) {
+                    return 'Fights: ' + context.parsed.y;
+                }
+            }
+        },
         legend: {
-            position: 'top', // place legend on the right side of chart
+            position: 'bottom',
+            labels: {
+                boxWidth: 20,
+                padding: 15
+            }
         },
         title: {
             display: true,
-            text: ' SITUATIONS CLINCH ',
+            text: 'SITUATIONS CLINCH',
+            font: {
+                size: 24,
+                weight: 'bold'
+            }
         },
     },
 }
 export const options4 = {
-    responsive: false,
+    animation: {
+        duration: 1000,
+        easing: 'easeInOutQuart'
+    },
+    responsive: true,
     scales: {
         y: {
             beginAtZero: true,
-            max: 50, // Define maximum value
+            max: 10, // Define maximum value
         },
     },
-    maintainAspectRatio: false, // Add this
+    maintainAspectRatio: true, // Add this
     plugins: {
+        tooltip: {
+            callbacks: {
+                label: function (context) {
+                    return 'Fights: ' + context.parsed.y;
+                }
+            }
+        },
         legend: {
-            position: 'top', // place legend on the right side of chart
+            position: 'bottom',
+            labels: {
+                boxWidth: 20,
+                padding: 15
+            }
         },
         title: {
             display: true,
-            text: ' tendances ',
+            text: 'TENDANCES',
+            font: {
+                size: 24,
+                weight: 'bold'
+            }
         },
     },
 }
+
+
 const AttOgFightersBarChart = ({
 
     dataset3,
@@ -108,19 +179,31 @@ const AttOgFightersBarChart = ({
     dataset9,
     dataset10,
     dataset11,
-    selectedFighter, // Ajouter la prop selectedFighter
+    selectedFighters, // Ajouter la prop selectedFighter
 }) => {
 
     const [fighter, setFighter] = useState(null)
+    console.log("fighter", fighter)
+    console.log("dataset3", dataset3)
+    console.log("dataset4", dataset4)
+    console.log("dataset5", dataset5)
+    console.log("dataset6", dataset6)
+    console.log("dataset7", dataset7)
+    console.log("dataset8", dataset8)
+    console.log("dataset9", dataset9)
+    console.log("dataset10", dataset10)
+    console.log("dataset11", dataset11)
 
     useEffect(() => {
         const fetchFighter = async () => {
-            const fighterData = await fighterService.getById(selectedFighter)
-            console.log("🚀 ~ file: FightersBarChart.jsx:119 ~ fetchFighter ~ fighterData:", fighterData)
+            if (!selectedFighters) 
+            return null;
+
+            const fighterData = await fighterService.getById(selectedFighters[0])
             setFighter(fighterData)
         }
         fetchFighter()
-    }, [selectedFighter])
+    }, [selectedFighters])
 
     //get fighters from data prop
 
@@ -134,7 +217,7 @@ const AttOgFightersBarChart = ({
         labels,
         datasets: [
             {
-                label: fighter?.name, // Utiliser le nom du fighter récupéré
+                label: fighter?.lastName, // Utiliser le nom du fighter récupéré
                 data: dataset3,
                 backgroundColor: 'rgba(54, 162, 235, 0.8)', // darker color
                 borderColor: 'rgba(54, 162, 235, 1)', // same color as background but fully opaque
@@ -153,7 +236,7 @@ const AttOgFightersBarChart = ({
         labels: label,
         datasets: [
             {
-                label: fighter?.name, // Utiliser le nom du fighter récupéré
+                label: fighter?.lastName, // Utiliser le nom du fighter récupéré
                 data: dataset5,
                 backgroundColor: 'rgba(54, 162, 235, 0.8)', // darker color
                 borderColor: 'rgba(54, 162, 235, 1)', // same color as background but fully opaque
@@ -172,7 +255,7 @@ const AttOgFightersBarChart = ({
         labels: labelcac,
         datasets: [
             {
-                label: fighter?.name, // Utiliser le nom du fighter récupéré
+                label: fighter?.lastName, // Utiliser le nom du fighter récupéré
                 data: dataset7,
                 backgroundColor: 'rgba(54, 162, 235, 0.8)', // darker color
                 borderColor: 'rgba(54, 162, 235, 1)', // same color as background but fully opaque
@@ -188,7 +271,7 @@ const AttOgFightersBarChart = ({
         ],
     }
     const data4 = {
-        labels: labelcac,
+        labels: labelgardes,
         datasets: [
             {
                 label: 'attaques',
@@ -213,6 +296,8 @@ const AttOgFightersBarChart = ({
             },
         ],
     }
+
+    console.log("selectedFighter", selectedFighters)
 
     return (
         <div className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4">

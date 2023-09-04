@@ -64,9 +64,9 @@ function AddEdit(props) {
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="row">
-                <div className="mb-3 col">
+        <form className="flex flex-col " onSubmit={handleSubmit(onSubmit)}>
+            <div className="flex flex-col  ">
+                <div className="mb-3 col ">
                     <label className="form-label">First Name</label>
                     <input name="firstName" type="text" {...register('firstName')} className={`form-control ${errors.firstName ? 'is-invalid' : ''}`} />
                     <div className="invalid-feedback">{errors.firstName?.message}</div>
@@ -77,7 +77,7 @@ function AddEdit(props) {
                     <div className="invalid-feedback">{errors.lastName?.message}</div>
                 </div>
             </div>
-            <div className="row">
+            <div className="flex flex-col ">
                 <div className="mb-3 col">
                     <label className="form-label">email</label>
                     <input name="email" type="text" {...register('email')} className={`form-control ${errors.email ? 'is-invalid' : ''}`} />
@@ -92,7 +92,7 @@ function AddEdit(props) {
                     <div className="invalid-feedback">{errors.password?.message}</div>
                 </div>
             </div>
-            <div className="row">
+            <div className="flex flex-col ">
                 <div className="mb-3 col">
                     <label className="form-label">country</label>
                     <input name="country" type="text" {...register('country')} className={`form-control ${errors.country ? 'is-invalid' : ''}`} />

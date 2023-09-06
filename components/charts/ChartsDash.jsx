@@ -649,6 +649,7 @@ const ChartsDash = ({
         sum_att_fg_data1,
         sum_att_fd_data1,
     )
+    console.log("🚀 ~ file: ChartsDash.jsx:652 ~ arrayOfSumAtt1:", arrayOfSumAtt1)
     arrayOfSumAtt2.push(
         sum_att_og_data2,
         sum_att_od_data2,
@@ -681,6 +682,7 @@ const ChartsDash = ({
     )
     
     const numberOfFightFiltered = data && data.length
+
 
 
     const labels = ['Number of fight']

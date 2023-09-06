@@ -3,6 +3,8 @@ import { errorHandler, jwtMiddleware } from 'helpers/api'
 export { apiHandler }
 
 function apiHandler(handler) {
+    console.log("🚀 ~ file: api-handler.js:6 ~ apiHandler ~ handler:", handler)
+    
     return async (req, res) => {
         const method = req.method.toLowerCase()
 

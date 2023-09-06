@@ -7,6 +7,14 @@ import { db } from 'helpers/api'
 const { serverRuntimeConfig } = getConfig()
 const User = db.User
 
+const SibApiV3Sdk = require('sib-api-v3-sdk');
+const defaultClient = SibApiV3Sdk.ApiClient.instance;
+
+const apiKey = defaultClient.authentications['api-key'];
+apiKey.apiKey = process.env.SENDINBLUE_API_KEY;
+
+const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
+
 const Mailjet = require('node-mailjet');
 
 
@@ -48,10 +56,13 @@ async function authenticate({ email, password }) {
 }
 
 async function forgotPassword({ email }) {
+
+
     const user = await User.findOne({ email })
 
     if (!user) { throw 'if this email is registered you will receive an email' }
-        // create a jwt token that is valid for 1 hour store it in the db and send an email with link for reset password
+
+    
 
     const token = jwt.sign({ sub: user.id }, process.env.SECRET, {
         expiresIn: '1h',
@@ -63,38 +74,24 @@ async function forgotPassword({ email }) {
     await user.save()
 
     // send an email with mailjet to reset password with a link to the reset password page
-    const mailjetConnection = Mailjet.apiConnect(
-        process.env.MAILJET_API_KEY,
-        process.env.MAILJET_API_SECRET
-    );
-    
-
-    const request = mailjetConnection.post('send', { version: 'v3.1' }).request({
-        Messages: [
-            {
-                From: {
-                    Email: 'younes-ouasmi_student2022@wilder.school',
-
-            
-                },
-                To: [
-                    {
-                        Email: email
-                    }
-                ],
-                Subject: 'Reset your password',
-                TextPart: `Hello ${user.firstName} ${user.lastName},\n\nYou are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\nPlease click on the following link, or paste this into your browser to complete the process:\n\n${serverRuntimeConfig.clientUrl}/reset-password?token=${token}\n\nIf you did not request this, please ignore this email and your password will remain unchanged.\n`
-            }
-        ]
-    })
-    request
-        .then(result => {
-            console.log(result.body)
-        })
-        .catch(err => {
-            console.log(err.statusCode)
-        })
-
+    const sendSmtpEmail = {
+        to: [{
+          email: email,
+          name: `${user.firstName} ${user.lastName}`
+        }],
+        subject: 'Reset your password',
+        htmlContent: `Hello ${user.firstName} ${user.lastName},<br><br>You are receiving this email because you (or someone else) have requested the reset of the password for your account.<br><br>Please click on the following link, or paste this into your browser to complete the process:<br><br><a href="${process.env.CLIENT_URL}/account/resetpassword?token=${token}">Reset Password</a><br><br>If you did not request this, please ignore this email and your password will remain unchanged.<br>`,
+        sender: {
+          email: 'y.ouasmi@gmail.com',
+          name: 'Dark Vador'
+        }
+      };
+      
+      apiInstance.sendTransacEmail(sendSmtpEmail).then(() => {
+        console.log('Email sent');
+      }).catch((error) => {
+        console.error(error);
+      });
 
     return {
         ...user.toJSON(),
@@ -102,7 +99,7 @@ async function forgotPassword({ email }) {
     }
 }
 
-async function resetPassword({ token, password }) {
+async function resetPassword({ token, new_password }) {
      // check if token is valid
 
      const user = await User.findOne({
@@ -113,8 +110,8 @@ async function resetPassword({ token, password }) {
     if (!user) { throw 'the token is invalid or has expired' }
 
     // hash password
-    if (password) {
-        user.hash = bcrypt.hashSync(password, 10)
+    if (new_password) {
+        user.hash = bcrypt.hashSync(new_password, 10)
     }
 
     // reset token and expiration date

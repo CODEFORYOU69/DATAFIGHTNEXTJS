@@ -4,12 +4,7 @@
     width: 100%;
     margin: 0 auto;
 }
-@font-face {
-    font-family: 'Resin';
-    src: url('/fonts/RESIN-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
+
 
 body {
     font-family: 'Resin', sans-serif;

@@ -39,8 +39,12 @@ async function forgotPassword(email) {
     alertService.success('Please check your email for password reset instructions');
 }
 
-async function resetPassword({ token, password, confirmPassword}) {
-    await fetchWrapper.post(`${baseUrl}/resetPassword`, { token, password, confirmPassword });
+async function resetPassword({ token, new_password, confirm_password}) {
+    console.log("🚀 ~ file: user.service.js:43 ~ resetPassword ~ confirmPassword:", confirm_password)
+    console.log("🚀 ~ file: user.service.js:43 ~ resetPassword ~ password:", new_password)
+    console.log("🚀 ~ file: user.service.js:43 ~ resetPassword ~ token:", token)
+    
+    await fetchWrapper.post(`${baseUrl}/resetPassword`, { token, new_password, confirm_password });
 
     Router.push('/account/login');
     alertService.success('Password reset successful, you can now login');

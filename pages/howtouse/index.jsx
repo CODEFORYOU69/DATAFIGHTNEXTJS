@@ -63,10 +63,10 @@ function HowToUse() {
                         {step.text}
                     </motion.p>
                     <motion.button 
-                        className="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center"
+                        className="w-8 h-8 md:w-8 md:h-8 rounded-full bg-blue-500 text-white flex items-center justify-center"
                         onClick={() => setSelectedImage(step.image)}
                     >
-                        i
+                        ?
                     </motion.button>
                 </motion.div>
             ))}
@@ -84,7 +84,7 @@ function HowToUse() {
                         <motion.img 
                             src={selectedImage} 
                             alt="Step Visual" 
-                            className="max-w-lg max-h-lg border-4 border-white rounded-lg shadow-lg"
+                            className="max-w-screen max-h-screen-md border-4 border-white rounded-lg shadow-lg"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         />

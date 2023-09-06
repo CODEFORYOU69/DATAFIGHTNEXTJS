@@ -22,7 +22,7 @@ export const options = {
     scales: {
         y: {
             beginAtZero: true,
-            max: 10, // Define maximum value
+            max: 30, // Define maximum value
         },
     },
     maintainAspectRatio: true, // Add this
@@ -50,7 +50,7 @@ export const options = {
             }
         },
     },
-    
+
 }
 export const options2 = {
     animation: {
@@ -61,7 +61,7 @@ export const options2 = {
     scales: {
         y: {
             beginAtZero: true,
-            max: 10, // Define maximum value
+            max: 30, // Define maximum value
         },
     },
     maintainAspectRatio: true, // Add this
@@ -99,7 +99,7 @@ export const options3 = {
     scales: {
         y: {
             beginAtZero: true,
-            max: 10, // Define maximum value
+            max: 30, // Define maximum value
         },
     },
     maintainAspectRatio: true, // Add this
@@ -137,10 +137,10 @@ export const options4 = {
     scales: {
         y: {
             beginAtZero: true,
-            max: 10, // Define maximum value
+            max: 30, // Define maximum value
         },
     },
-    maintainAspectRatio: true, // Add this
+    maintainAspectRatio: true,
     plugins: {
         tooltip: {
             callbacks: {
@@ -196,8 +196,8 @@ const AttOgFightersBarChart = ({
 
     useEffect(() => {
         const fetchFighter = async () => {
-            if (!selectedFighters) 
-            return null;
+            if (!selectedFighters)
+                return null;
 
             const fighterData = await fighterService.getById(selectedFighters[0])
             setFighter(fighterData)
@@ -300,15 +300,25 @@ const AttOgFightersBarChart = ({
     console.log("selectedFighter", selectedFighters)
 
     return (
-        <div className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4">
-            <div className="flex flex-col space-y-4">
+        <div className="flex flex-col md:flex-row flex-wrap justify-between mb-2">
+            <div className="md:w-1/4 md:h-max h-max p-2 rounded-lg shadow-md  bg-white ">
 
                 <Bar options={options} data={data} />
+            </div>
+            <div className="md:w-1/4 md:h-max h-max p-2 rounded-lg shadow-md  bg-white">
+
                 <Bar options={options2} data={data2} />
+            </div>
+            <div className="md:w-1/4 md:h-max h-max p-2 rounded-lg shadow-md bg-white">
+
                 <Bar options={options3} data={data3} />
+            </div>
+            <div className="md:w-1/4 md:h-max h-max p-2 rounded-lg shadow-md bg-white">
+
                 <Bar options={options4} data={data4} />
             </div>
         </div>
+
     )
 }
 

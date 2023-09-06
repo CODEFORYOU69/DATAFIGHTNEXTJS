@@ -24,7 +24,7 @@ export const options = {
             max: 10, // Define maximum value
         },
     },
-    maintainAspectRatio: true, // Add this
+    maintainAspectRatio: true,
     plugins: {
         tooltip: {
             callbacks: {
@@ -42,7 +42,7 @@ export const options = {
         },
         title: {
             display: true,
-            text: 'Number Fight',
+            text: 'Number of Fight',
             font: {
                 size: 24,
                 weight: 'bold'
@@ -70,7 +70,12 @@ const NumberFightBarChart = ({ labels, dataset1 }) => {
         ],
     }
 
-    return <Bar options={options} data={data} />
+    return <div style={{ maxWidth: '400px', maxHeight: '400px' }} className="rounded-lg shadow-md p-5 m-5 bg-white" >
+          
+
+        <Bar options={options} data={data} />
+        
+    </div>
 }
 
 export default NumberFightBarChart

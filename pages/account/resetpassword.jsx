@@ -35,6 +35,9 @@ function ResetPassword() {
     const { errors } = formState;
 
     function onSubmit({ new_password, confirm_password }) {
+        console.log("🚀 ~ file: resetpassword.jsx:38 ~ onSubmit ~ confirm_password:", confirm_password)
+        console.log("🚀 ~ file: resetpassword.jsx:38 ~ onSubmit ~ new_password:", new_password)
+        
         return userService.resetPassword({ token: router.query.token, new_password, confirm_password })
             .then(() => {
                 alertService.success('Password reset successful, you can now login', { keepAfterRouteChange: true });

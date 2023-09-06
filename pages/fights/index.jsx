@@ -44,7 +44,7 @@ function Index() {
 
     return (
         <Layout>
-            <div className="">
+            <div className="pt-16">
                 <h1>Fights</h1>
                 <div className="md:hidden ">
                     <p className='text-red-600 inline'>Add Round is only available on tablet or desktop devices.</p>

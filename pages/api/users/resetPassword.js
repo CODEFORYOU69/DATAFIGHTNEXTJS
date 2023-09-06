@@ -5,6 +5,6 @@ export default apiHandler({
 });
 
 async function resetPassword(req, res) {
-    await usersRepo.forgotPassword(req.body);
+    await usersRepo.resetPassword(req.body);
     return res.status(200).json({});
 }

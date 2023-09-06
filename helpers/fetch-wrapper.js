@@ -30,6 +30,7 @@
             };
 
             const response = await fetch(url, requestOptions);
+            console.log("🚀 ~ file: fetch-wrapper.js:33 ~ return ~ response:", response)
             return handleResponse(response);
         }
     }

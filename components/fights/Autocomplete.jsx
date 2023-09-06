@@ -1,0 +1,53 @@
+import React, { useState, useEffect } from 'react';
+
+const Autocomplete = ({ options, value, onChange, name }) => {
+    const [filteredOptions, setFilteredOptions] = useState(options);
+    const [showOptions, setShowOptions] = useState(false);
+    const [displayName, setDisplayName] = useState(""); // Nouvel état pour le nom et prénom
+
+    useEffect(() => {
+        setFilteredOptions(
+            options.filter((option) => 
+                option && option.label && option.label.toLowerCase().includes(value.toLowerCase())
+            )
+        );
+    }, [value, options]);
+
+    const handleSelect = (option) => {
+        onChange(name, option.value); // Mettre à jour l'ID
+        setDisplayName(option.label); // Mettre à jour le nom et prénom
+        setShowOptions(false);
+    };
+
+    return (
+      <div >
+        <input
+        className=''
+          type="text"
+          value={displayName} // Utilisez displayName ici
+          onChange={(e) => {
+            onChange(e.target.name, e.target.value);
+            setDisplayName(e.target.value); // Mettre à jour le nom et prénom lors de la saisie
+          }}
+          onFocus={() => setShowOptions(true)}
+          onBlur={() => setTimeout(() => setShowOptions(false), 200)}
+          name={name}
+        />
+        {showOptions && (
+          <ul>
+            {filteredOptions.map((option, index) => (
+              <li
+                key={index}
+                onClick={() => handleSelect(option)} // Utilisez handleSelect ici
+              >
+                {option.label}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    );
+};
+
+
+export default Autocomplete;

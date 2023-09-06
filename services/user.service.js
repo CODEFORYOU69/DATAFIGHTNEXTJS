@@ -40,9 +40,7 @@ async function forgotPassword(email) {
 }
 
 async function resetPassword({ token, new_password, confirm_password}) {
-    console.log("🚀 ~ file: user.service.js:43 ~ resetPassword ~ confirmPassword:", confirm_password)
-    console.log("🚀 ~ file: user.service.js:43 ~ resetPassword ~ password:", new_password)
-    console.log("🚀 ~ file: user.service.js:43 ~ resetPassword ~ token:", token)
+
     
     await fetchWrapper.post(`${baseUrl}/resetPassword`, { token, new_password, confirm_password });
 

@@ -37,18 +37,14 @@ const RadarChart = ({ rounds }) => {
         cac_fg_data: 0,
         cac_og_data: 0,
     })
-    console.log("🚀 ~ file: Radar1.jsx:41 ~ RadarChart ~ calculatedData:", calculatedData)
     
     // Créez des tableaux pour stocker les données de chaque round
     // Initialisation des variables à 0
     useEffect(() => {
 let att_fd_data = 0;
-("🚀 ~ file: Radar1.jsx:28 ~ RadarChart ~ att_fd_data:", calculatedData.att_fd_data)
 let att_od_data = 0;
-console.log("🚀 ~ file: Radar1.jsx:30 ~ RadarChart ~ att_od_data:", att_od_data)
 let att_fg_data = 0;
 let att_og_data = 0;
-console.log("🚀 ~ file: Radar1.jsx:33 ~ RadarChart ~ att_og_data:", att_og_data)
 let def_fd_data = 0;
 let def_od_data = 0;
 let def_fg_data = 0;

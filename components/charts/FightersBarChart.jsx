@@ -183,16 +183,7 @@ const AttOgFightersBarChart = ({
 }) => {
 
     const [fighter, setFighter] = useState(null)
-    console.log("fighter", fighter)
-    console.log("dataset3", dataset3)
-    console.log("dataset4", dataset4)
-    console.log("dataset5", dataset5)
-    console.log("dataset6", dataset6)
-    console.log("dataset7", dataset7)
-    console.log("dataset8", dataset8)
-    console.log("dataset9", dataset9)
-    console.log("dataset10", dataset10)
-    console.log("dataset11", dataset11)
+  
 
     useEffect(() => {
         const fetchFighter = async () => {
@@ -297,7 +288,6 @@ const AttOgFightersBarChart = ({
         ],
     }
 
-    console.log("selectedFighter", selectedFighters)
 
     return (
         <div className="flex flex-col md:flex-row flex-wrap justify-between mb-2">

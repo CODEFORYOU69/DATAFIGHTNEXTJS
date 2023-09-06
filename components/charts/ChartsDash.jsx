@@ -18,7 +18,6 @@ const ChartsDash = ({
 }) => {
 
     const [updatedFightsData, setUpdatedFightsData] = useState([])
-    console.log("🚀 ~ file: ChartsDash.jsx:21 ~ updatedFightsData:", updatedFightsData)
 
 
 
@@ -29,7 +28,6 @@ const ChartsDash = ({
 
 
     let allRounds = []
-    console.log("🚀 ~ file: ChartsDash.jsx:31 ~ allRounds:", allRounds)
     let datafighter = []
 
     updatedFightsData &&
@@ -288,7 +286,6 @@ const ChartsDash = ({
             round.att_fd_5_by_fighter1,
             round.att_fd_5_by_fighter2,
         )
-        console.log("att_od_data1:", att_od_data1);
 
         // Attaque ouverte droite par fighter1 et fighter2
         att_od_data.push(
@@ -649,7 +646,6 @@ const ChartsDash = ({
         sum_att_fg_data1,
         sum_att_fd_data1,
     )
-    console.log("🚀 ~ file: ChartsDash.jsx:652 ~ arrayOfSumAtt1:", arrayOfSumAtt1)
     arrayOfSumAtt2.push(
         sum_att_og_data2,
         sum_att_od_data2,

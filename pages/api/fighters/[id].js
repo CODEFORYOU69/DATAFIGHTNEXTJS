@@ -9,7 +9,6 @@ export default apiHandler({
 
 async function getById(req, res) {
     const id = req.query.id;
-    console.log("🚀 ~ file: [id].js:12 ~ getById ~ req.query.id:", req.query.id)
   
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({ message: 'Invalid ID' });

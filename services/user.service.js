@@ -35,7 +35,7 @@ async function login(email, password) {
 async function forgotPassword(email) {
     await fetchWrapper.post(`${baseUrl}/forgotPassword`, { email });
 
-    
+    Router.push('/account/login');
     alertService.success('Please check your email for password reset instructions');
 }
 

@@ -35,8 +35,7 @@ function ForgotPassword() {
 
     return (
         <Layout>
-
-            <div className="card-header">Reset Password</div>
+            <div className="card-header">Forgot Password</div>
             <div className="card-body">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-group">

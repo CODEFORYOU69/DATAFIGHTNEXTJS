@@ -64,41 +64,42 @@ const StatsPage = () => {
 
 
     return (
-            <div className='flex flex-col  p-3 items-center'>
-                <div className={`fixed top-0 left-0  w-screen md:h-screen md:w-1/4 bg-gray-200 p-4 transform transition-transform ease-in-out duration-300 ${isFilterPanelOpen ? 'translate-x-0  min-h-[48rem]' : '-translate-x-3/4 h-40'} `}>
+        <div className='flex flex-col  p-3 items-center'>
+            <div className={`fixed top-0 left-0  w-screen md:h-screen md:w-1/4 bg-gray-200 p-4 transform transition-transform ease-in-out duration-300 ${isFilterPanelOpen ? 'translate-x-0  min-h-[48rem]' : '-translate-x-3/4 h-40'} `}>
 
-                    <button
-                        onClick={() => setIsFilterPanelOpen(!isFilterPanelOpen)}
-                        className="absolute top-1/2 right-12 w-6 h-6 transform-x-1/2 z-10 transition-transform ease-in-out duration-300"
-                    >
-                        {isFilterPanelOpen ?
-                            <label className='text-xs'>
-                                <img src="/uploads/yeux-fermes.jpg" alt="Fermer les filtres" />
-                                Hide filters
-                            </label>
-                            :
-                            <label className='text-xs'>
-                                <img src="/uploads/oeil.jpg" alt="Ouvrir les filtres" />
-                                Show filters
-                            </label>
-                        }
-                    </button>
-                    <h2 className="pt-12 text-2xl font-bold">Filters</h2>
-                    <div className="flex flex-col my-4">
-                        {Object.keys(filters).map(
-                            (filterName) =>
-                                filters[filterName] && (
-                                    <FilterTag
-                                        key={filterName}
-                                        filterName={filterName}
-                                        onDelete={() => removeFilter(filterName)}
-                                    />
-                                ),
-                        )}
-                    </div>
+                <button
+                    onClick={() => setIsFilterPanelOpen(!isFilterPanelOpen)}
+                    className="absolute top-1/2 right-12 w-6 h-6 transform-x-1/2 z-10 transition-transform ease-in-out duration-300"
+                >
+                    {isFilterPanelOpen ?
+                        <label className='text-xs'>
+                            <img src="/uploads/yeux-fermes.jpg" alt="Fermer les filtres" />
+                            Hide filters
+                        </label>
+                        :
+                        <label className='text-xs'>
+                            <img src="/uploads/oeil.jpg" alt="Ouvrir les filtres" />
+                            Show filters
+                        </label>
+                    }
+                </button>
+                <h2 className="pt-12 text-2xl font-bold">Filters</h2>
+                <div className="flex flex-col my-4">
+                    {Object.keys(filters).map(
+                        (filterName) =>
+                            filters[filterName] && (
+                                <FilterTag
+                                    key={filterName}
+                                    filterName={filterName}
+                                    onDelete={() => removeFilter(filterName)}
+                                />
+                            ),
+                    )}
                 </div>
-                <div className="flex flex-col w-full pt-20 pb-12 ml-0 md:ml-28 px-2 md:pl-10  mb-12 ">
+            </div>
+            <div className="flex flex-col w-full pt-20 pb-12 ml-0 md:ml-28 px-2 md:pl-10  mb-12 ">
                 <h1 className="text-3xl text-center font-bold mb-8">Stats</h1>
+                <h2 className="text-2xl text-center font-bold mb-8">Select your Filters</h2>
                 <form onSubmit={handleSubmit} className=" flex flex-col items-center ">
                     <label>
                         Year
@@ -202,7 +203,7 @@ const StatsPage = () => {
                             : 'border-gray-300'
                             }w-full md:w-1/2`}
                     />
-                   
+
                     <label>
                         Country
                     </label>
@@ -237,8 +238,6 @@ const StatsPage = () => {
                             }w-full md:w-1/2`}
                     />
 
-
-
                     <label>
                         Weight
                     </label>
@@ -253,13 +252,13 @@ const StatsPage = () => {
                         className={`p-2 border rounded focus:outline-none ${filters.weightcat
                             ? 'border-green-500'
                             : 'border-gray-300'
-                            }w-full md:w-1/2`}
+                            }w-full md:w-1/2 pb-2`}
                     />
 
 
                     <button
                         type="submit"
-                        className=" py-2 px-4 rounded bg-green-500 text-white w-full md:w-1/2"
+                        className=" mt-2 py-2 px-4 rounded bg-green-500 text-white w-full md:w-1/4"
                     >
                         Filter
                     </button>

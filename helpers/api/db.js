@@ -1,9 +1,6 @@
-import getConfig from 'next/config'
 const mongoose = require('mongoose')
 
-const { serverRuntimeConfig } = getConfig()
 const Schema = mongoose.Schema
-const MONGODB = serverRuntimeConfig.connectionString
 
 export const db = {
   User: userModel(),

@@ -22,7 +22,7 @@ const Autocomplete = ({ options, value, onChange, name }) => {
     return (
       <div >
         <input
-          className="border rounded-lg hover:border-gray-400 focus:border-green-500 focus:ring focus:ring-green-200 focus:ring-opacity-50 shadow-sm p-2"
+          className=" border rounded-lg hover:border-gray-400 focus:border-green-500 focus:ring focus:ring-green-200 focus:ring-opacity-50 shadow-sm p-2"
           type="text"
           value={displayName} // Utilisez displayName ici
           onChange={(e) => {

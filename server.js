@@ -5,20 +5,24 @@ const rateLimit = require("express-rate-limit");
 
 
 
+
 //  options de limitation
 
 
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
+const limiter = rateLimit({
+  windowMs:  60 * 1000, // 1 minutes
+  max: 100, // limite chaque IP à 100 requêtes par fenêtre
+  message: "Trop de requêtes depuis cette IP, veuillez réessayer plus tard."
+ });
 
 
-const serverRuntimeConfig = require("./next.config").serverRuntimeConfig;
 
 app.prepare().then(async () => {
-
   
-  await mongoose.connect(serverRuntimeConfig.connectionString, {
+  await mongoose.connect(process.env.DATABASE_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
@@ -35,6 +39,8 @@ mongoose.connection.on('disconnected', () => {
     console.warn('Déconnecté de MongoDB');
 });
   const server = express();
+  server.use(limiter);
+
 
   server.use(express.json());
 
@@ -42,7 +48,7 @@ mongoose.connection.on('disconnected', () => {
     return handle(req, res);
   });
 
-  server.use(limiter);
+ 
 
 
   const port = process.env.PORT || 3000;
@@ -52,11 +58,6 @@ mongoose.connection.on('disconnected', () => {
   });
 });
 
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limite chaque IP à 100 requêtes par fenêtre
-  message: "Trop de requêtes depuis cette IP, veuillez réessayer plus tard."
- });
 
-// Appliquez la limite de taux à toutes les requêtes
+
 

@@ -39,9 +39,10 @@ async function authenticate({ email, password }) {
 
     // create a jwt token with id and role 
     const token = jwt.sign({ sub: user.id, role: user.role }, process.env.SECRET, {
+        
         expiresIn: '7d',
     });
-    
+    console.log("🚀 ~ file: users-repo.js:42 ~ authenticate ~ process.env.SECRET:", process.env.SECRET)
     // remove hash from user object
     
     if (user) {
@@ -56,14 +57,8 @@ async function authenticate({ email, password }) {
 }
 
 async function forgotPassword({ email }) {
-
-
     const user = await User.findOne({ email })
-
     if (!user) { throw 'if this email is registered you will receive an email' }
-
-    
-
     const token = jwt.sign({ sub: user.id }, process.env.SECRET, {
         expiresIn: '1h',
     })
@@ -165,7 +160,6 @@ async function create(params) {
     if (params.password) {
         user.hash = bcrypt.hashSync(params.password, 10)
     }
-
     // save user
     await user.save()
 }

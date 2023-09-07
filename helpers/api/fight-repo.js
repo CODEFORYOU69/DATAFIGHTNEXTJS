@@ -134,13 +134,6 @@ async function filterFights(filters) {
         { $unwind: "$fighter2" },
     ];
 
-    const addFighterFilter = (fighterKey, filterKey) => {
-        if (filters[filterKey]) {
-            const fighterId = new mongoose.Types.ObjectId(filters[filterKey]);
-            query.push({ [fighterKey]: fighterId });
-        }
-    };
-
     if (filters.fighter1 && filters.fighter2) {
         const fighter1Id = new mongoose.Types.ObjectId(filters.fighter1);
         const fighter2Id = new mongoose.Types.ObjectId(filters.fighter2);

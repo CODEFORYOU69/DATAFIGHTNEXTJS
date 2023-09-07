@@ -31,12 +31,7 @@ const StatsPage = () => {
     })
 
     const [data, setData] = useState(null)
-    const handleInputChange = (event) => {
-        setFilters({
-            ...filters,
-            [event.target.name]: event.target.value,
-        })
-    }
+    console.log("🚀 ~ file: index.jsx:34 ~ StatsPage ~ data:", data)
 
     const FilterTag = ({ filterName, onDelete }) => (
         <div className="inline-block bg-gray-400 rounded w-1/2 px-3 py-1 text-sm font-semibold text-BLACK-700 mr-2 mb-2">
@@ -69,7 +64,7 @@ const StatsPage = () => {
 
 
     return (
-            <div className='flex flex-col overflow-x-hidden'>
+            <div className='flex flex-col  p-3 items-center'>
                 <div className={`fixed top-0 left-0  w-screen md:h-screen md:w-1/4 bg-gray-200 p-4 transform transition-transform ease-in-out duration-300 ${isFilterPanelOpen ? 'translate-x-0  min-h-[48rem]' : '-translate-x-3/4 h-40'} `}>
 
                     <button

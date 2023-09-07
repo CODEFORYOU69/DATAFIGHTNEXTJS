@@ -1,8 +1,5 @@
 import { expressjwt } from 'express-jwt';
 import util from 'util';
-import getConfig from 'next/config';
-
-const { serverRuntimeConfig } = getConfig();
 
 require('dotenv').config();
 

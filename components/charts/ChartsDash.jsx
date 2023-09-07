@@ -18,6 +18,7 @@ const ChartsDash = ({
 }) => {
 
     const [updatedFightsData, setUpdatedFightsData] = useState([])
+    console.log("🚀 ~ file: ChartsDash.jsx:21 ~ updatedFightsData:", updatedFightsData)
 
 
 
@@ -42,6 +43,9 @@ const ChartsDash = ({
         data.forEach((fight) => {
             allRounds = allRounds.concat(fight.rounds)
         })
+
+        console.log("🚀 ~ file: ChartsDash.jsx:32 ~ allRounds:", allRounds)
+
     let att_fd_data = []
     let att_od_data = []
     let att_fg_data = []

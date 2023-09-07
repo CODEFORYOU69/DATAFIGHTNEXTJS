@@ -61,7 +61,7 @@ function App({ Component, pageProps }) {
                
 
                 <Nav />
-                <div className="h-16"></div>
+                <div className="pt-16 h-16"></div>
                 <Alert />
                 {authorized &&
                     <Component {...pageProps} />

@@ -18,8 +18,11 @@ function Register() {
             .required('First Name is required'),
         lastName: Yup.string()
             .required('Last Name is required'),
-        email: Yup.string()
-            .required('email is required'),
+        email: Yup.string().email('Email is invalid')
+            .required('email is required')
+            .matches(
+                /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i,
+            ),
         country: Yup.string()
             .required('country is required'),
         password: Yup.string()
@@ -62,7 +65,7 @@ function Register() {
                         </div>
                         <div className="mb-3">
                             <label className="form-label">Email</label>
-                            <input name="email" type="text" {...register('email')} className={`form-control ${errors.email ? 'is-invalid' : ''}`} />
+                            <input name="email" type="email" {...register('email')} className={`form-control ${errors.email ? 'is-invalid' : ''}`} />
                             <div className="invalid-feedback">{errors.email?.message}</div>
                         </div>
                         <div className="mb-3">

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { fighterService } from 'services'
 
-const port = process.env.PORT || 'http://localhost:3000/'
 function FightersList() {
     const [fighters, setFighters] = useState([])
 
@@ -16,33 +15,24 @@ function FightersList() {
     const handleUploadPhoto = async (fighterId, formData) => {
        
         try {
-            const response = await fetch(
-                `/api/fighters/uploadPhoto?fighterId=${fighterId}`,
-                {
-                    method: 'PUT',
-                    body: formData,
-                },
-            )
-
+            const response = await fighterService.uploadPhoto(fighterId, formData)
             if (!response.ok) {
                 throw new Error('Error while uploading the photo')
             }
-
-            // Reload fighters to update the photo display
+            // Recharger la liste des combattants
             const updatedFighters = await fighterService.getAll()
             setFighters(updatedFighters)
         } catch (error) {
             console.error('Error while uploading the photo:', error)
         }
     }
-
+    
     const onChangeImage = async (fighterId, file) => {
-        
         const formData = new FormData()
         formData.append('photo', file)
         await handleUploadPhoto(fighterId, formData)
     }
-
+    
     return (
         <div className="mt-3">
             <h5>Fighters:</h5>

@@ -54,7 +54,7 @@ async function _delete(id) {
 }
 
 async function uploadPhoto(fighterId, formData) {
-    return await fetchWrapper.putFormData(`/api/fighters/uploadPhoto?fighterId=${fighterId}`, formData);
+    return await fetchWrapper.putFormData(`${baseUrl}/uploadPhoto?fighterId=${fighterId}`, formData);
 }
 
 

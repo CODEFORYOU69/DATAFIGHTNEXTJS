@@ -8,7 +8,7 @@ const Autocomplete = ({ options, value, onChange, name }) => {
     useEffect(() => {
         setFilteredOptions(
             options.filter((option) => 
-                option && option.label && option.label.toLowerCase().includes(value.toLowerCase())
+            option && option.label && value && option.label.toLowerCase().includes(value.toLowerCase())
             )
         );
     }, [value, options]);
@@ -22,7 +22,7 @@ const Autocomplete = ({ options, value, onChange, name }) => {
     return (
       <div >
         <input
-        className=''
+          className="border rounded-lg hover:border-gray-400 focus:border-green-500 focus:ring focus:ring-green-200 focus:ring-opacity-50 shadow-sm p-2"
           type="text"
           value={displayName} // Utilisez displayName ici
           onChange={(e) => {
@@ -34,11 +34,13 @@ const Autocomplete = ({ options, value, onChange, name }) => {
           name={name}
         />
         {showOptions && (
-          <ul>
+          <ul className="border rounded-lg shadow-sm">
             {filteredOptions.map((option, index) => (
               <li
                 key={index}
                 onClick={() => handleSelect(option)} // Utilisez handleSelect ici
+                className="cursor-pointer hover:bg-gray-200 p-2"
+
               >
                 {option.label}
               </li>

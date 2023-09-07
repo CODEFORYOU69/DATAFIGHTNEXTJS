@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 const { serverRuntimeConfig } = getConfig()
 const Schema = mongoose.Schema
-const MONGODB = process.env.MONGODB_URI || serverRuntimeConfig.connectionString
+const MONGODB = serverRuntimeConfig.connectionString
 
 export const db = {
   User: userModel(),

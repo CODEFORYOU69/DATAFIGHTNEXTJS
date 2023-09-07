@@ -8,6 +8,7 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js'
+import calculateData from './CalculateDataCharts'
 import { Radar } from 'react-chartjs-2'
 
 ChartJS.register(
@@ -38,57 +39,10 @@ const RadarChart = ({ rounds }) => {
         cac_og_data: 0,
     })
     
-    // Créez des tableaux pour stocker les données de chaque round
-    // Initialisation des variables à 0
     useEffect(() => {
-let att_fd_data = 0;
-let att_od_data = 0;
-let att_fg_data = 0;
-let att_og_data = 0;
-let def_fd_data = 0;
-let def_od_data = 0;
-let def_fg_data = 0;
-let def_og_data = 0;
-let cac_fd_data = 0;
-let cac_od_data = 0;
-let cac_fg_data = 0;
-let cac_og_data = 0;
-
-// Parcourir les rounds et extraire les données
-for (let round of rounds) {
-    // Addition des valeurs pour chaque type d'action
-    att_fd_data += round.att_fd_1_by_fighter1 + round.att_fd_1_by_fighter2 + round.att_fd_2_by_fighter1 + round.att_fd_2_by_fighter2 + round.att_fd_3_by_fighter1 + round.att_fd_3_by_fighter2 + round.att_fd_4_by_fighter1 + round.att_fd_4_by_fighter2 + round.att_fd_5_by_fighter1 + round.att_fd_5_by_fighter2;
-    att_od_data += round.att_od_1_by_fighter1 + round.att_od_1_by_fighter2 + round.att_od_2_by_fighter1 + round.att_od_2_by_fighter2 + round.att_od_3_by_fighter1 + round.att_od_3_by_fighter2 + round.att_od_4_by_fighter1 + round.att_od_4_by_fighter2 + round.att_od_5_by_fighter1 + round.att_od_5_by_fighter2;
-    att_fg_data += round.att_fg_1_by_fighter1 + round.att_fg_1_by_fighter2 + round.att_fg_2_by_fighter1 + round.att_fg_2_by_fighter2 + round.att_fg_3_by_fighter1 + round.att_fg_3_by_fighter2 + round.att_fg_4_by_fighter1 + round.att_fg_4_by_fighter2 + round.att_fg_5_by_fighter1 + round.att_fg_5_by_fighter2;
-    att_og_data += round.att_og_1_by_fighter1 + round.att_og_1_by_fighter2 + round.att_og_2_by_fighter1 + round.att_og_2_by_fighter2 + round.att_og_3_by_fighter1 + round.att_og_3_by_fighter2 + round.att_og_4_by_fighter1 + round.att_og_4_by_fighter2 + round.att_og_5_by_fighter1 + round.att_og_5_by_fighter2;
-    def_fd_data += round.def_fd_1_by_fighter2 + round.def_fd_2_by_fighter1 + round.def_fd_2_by_fighter2 + round.def_fd_3_by_fighter1 + round.def_fd_3_by_fighter2 + round.def_fd_4_by_fighter1 + round.def_fd_4_by_fighter2 + round.def_fd_5_by_fighter1 + round.def_fd_5_by_fighter2;
-    def_od_data += round.def_od_1_by_fighter1 + round.def_od_1_by_fighter2 + round.def_od_2_by_fighter1 + round.def_od_2_by_fighter2 + round.def_od_3_by_fighter1 + round.def_od_3_by_fighter2 + round.def_od_4_by_fighter1 + round.def_od_4_by_fighter2 + round.def_od_5_by_fighter1 + round.def_od_5_by_fighter2;
-    def_fg_data += round.def_fg_1_by_fighter1 + round.def_fg_1_by_fighter2 + round.def_fg_2_by_fighter1 + round.def_fg_2_by_fighter2 + round.def_fg_3_by_fighter1 + round.def_fg_3_by_fighter2 + round.def_fg_4_by_fighter1 + round.def_fg_4_by_fighter2 + round.def_fg_5_by_fighter1 + round.def_fg_5_by_fighter2;
-    def_og_data += round.def_og_1_by_fighter1 + round.def_og_1_by_fighter2 + round.def_og_2_by_fighter1 + round.def_og_2_by_fighter2 + round.def_og_3_by_fighter1 + round.def_og_3_by_fighter2 + round.def_og_4_by_fighter1 + round.def_og_4_by_fighter2 + round.def_og_5_by_fighter1 + round.def_og_5_by_fighter2;
-    cac_fd_data += round.cac_fd_1_by_fighter2 + round.cac_fd_2_by_fighter1 + round.cac_fd_2_by_fighter2 + round.cac_fd_3_by_fighter1 + round.cac_fd_3_by_fighter2 + round.cac_fd_4_by_fighter1 + round.cac_fd_4_by_fighter2 + round.cac_fd_5_by_fighter1 + round.cac_fd_5_by_fighter2;
-    cac_od_data += round.cac_od_1_by_fighter1 + round.cac_od_1_by_fighter2 + round.cac_od_2_by_fighter1 + round.cac_od_2_by_fighter2 + round.cac_od_3_by_fighter1 + round.cac_od_3_by_fighter2 + round.cac_od_4_by_fighter1 + round.cac_od_4_by_fighter2 + round.cac_od_5_by_fighter1 + round.cac_od_5_by_fighter2;
-    cac_fg_data += round.cac_fg_1_by_fighter1 + round.cac_fg_1_by_fighter2 + round.cac_fg_2_by_fighter1 + round.cac_fg_2_by_fighter2 + round.cac_fg_3_by_fighter1 + round.cac_fg_3_by_fighter2 + round.cac_fg_4_by_fighter1 + round.cac_fg_4_by_fighter2 + round.cac_fg_5_by_fighter1 + round.cac_fg_5_by_fighter2;
-    cac_og_data += round.cac_og_1_by_fighter1 + round.cac_og_1_by_fighter2 + round.cac_og_2_by_fighter1 + round.cac_og_2_by_fighter2 + round.cac_og_3_by_fighter1 + round.cac_og_3_by_fighter2 + round.cac_og_4_by_fighter1 + round.cac_og_4_by_fighter2 + round.cac_og_5_by_fighter1 + round.cac_og_5_by_fighter2;
-
-
-
-        
-    }
-    setCalculatedData({
-        att_fd_data,
-        att_od_data,
-        att_fg_data,
-        att_og_data,
-        def_fd_data,
-        def_od_data,
-        def_fg_data,
-        def_og_data,
-        cac_fd_data,
-        cac_od_data,
-        cac_fg_data,
-        cac_og_data,
-    });
-}, [rounds])
+        const newCalculatedData = calculateData(rounds);  // Appel de la fonction calculateData
+        setCalculatedData(newCalculatedData);  // Mise à jour de l'état avec les nouvelles données calculées
+      }, [rounds]);    
 
     // Préparer les données pour le graphique radar
 
@@ -99,55 +53,61 @@ for (let round of rounds) {
         'Fermée Gauche',
     ]
 
+    const commonOptions = {
+        borderWidth: 1,
+        fill: true,
+        tension: 0.1
+      };
+      
+      const attackOptions = {
+        ...commonOptions,
+        backgroundColor: 'rgba(75,192,192,0.2)',
+        borderColor: 'rgba(75,192,192,1)',
+      };
+      
+
     // Maintenant, "roundLabels" est un tableau de labels comme ["Round 1", "Round 2", "Round 3", ...]
 
     const data = {
         labels: roundLabels,
         datasets: [
-            {
-                label: 'Attaques',
-                data: [
-                    calculatedData.att_od_data,  // Ouverte Droite
-                    calculatedData.att_og_data,  // Ouverte Gauche
-                    calculatedData.att_fd_data,  // Fermée Droite
-                    calculatedData.att_fg_data   // Fermée Gauche
-                ],
-                backgroundColor: 'rgba(75,192,192,0.2)',  // Couleur de remplissage
-                borderColor: 'rgba(75,192,192,1)',  // Couleur de la bordure
-                borderWidth: 1,  // Largeur de la bordure
-                fill: true,  // Remplir l'intérieur
-                tension: 0.1  // Lier les points avec une certaine tension (0 pour des lignes droites)
-            },
-            {
-                label: ' defenses',
-                data: [
-                    calculatedData.def_od_data,  // Ouverte Droite
-                    calculatedData.def_og_data,  // Ouverte Gauche
-                    calculatedData.def_fd_data,  // Fermée Droite
-                    calculatedData.def_fg_data   // Fermée Gauche
-                ],
-                backgroundColor: 'rgba(255,99,132,0.2)',
-                borderColor: 'rgba(255,99,132,1)',
-                borderWidth: 1,
-                fill: true,  // Remplir l'intérieur
-                tension: 0.1  // Lier les points avec une certaine tension (0 pour des lignes droites)
-            },
-            {
-                label: 'clinch',
-                data: [
-                    calculatedData.cac_od_data,  // Ouverte Droite
-                    calculatedData.cac_og_data,  // Ouverte Gauche
-                    calculatedData.cac_fd_data,  // Fermée Droite
-                    calculatedData.cac_fg_data   // Fermée Gauche
-                ],
-                backgroundColor: 'rgba(255,205,86,0.2)',
-                borderColor: 'rgba(255,205,86,1)',
-                borderWidth: 1,
-                fill: true,  // Remplir l'intérieur
-                tension: 0.1  // Lier les points avec une certaine tension (0 pour des lignes droites)
-            },
+          {
+            label: 'Attaques',
+            data: [
+              calculatedData.att_od_data,
+              calculatedData.att_og_data,
+              calculatedData.att_fd_data,
+              calculatedData.att_fg_data
+            ],
+            ...attackOptions  // Utilisation des options communes
+          },
+          {
+            label: 'Défenses',
+            data: [
+              calculatedData.def_od_data,
+              calculatedData.def_og_data,
+              calculatedData.def_fd_data,
+              calculatedData.def_fg_data
+            ],
+            backgroundColor: 'rgba(255,99,132,0.2)',
+            borderColor: 'rgba(255,99,132,1)',
+            ...commonOptions  // Utilisation des options communes
+          },
+          {
+            label: 'Clinch',
+            data: [
+              calculatedData.cac_od_data,
+              calculatedData.cac_og_data,
+              calculatedData.cac_fd_data,
+              calculatedData.cac_fg_data
+            ],
+            backgroundColor: 'rgba(255,205,86,0.2)',
+            borderColor: 'rgba(255,205,86,1)',
+            ...commonOptions  // Utilisation des options communes
+          },
         ],
-    }
+      };
+      
     const data2 = {
         labels: roundLabels,
         datasets: [

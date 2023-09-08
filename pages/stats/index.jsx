@@ -31,7 +31,6 @@ const StatsPage = () => {
     })
 
     const [data, setData] = useState(null)
-    console.log("🚀 ~ file: index.jsx:34 ~ StatsPage ~ data:", data)
 
     const FilterTag = ({ filterName, onDelete }) => (
         <div className="inline-block bg-gray-400 rounded w-1/2 px-3 py-1 text-sm font-semibold text-BLACK-700 mr-2 mb-2">

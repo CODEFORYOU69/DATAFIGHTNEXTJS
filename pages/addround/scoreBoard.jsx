@@ -14,7 +14,7 @@ function Scoreboard({
     country2,
 }) {
     return (
-        <div className="scoreboard rounded-lg overflow-hidden shadow-lg mx-auto w-2/3 bg-gray-800 text-white">
+        <div className="scoreboard rounded-lg overflow-hidden shadow-lg mx-auto w-1/3 bg-gray-800 text-white">
             <div className="flex flex-row border-double border-4 border-black">
                 <div className="score blue w-1/2 bg-blue-700 text-center p-4">
                     <ReactCountryFlag

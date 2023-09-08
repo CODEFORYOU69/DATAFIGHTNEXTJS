@@ -14,6 +14,7 @@
 
     function request(method, isFormData = false) {
         return async (url, body) => {
+            console.log("🚀 ~ file: fetch-wrapper.js:17 ~ return ~ url:", url)
             const headers = authHeader(url);
             if (isFormData) {
                 // Si c'est FormData, supprimez l'en-tête 'Content-Type'
@@ -28,6 +29,7 @@
                 headers,
                 body
             };
+            console.log("🚀 ~ file: fetch-wrapper.js:31 ~ return ~ requestOptions:", requestOptions)
 
             const response = await fetch(url, requestOptions);
             return handleResponse(response);

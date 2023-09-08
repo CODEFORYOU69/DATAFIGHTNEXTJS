@@ -10,7 +10,6 @@ export const roundRepo = {
     getAll,
     getById,
     createRound,
-    getRoundCountByFightId,
     update,
 
     delete: _delete,
@@ -191,7 +190,4 @@ async function _delete(id) {
     await Round.findByIdAndRemove(id)
 }
 
-async function getRoundCountByFightId(id) {
-    const round = await Round.find({ fight: id })
-    return round.length
-}
+

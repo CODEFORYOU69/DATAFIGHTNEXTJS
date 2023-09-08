@@ -22,6 +22,7 @@ export const fightService = {
     update,
     delete: _delete,
     filterFights
+    
 };
 
 async function createFight(data) {

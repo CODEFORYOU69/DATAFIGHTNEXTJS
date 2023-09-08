@@ -135,7 +135,7 @@ function Index() {
                                                 Edit
                                             </Link>
                                             <Link
-                                                href={`/addround/addRound?fightId=${fight.id}`}
+                                                href={`/addround/addRound/?fightId=${fight.id}`}
                                                 className="btn btn-sm btn-primary me-1 hidden md:block"
                                             >
                                                 Add round

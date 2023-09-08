@@ -18,7 +18,6 @@ export const roundService = {
     getAll,
     getById,
     update,
-    getRoundCountByFightId,
     delete: _delete,
 };
 
@@ -54,6 +53,4 @@ async function _delete(id) {
     await fetchWrapper.delete(`${baseUrl}/${id}`);
 }
 
-async function getRoundCountByFightId(id) {
-    return await fetchWrapper.get(`${baseUrl}/getRoundCountByFightId/${id}`);
-}
+

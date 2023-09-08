@@ -1,9 +1,13 @@
 import { apiHandler, fightRepo } from 'helpers/api';
+import { ObjectId } from 'mongodb';
+import { object } from 'prop-types';
+
 
 export default apiHandler({
     get: getById,
     put: update,
     delete: _delete
+    
 });
 
 async function getById(req, res) {
@@ -23,5 +27,7 @@ async function _delete(req, res) {
     await fightRepo.delete(req.query.id);
     return res.status(200).json({});
 }
+
+
 
 

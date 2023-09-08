@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Modal from 'react-modal'
 import { useRouter } from 'next/router'
+import Link from 'next/link';
 import Scoreboard from './scoreBoard'
 import IncrementDecrementField from 'components/fights/IncrementDecrementField'
 
@@ -231,17 +232,13 @@ function AddRound() {
 
     //get fighters from api
     const [fighters, setFighters] = useState([])
-    const [roundCount, setRoundCount] = useState(0)
 
     useEffect(() => {
         if (fightId) {
             fightService.getById(fightId).then((fight) => {
-                setFighters([fight.fighter1_id, fight.fighter2_id])
+                setFighters([fight.fighter1_id, fight.fighter2_id, fight.rounds.length])
             })
 
-            roundService.getRoundCountByFightId(fightId).then((count) => {
-                setRoundCount(count)
-            })
         }
     }, [fightId])
     //get firstname and lastname from api for each fighter
@@ -259,14 +256,13 @@ function AddRound() {
         }
     }, [fighters])
 
-    const [isModalOpen, setIsModalOpen] = useState(false)
 
     function onSubmit(event) {
         event.preventDefault()
 
         const round = {
             fight: fightId,
-            round: roundCount + 1,
+            round: fighters[2] + 1,
             att_fd_1_by_fighter1: att_fd_1_by_fighter1,
             att_fd_2_by_fighter1: att_fd_2_by_fighter1,
             att_fd_3_by_fighter1: att_fd_3_by_fighter1,
@@ -403,20 +399,12 @@ function AddRound() {
             .catch(alertService.error)
     }
 
-    const openModal = () => setIsModalOpen(true)
-    const closeModal = () => setIsModalOpen(false)
 
     return (
         <Layout>
-            <button onClick={openModal} className="btn btn-primary">
-                Add Round
-            </button>
+            
 
-            <Modal
-                isOpen={isModalOpen}
-                onRequestClose={closeModal}
-                contentLabel="Add Fight"
-            >
+           
                 <h4 className="card-header">Add Fight</h4>
                 <div className="flex flex-col pt-12 form-group">
                 <img src="/uploads/df.png" alt="round" className='left-4 w-20 h-20'/>
@@ -430,13 +418,13 @@ function AddRound() {
                     </p>
                     <label>Round</label>
 
-                    <p>{roundCount + 1}</p>
+                    <p>{fighters[2] + 1}</p>
                 </div>
                 
                 <form onSubmit={onSubmit}>
                     <div className="grid pt-32 grid-cols-9 grid-rows-11 gap-4 border-1 text-center border-double border-red-600">
                         <div className="text-center  border-red-600">
-                            Round:{roundCount + 1}
+                            Round:{fighters[2] + 1}
                         </div>
                         <div className="col-span-8 text-center">ATTAQUE</div>
                         <div className="row-start-2">GARDE</div>
@@ -2049,8 +2037,8 @@ function AddRound() {
             )} */}
                         Add Round
                     </button>
-                    <button onClick={closeModal} className="btn btn-link">
-                        Cancel
+                    <button >
+                    <Link href="/account/login" className="btn btn-link">Cancel</Link>
                     </button>
                 </form>
                 <div className="fixed top-0 left-0 w-full z-10 pt-20 overflow-auto">
@@ -2069,7 +2057,6 @@ function AddRound() {
                         country2={fighter2.country}
                     />
                 </div>
-            </Modal>
         </Layout>
     )
 }
